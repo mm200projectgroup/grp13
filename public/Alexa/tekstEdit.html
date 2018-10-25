@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    </head>
+<body>
+
+<h3>Text editor</h3>
+<!--Buttons-->
+    <div >
+    <button id ="butB" onclick = "toBold">B</button>
+    <button id ="butI" onclick = "toItalic">I</button>
+    <button id ="butU" onclick = "toUnderline">U</button>
+    </div>
+    
+<!--Powerpoint slide------------------- -->
+<div id ="slide01">
+    <input id = "slideTitle01" value ="Test" maxlength= "14">
+    <br>
+    <input id = "slideText01" value ="testy">    
+    </div>
+    </body>
+<!---^-Powerpoint slide--^------------^ -->
+
+<script>
+
+let activeWindow = document.activeElement.addEventListener;
+    
+function toBold() {
+    document.getElementById("slideTitle01").style.fontWeight ="700";
+    }
+    document.getElementById("butB").onclick = function(){toBold()};
+    
+/*
+function toItalic() {
+ document.getElementById("slideTitle01").style.fontStyle = "italic";
+    }
+document.getElementById("butI").onclick = function(){toItalic()};
+    
+//Function toUnderline(){}
+function toUnderline() {
+document.getElementById("slideTitle01").style.fontVariant = "underline";
+    }
+document.getElementById("butU").onclick = function(){toUnderline()}; */
+    
+    
+    </script>
+    
+<style>
+#butB {
+    font-weight: bold;
+    }
+#butI {
+    font-style: italic;
+    }
+#butU {  
+    text-decoration: underline;
+    }
+    
+button {
+    font-size:14px;
+    height: 40px;
+    width: 40px;
+    margin-right: 5px;
+    border: 1px solid #000000;
+    background-color: lightgrey;
+    align-content: center;
+    margin-bottom: 20px;
+    }
+    
+h3 {
+    font-size: 23px;
+    
+    }
+    
+#slide01 {
+    background-color: #FFFFFF;
+    width: 600px;
+    height: 350px;
+    border: 1px solid lightgray;
+    padding: 25px;
+}
+
+#slideTitle01 {
+    border-style: hidden;
+    font-size: 45px;
+    height: auto;
+    width: 550px;
+    padding-left: 25px;
+    padding-right: 25px;
+    text-align: center;
+    
+    }
+#slideText01 {
+    border-style: hidden;
+    margin-top: 20px;
+    width: auto;
+    margin-left: 30px;
+    margin-right: 30px;
+    }
+    
+input {
+    height: 50px;
+    font-size: 25px;
+    
+    }
+
+
+    </style>
+</html>
