@@ -19,6 +19,9 @@ app.use(function(req, res, next) {
 const users = require('./js/users.js');
 app.use('/innafor/users/', users);
 
+const update = require('./js/adminUser.js');
+app.use('/innafor/update/', update);
+
 
 app.listen(app.get('port'), function () {
     console.log('server running', app.get('port'));

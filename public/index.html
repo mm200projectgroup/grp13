@@ -81,7 +81,7 @@
     <div class="menu">Menu</div>
     <div class="canvas">canvas</div>
     <div class="footer">Footer</div>
-
+    <button onclick="tempFunction()">Delete me</button>
     <script>
     let loggInnUsername = document.getElementById("loggInnUsername");
     let loggInnpassword = document.getElementById("loggInnpassword");
@@ -96,8 +96,20 @@
     let outputLogIn1 = document.getElementById("outputLogIn");
     let outputSignUp1 = document.getElementById("outputSignUp");
         let user = document.getElementById("user");
-    
 
+        //Test function. Delete if now longer needed.
+function tempFunction(){
+    return fetch("/innafor/update/email/", {
+        method: "UPDATE",
+        headers: {
+            "Content-Type": "application/json; charset=utf8"
+        },
+        body: JSON.stringify({
+            newEmail: "nordbom@gmail.com",
+            oldEmail: "nordbom@live.no"
+        })
+    })
+}
         
         // Get the modal
         var logInForm = document.getElementById('logInForm');
