@@ -19,9 +19,9 @@ router.post("/login/", async function (req, res) {
         let nameMatch = datarows.length == 1 ? true : false;
         if (nameMatch == true) {
             let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
-            if (nameMatch, passwordMatch) {
+            if (passwordMatch == true) {
                 res.status(200).json({
-                    mld: "Hello, " + username,
+                    mld: "Hallo, " + username,
                     username: username
                 });
             }
