@@ -10,6 +10,7 @@ function sendData(endpoint, data) {
         },
         body: JSON.stringify(data)
     }).then(data => {
+        console.log(data);
         status = data.status;
         return data.json();
     });
