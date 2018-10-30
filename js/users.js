@@ -21,7 +21,7 @@ router.post("/login/", async function (req, res) {
             let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
             if (passwordMatch == true) {
                 res.status(200).json({
-                    mld: "Hallo, " + username,
+                    //mld: "Hallo, " + username,
                     username: username
                 });
             }
@@ -53,10 +53,6 @@ router.post("/register/", async function (req, res) {
 
     let query = `INSERT INTO public."users" ("id", "email", "username", "hash") VALUES (DEFAULT, '${userEmail}', '${userName}', '${hashPassw}') RETURNING "id", "email", "username", "hash"`;
     
-    
-
-    
-
     try {
         let code = db.any(query) ? 200 : 500;
         res.status(code).json({}).end()
@@ -70,6 +66,28 @@ router.post("/register/", async function (req, res) {
 });
 
 
+
+/*
+//Test for å se om getData funker
+router.get("/getUsers/", async function (req, res){
+    let query = 'SELECT * FROM public."users"';
+    
+    
+    try{
+    let users = await db.any(query);
+    console.log(users);
+    res.status(200).json(users);
+        
+    }catch (err) {
+        res.status(500).json({
+            error: err
+        }); //something went wrong!
+    }
+
+    
+});
+
+*/
 
 //export module -------------------------------------
 module.exports = router;
