@@ -38,6 +38,15 @@ router.post("/changeLogin/", async function (req, res) {
 
 
 
+router.delete("/changeLogin/", async function (req, res) {
+
+    
+});
+
+
+
+
+
 
 
 module.exports = router;

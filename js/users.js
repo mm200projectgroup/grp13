@@ -1,7 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const db = require('./dbconnect').db; //database
+
+const db = require('./dbconnect').db;
+const prpSql = require('./dbconnect').prpSql;
+
 const bcrypt = require('bcryptjs');
 
 
@@ -10,21 +13,31 @@ const bcrypt = require('bcryptjs');
 router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
-    let query = `SELECT *
-	FROM public."users" WHERE username = '${username}'`;
-    
+
+    let query = prpSql.findUser;
+    query.values = [username];
+
     try {
+
         let datarows = await db.any(query);
-        console.log(datarows);
-        let nameMatch = datarows.length == 1 ? true : false;
-        if (nameMatch == true) {
-            let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
-            if (passwordMatch == true) {
-                res.status(200).json({
-                    //mld: "Hallo, " + username,
-                    username: username
-                });
-            }
+        if (datarows.length == 0) {
+            res.status(401).json({
+                mld: "Feil brukernavn eller passord"
+            });
+        }
+
+        let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
+        let nameCheck = datarows.find(nameCheck => {
+            return username === nameCheck.username;
+        });
+
+
+        if (nameCheck && passwordMatch) {
+            res.status(200).json({
+                //mld: "Hallo, " + username,
+                username: username
+            });
+
         } else {
             res.status(401).json({
                 mld: "Feil brukernavn eller passord"
@@ -44,15 +57,18 @@ router.post("/login/", async function (req, res) {
 
 
 
-///TODO: Endre på databasen slik at det brukerene har en bruker rolle. Må også sjekke om brukernavnet eksiterer. 
+///TODO: Endre på databasen slik at det brukerene har en bruker rolle. Brukeren må også få beskjed hvis epost eller brukernavn allerede er registrert
 router.post("/register/", async function (req, res) {
     let userEmail = req.body.email;
     let userName = req.body.username;
     let password = req.body.password;
     let hashPassw = bcrypt.hashSync(password, 10);
 
-    let query = `INSERT INTO public."users" ("id", "email", "username", "hash") VALUES (DEFAULT, '${userEmail}', '${userName}', '${hashPassw}') RETURNING "id", "email", "username", "hash"`;
+    let query = prpSql.createUser;
+    query.values = [userEmail, userName, hashPassw];
     
+
+
     try {
         let code = db.any(query) ? 200 : 500;
         res.status(code).json({}).end()

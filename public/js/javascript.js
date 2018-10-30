@@ -12,10 +12,9 @@ function sendData(endpoint, data) {
         },
         body: JSON.stringify(data)
     }).then(data => {
-        if(data.status==200){
         status = data.status;
         return data.json();
-        }
+        
     });
 }
 
