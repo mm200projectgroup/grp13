@@ -16,8 +16,12 @@ app.use(function(req, res, next) {
 });
 
 
-const users = require('./js/users.js');
-app.use('/innafor/users/', users);
+const users = require('./js/users.js');//router til users.js
+app.use('/app/users/', users);
+
+
+const editUsers = require('./js/editUsers.js');//router til editUsers.js
+app.use('/app/editUsers/', editUsers);
 
 
 app.listen(app.get('port'), function () {

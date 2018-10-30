@@ -10,7 +10,27 @@
 
 <body>
 
+    <!-- /// Ny pass eller brukernavn -->
+    <div id="userSettingsForm" class="modal">
+        <div class="modal-content animate">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('userSettingsForm').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <h2 class="modulHeader">Administrate User</h2>
+            </div>
 
+            <div class="container">
+                <label for="username"><b>New Username</b></label>
+                <br>
+                <input type="text" id="newUsername" placeholder="newUsername" name="newUsername">
+                <br>
+                <label for="password"><b>New Password</b></label>
+                <br>
+                <input type="password" id="newPassword" placeholder="newPassword" name="newPassword">
+                <br>
+                <button class="formButtons" onclick="changeLogin()">Change Login Information</button>
+            </div>
+        </div>
+    </div>
 
 
     <div id="logInForm" class="modal">
@@ -71,9 +91,9 @@
 
     <div class="header">
         <button id="headerButton1" onclick="document.getElementById('signUpForm').style.display='block'" style="width:auto;">Sign up</button>
-        
+
         <button id="headerButton2" onclick="document.getElementById('logInForm').style.display='block'" style="width:auto;">Login</button>
-        
+
         <h3 id="user"></h3>
 
 
@@ -83,22 +103,22 @@
     <div class="footer">Footer</div>
 
     <script>
-    let loggInnUsername = document.getElementById("loggInnUsername");
-    let loggInnpassword = document.getElementById("loggInnpassword");
-    
-    let regUsername = document.getElementById("regUsername");
-    let regPassword = document.getElementById("regpassword");    
-    let regEmail = document.getElementById("regEmail");
-    
-    let headerButton1 = document.getElementById("headerButton1");
-    let headerButton2 = document.getElementById("headerButton2");
+        let loggInnUsername = document.getElementById("loggInnUsername");
+        let loggInnpassword = document.getElementById("loggInnpassword");
 
-    let outputLogIn1 = document.getElementById("outputLogIn");
-    let outputSignUp1 = document.getElementById("outputSignUp");
+        let regUsername = document.getElementById("regUsername");
+        let regPassword = document.getElementById("regpassword");
+        let regEmail = document.getElementById("regEmail");
+
+        let headerButton1 = document.getElementById("headerButton1");
+        let headerButton2 = document.getElementById("headerButton2");
+
+        let outputLogIn1 = document.getElementById("outputLogIn");
+        let outputSignUp1 = document.getElementById("outputSignUp");
         let user = document.getElementById("user");
-    
 
-        
+
+
         // Get the modal
         var logInForm = document.getElementById('logInForm');
         var signUpForm = document.getElementById('signUpForm');
@@ -112,7 +132,7 @@
                 signUpForm.style.display = "none";
             }
         }
-    </script>   
+    </script>
 
 </body>
 

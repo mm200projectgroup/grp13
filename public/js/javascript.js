@@ -2,6 +2,8 @@ let status;
 
 
 
+
+
 function sendData(endpoint, data) {
     return fetch(endpoint, {
         method: "POST",
@@ -10,9 +12,10 @@ function sendData(endpoint, data) {
         },
         body: JSON.stringify(data)
     }).then(data => {
-        console.log(data);
+        if(data.status==200){
         status = data.status;
         return data.json();
+        }
     });
 }
 
@@ -37,7 +40,6 @@ function getData(endpoint) {
 
 
 
-
 function loggInn() {
     let data = {
         username: loggInnUsername.value,
@@ -45,7 +47,7 @@ function loggInn() {
     };
 
 
-    sendData("/innafor/users/login", data)
+    sendData("/app/users/login", data)
         .then(json => {
             console.log(status);
             if (status == 200) {
@@ -53,7 +55,15 @@ function loggInn() {
                 headerButton1.style.visibility = 'hidden';
                 headerButton2.style.visibility = 'hidden';
                 logInForm.style.display = "none";
-                user.innerHTML = json.mld;
+
+                let hyperlink = document.createElement("button");
+                hyperlink.innerHTML = data.username;
+                hyperlink.onclick = function changePassword() {
+                    document.getElementById('userSettingsForm').style.display = 'block'
+                };
+                user.innerHTML = "hello, ";
+                user.appendChild(hyperlink)
+                //user.innerHTML = json.mld;
                 user.style.visibility = 'visible';
 
             } else {
@@ -78,7 +88,7 @@ function register() {
         email: regEmail.value
     };
 
-    sendData("/innafor/users/register", data)
+    sendData("/app/users/register", data)
         .then(json => {
             outputSignUp1.style.color = "white";
             outputSignUp1.innerHTML = "Bruker registrert";
@@ -93,3 +103,38 @@ function register() {
 
 
 }
+
+
+function changeLogin() {
+    let data = {
+        username: newUsername.value,
+        password: newPassword.value,
+    };
+    sendData("/app/editUsers/changeLogin", data)
+}
+
+
+
+
+//Test funksjoner
+/*
+//Test function. Delete if now longer needed.
+function tempFunction() {
+    return fetch("/app/update/email/", {
+        method: "UPDATE",
+        headers: {
+            "Content-Type": "application/json; charset=utf8"
+        },
+        body: JSON.stringify({
+            newEmail: "nordbom@gmail.com",
+            oldEmail: "nordbom@live.no"
+        })
+    })
+}*/
+
+/*
+//Test function. Checking if GET works
+(function () {
+    getData("/app/users/getUsers");
+})();
+*/
