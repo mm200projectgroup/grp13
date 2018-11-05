@@ -3,9 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="js/javascript.js"></script>
     <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
-
 </head>
 
 <body>
@@ -32,7 +30,6 @@
         </div>
     </div>
 
-
     <div id="logInForm" class="modal">
         <div class="modal-content animate">
             <div class="imgcontainer">
@@ -56,7 +53,6 @@
             </div>
         </div>
     </div>
-
 
     <div id="signUpForm" class="modal">
         <div class="modal-content animate">
@@ -86,23 +82,76 @@
         </div>
     </div>
 
+    <div id="header"></div>
 
-
-
-    <div class="header">
-        <button id="headerButton1" onclick="document.getElementById('signUpForm').style.display='block'" style="width:auto;">Sign up</button>
-
-        <button id="headerButton2" onclick="document.getElementById('logInForm').style.display='block'" style="width:auto;">Login</button>
-
+    <template id="signedIn">
         <h3 id="user"></h3>
+    </template>
+
+    <template id="notSignedIn">
+        <button id="loginBtn" onclick="document.getElementById('signUpForm').style.display='block'" style="width:auto;">Sign up</button>
+
+        <button id="signInBtn" onclick="document.getElementById('logInForm').style.display='block'" style="width:auto;">Login</button>
+    </template>
+
+
+    <div class="menu">
+        <div id="textMenu">
+            <h3>Text editing</h3>
+            <button id="butB" onclick="toBold">B</button>
+            <button id="butI" onclick="toItalic">I</button>
+            <button id="butU" onclick="toUnderline">U</button>
+        </div>
+        <div id="imageMenu">
+            <h3>Image Editing</h3>
+            <!--//Legg til et bilde-->
+            <button id="addImg">Add image</button>
+            <br>
+            <!--//Skalering-->
+            <p>Scale image</p>
+            <input id="imgSlider" type="range" min="10" max="1000" step="1">
+            <br>
+            <!--//Div som bilder blir lagt inn i-->
+            <!-- <div id="presObj" style=" border-style: solid;"></div> -->
+
+            <!--//Sette inn filter-->
+            <select id="filter">
+                <option value="none">None</option>
+                <option value="blur(5px)">Blur</option>
+                <option value="brightness(200%)">Brightness</option>
+                <option value="contrast(200%)">Contrast</option>
+                <option value="drop-shadow(8px 8px 10px gray)">Drop-Shadow</option>
+                <option value="grayscale(100%)">Grayscale</option>
+                <option value="hue-rotate(90deg)">Hue-rotate</option>
+                <option value="invert(100%)">Invert</option>
+                <option value="opacity(30%)">Opacity</option>
+                <option value="saturate(8)">Saturate</option>
+                <option value="sepia(100%)">Sepia</option>
+            </select>
+        </div>
+
+
 
 
     </div>
-    <div class="menu">Menu</div>
-    <div class="canvas">canvas</div>
-    <div class="footer">Footer</div>
+    <div class="canvas">
+        <p>Canvas bakgrunn</p>
+        <div onclick="selectActive()" id="enSlide">
 
+            <p>Canvas</p>
+            <input id="testText1" value="Test" maxlength="14">
+        </div>
+    </div>
+
+    <!-- /// TODO: SLIDES /// -->
+    <!-- Footer skal ha en slide som er den en starter med hvor en har muligheten til å legge til en ny slide.
+    Når en ny slide er lagt til, så vil en se 2 slides med muligheten til å legge til flere. 
+    Kun en slide skal kunne ses i canvas om gangen. -->
+    <div class="footer">Footer</div>
     <script>
+    
+        //let user = document.getElementById("user");
+        
         let loggInnUsername = document.getElementById("loggInnUsername");
         let loggInnpassword = document.getElementById("loggInnpassword");
 
@@ -110,12 +159,27 @@
         let regPassword = document.getElementById("regpassword");
         let regEmail = document.getElementById("regEmail");
 
-        let headerButton1 = document.getElementById("headerButton1");
-        let headerButton2 = document.getElementById("headerButton2");
+        let loginBtn = document.getElementById("loginBtn");
+        let signInBtn = document.getElementById("signInBtn");
 
         let outputLogIn1 = document.getElementById("outputLogIn");
         let outputSignUp1 = document.getElementById("outputSignUp");
-        let user = document.getElementById("user");
+        
+        
+
+        //Change header template
+        let header = document.getElementById("header");
+        setHeaderView("notSignedIn", header);
+        
+        
+
+        function setHeaderView(id) {
+            header.innerHTML = "";
+            let temp = document.getElementById(id);
+            let clone = temp.content.cloneNode(true);
+            header.appendChild(clone);
+
+        }
 
 
 
@@ -133,6 +197,10 @@
             }
         }
     </script>
+    <script src="js/editingTools.js"></script>
+    <script src="js/javascript.js"></script>
+    
+        
 
 </body>
 

@@ -4,6 +4,7 @@ let status;
 
 
 
+
 function sendData(endpoint, data) {
     return fetch(endpoint, {
         method: "POST",
@@ -29,7 +30,7 @@ function getData(endpoint) {
             "Content-Type": "application/json; charset=utf-8",
         },
     }).then(data => {
-        console.log(data);
+        //console.log(data);
     });
 }
 
@@ -51,19 +52,20 @@ function loggInn() {
             console.log(status);
             if (status == 200) {
                 console.log("yay");
-                headerButton1.style.visibility = 'hidden';
-                headerButton2.style.visibility = 'hidden';
+                
+                localStorage.setItem("logindata", JSON.stringify(json));
+                let token = JSON.parse(localStorage.getItem("logindata")).token;
+              
                 logInForm.style.display = "none";
-
-                let hyperlink = document.createElement("button");
-                hyperlink.innerHTML = data.username;
-                hyperlink.onclick = function changePassword() {
-                    document.getElementById('userSettingsForm').style.display = 'block'
+                setHeaderView("signedIn", header);
+                
+                let user = document.getElementById("user");
+                user.innerHTML = json.username;
+                user.onclick = function changePassword() {
+                document.getElementById('userSettingsForm').style.display = 'block'
                 };
-                user.innerHTML = "hello, ";
-                user.appendChild(hyperlink)
-                //user.innerHTML = json.mld;
-                user.style.visibility = 'visible';
+
+      
 
             } else {
                 console.log("ops");

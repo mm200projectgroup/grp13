@@ -6,6 +6,9 @@ const db = require('./dbconnect').db;
 const prpSql = require('./dbconnect').prpSql;
 
 const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
+
+const secret = process.env.SECRET;
 
 
 
@@ -33,9 +36,12 @@ router.post("/login/", async function (req, res) {
 
 
         if (nameCheck && passwordMatch) {
+        let payload = {username: nameCheck.username};
+        let tok = jwt.sign(payload, secret, {expiresIn: "12h"});
+
             res.status(200).json({
-                //mld: "Hallo, " + username,
-                username: username
+                username: username,
+                token: tok
             });
 
         } else {

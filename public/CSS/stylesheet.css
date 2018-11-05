@@ -11,7 +11,7 @@ body {
     display: grid;
 
     grid-template-columns: 250px 1fr 1fr 1fr;
-    grid-template-rows: 80px 1fr 1fr 1fr 1fr 150px;
+    grid-template-rows: 40px 1fr 1fr 1fr 1fr 150px;
 
 
 
@@ -26,8 +26,18 @@ body {
 }
 
 
+p {
+    font-size: 14px;
+}
 
-.header {
+h3 {
+    font-size: 23px;
+    
+    }
+
+
+
+#header {
     grid-area: header;
     background: cornflowerblue;
 
@@ -54,13 +64,77 @@ body {
 
 }
 
-.modulHeader{
+
+/*CANVAS */
+#enSlide {
+   width: 80%; /*can be in percentage also.*/
+    height: 90%;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+    border: 1px solid lightgray;
+    background-color: #FFFFFF;
+}
+/*MENY */
+#textMenu {
+    background: pink;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+#imageMenu {
+    background: green;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+
+/* /// Text editing --- */
+
+#butB {
+    font-weight: bold;
+    }
+#butI {
+    font-style: italic;
+    }
+#butU {  
+    text-decoration: underline;
+    }
+    
+button {
+    font-size:14px;
+    height: 40px;
+    width: 40px;
+    margin-right: 5px;
+    border: 1px solid #000000;
+    background-color: lightgrey;
+    align-content: center;
+    margin-bottom: 20px;
+    }
+    
+
+
+/* /// Image editing --- */
+#addImg {
+    font-size: 14px;
+    height: 40px;
+    width: 100px;
+    
+}
+#filter {
+    font-size: 14px;
+    width: 100px;
+}
+
+/*MENYEND */
+
+.modulHeader {
     font-size: 35px;
 }
 
 
-#user{
-    text-align: right;   
+#user {
+    text-align: right;
     padding: 20px 20px;
     color: white;
     font-size: 20px;
@@ -83,7 +157,8 @@ input[type=password] {
 
 
 
-#headerButton1, #headerButton2 {
+#signInBtn,
+#loginBtn {
     float: right;
     color: black;
     border: 0px;
@@ -208,6 +283,7 @@ span.psw {
     from {
         transform: scale(0)
     }
+
     to {
         transform: scale(1)
     }
