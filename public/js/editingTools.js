@@ -1,3 +1,4 @@
+/*
 //Denne funksjonen setter størrelse
 let imgResizer = function () {
     let imgResizerObj = {};
@@ -77,7 +78,7 @@ let imgResizer = function () {
 imgResizer();
 
 
-
+*/
 
 
 function selectActive() {

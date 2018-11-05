@@ -53,10 +53,7 @@ h3 {
 #canvas {
     grid-area: canvas;
     position: relative;
-    margin: auto;
-   
-
-
+    margin: 5%;
 }
 
 .footer {
