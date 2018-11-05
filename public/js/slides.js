@@ -8,7 +8,7 @@
             titel: "Innhold",
             text: "Et Esel har lange ører",
             bakgrunn: "cadetblue"
-        },{
+        }, {
             presentationsID: 1,
             titel: "Litt text",
             text: "Jeg håper at dette er en fine slide. Det hadde vært syn hvis den gikk utenfor div taggen. La oss håpe at jeg slipper å måtte gjøre mye for å fikse dette. Kanskje det tilog med ikke er et problem. Tror jeg skal bare slå hode på keybordet for å få litt mer text her.. asijfhasjhdfaousjfgaoøsiudpoajghsfouajsdahjsfpaskjdouahsøkgfjsdfhjaøskdpiaoshjgfpoask",
@@ -27,9 +27,9 @@
 
             div.innerHTML = slides;
             div.className = "mySlides";
-            div.id = "slide"+i;
+            div.id = "slide" + i;
             canvas.appendChild(div)
-            document.getElementById("slide"+i).style.backgroundColor=`${data[i].bakgrunn}`;
+            document.getElementById("slide" + i).style.backgroundColor = `${data[i].bakgrunn}`;
 
 
         }
@@ -42,29 +42,30 @@
             let slides = `
             <div class="previewTitle">${data[i].titel}</div>
         `;
-            
+
             div.innerHTML = slides;
             div.className = "myPreview";
-            div.id = "preview"+i;
+            div.id = "preview" + i;
             div.onclick = select;
             preview.appendChild(div)
-             document.getElementById("preview"+i).style.backgroundColor=`${data[i].bakgrunn}`;
+            document.getElementById("preview" + i).style.backgroundColor = `${data[i].bakgrunn}`;
 
         }
 
 
 
-        function select(evt){
-        let target = evt.currentTarget.id;
-        let getNr = target.match(/\d+/g).map(Number);
-        let index = parseInt(getNr);
-        console.log(index);
-        
-              
+        function select(evt) {
+            let target = evt.currentTarget.id;
+            let getNr = target.match(/\d+/g).map(Number);
+            let index = parseInt(getNr)+1;
+            console.log(index);
+            
+            currentSlide(index);
+
         }
-        
-        
-  
+
+
+
 
         let slideIndex = 1;
         showSlides(slideIndex);
@@ -81,6 +82,7 @@
         function showSlides(n) {
             let i;
             let slides = document.getElementsByClassName("mySlides");
+            let preview = document.getElementsByClassName("myPreview");
             if (n > slides.length) {
                 slideIndex = 1
             }
@@ -90,7 +92,11 @@
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
-
+            for (i = 0; i < preview.length; i++) {
+                preview[i].className = preview[i].className.replace(" active", "");
+            }
             slides[slideIndex - 1].style.display = "block";
-
+            preview[slideIndex - 1].className += " active";
         }
+
+        
