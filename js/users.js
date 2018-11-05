@@ -68,10 +68,11 @@ router.post("/register/", async function (req, res) {
     let userEmail = req.body.email;
     let userName = req.body.username;
     let password = req.body.password;
+    let role = req.body.role;
     let hashPassw = bcrypt.hashSync(password, 10);
 
     let query = prpSql.createUser;
-    query.values = [userEmail, userName, hashPassw];
+    query.values = [userEmail, userName, hashPassw, role];
     
 
 

@@ -1,4 +1,5 @@
-let status;
+let STATUS;
+let ROLE = 1;
 
 
 
@@ -13,7 +14,7 @@ function sendData(endpoint, data) {
         },
         body: JSON.stringify(data)
     }).then(data => {
-        status = data.status;
+        STATUS = data.status;
         return data.json();
         
     });
@@ -50,7 +51,7 @@ function loggInn() {
     sendData("/app/users/login", data)
         .then(json => {
             console.log(status);
-            if (status == 200) {
+            if (STATUS == 200) {
                 console.log("yay");
                 
                 localStorage.setItem("logindata", JSON.stringify(json));
@@ -86,7 +87,8 @@ function register() {
     let data = {
         username: regUsername.value,
         password: regPassword.value,
-        email: regEmail.value
+        email: regEmail.value,
+        role: ROLE
     };
 
     sendData("/app/users/register", data)
