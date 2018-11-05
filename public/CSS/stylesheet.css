@@ -213,6 +213,20 @@ span.psw {
     float: right;
     padding-top: 16px;
 }
+.hideButtons{
+    color: white;
+    border: 0px;
+    display: inline-block;
+    background-color: cornflowerblue;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14pt;
+    border-radius: 25px;
+    cursor: pointer;
+    user-select: none;
+    padding: 14px 20px;
+    transition: transform 0.2s;
+}
 
 /* The Modal (background) */
 .modal {
