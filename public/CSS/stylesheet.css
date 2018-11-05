@@ -9,9 +9,9 @@
 body {
     height: 100vh;
     display: grid;
-
+    background-color: lightgrey;
     grid-template-columns: 250px 1fr 1fr 1fr;
-    grid-template-rows: 40px 1fr 1fr 1fr 1fr 150px;
+    grid-template-rows: 60px 1fr 1fr 1fr 1fr 150px;
 
 
 
@@ -32,8 +32,8 @@ p {
 
 h3 {
     font-size: 23px;
-    
-    }
+
+}
 
 
 
@@ -50,10 +50,12 @@ h3 {
 
 }
 
-.canvas {
+#canvas {
     grid-area: canvas;
-    background: gray;
-    border: solid 1px aliceblue;
+    position: relative;
+    margin: auto;
+   
+
 
 }
 
@@ -62,19 +64,83 @@ h3 {
     background: gray;
     border: solid 1px aliceblue;
 
+
 }
 
 
 /*CANVAS */
-#enSlide {
-   width: 80%; /*can be in percentage also.*/
-    height: 90%;
-    margin: 0 auto;
-    padding: 10px;
-    position: relative;
-    border: 1px solid lightgray;
-    background-color: #FFFFFF;
+.mySlides {
+    width: 100%;
+    height: 100%;
+    
+
 }
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+/*SLIDE*/
+.text {
+    font-size: 20px;
+    padding: 8px 12px;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+
+.title {
+    text-align: center;
+    font-size: 60px;
+    padding: 60px 12px;
+}
+
+.undertitle {
+    text-align: center;
+    font-size: 40px;
+    padding: 60px 12px;
+}
+
+
+.myPreview {
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+
+    
+
+}
+
+.previewTitle {
+    text-align: center;
+}
+
+
 /*MENY */
 #textMenu {
     background: pink;
@@ -86,6 +152,7 @@ h3 {
     background: green;
     padding-left: 30px;
     padding-top: 30px;
+
 }
 
 
@@ -93,16 +160,21 @@ h3 {
 
 #butB {
     font-weight: bold;
-    }
+}
+
 #butI {
     font-style: italic;
-    }
-#butU {  
+   
+}
+
+#butU {
     text-decoration: underline;
-    }
-    
-button {
-    font-size:14px;
+}
+
+#butU,
+#butI,
+#butB {
+    font-size: 14px;
     height: 40px;
     width: 40px;
     margin-right: 5px;
@@ -110,8 +182,8 @@ button {
     background-color: lightgrey;
     align-content: center;
     margin-bottom: 20px;
-    }
-    
+}
+
 
 
 /* /// Image editing --- */
@@ -119,8 +191,9 @@ button {
     font-size: 14px;
     height: 40px;
     width: 100px;
-    
+
 }
+
 #filter {
     font-size: 14px;
     width: 100px;
@@ -166,7 +239,7 @@ input[type=password] {
     background-color: white;
     margin: 8px;
     font-family: sans-serif;
-    font-size: 14pt;
+    font-size: 10pt;
     border-radius: 25px;
     cursor: pointer;
     user-select: none;
@@ -192,8 +265,6 @@ input[type=password] {
 
 
 
-
-
 /* Center the image and position the close button */
 .imgcontainer {
     text-align: center;
@@ -213,7 +284,8 @@ span.psw {
     float: right;
     padding-top: 16px;
 }
-.hideButtons{
+
+.hideButtons {
     color: white;
     border: 0px;
     display: inline-block;
@@ -277,31 +349,6 @@ span.psw {
     cursor: pointer;
 }
 
-/* Add Zoom Animation */
-.animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-    from {
-        -webkit-transform: scale(0)
-    }
-
-    to {
-        -webkit-transform: scale(1)
-    }
-}
-
-@keyframes animatezoom {
-    from {
-        transform: scale(0)
-    }
-
-    to {
-        transform: scale(1)
-    }
-}
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {

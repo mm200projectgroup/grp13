@@ -11,7 +11,7 @@
 
     <!-- /// Ny pass eller brukernavn -->
     <div id="userSettingsForm" class="modal">
-        <div class="modal-content animate">
+        <div class="modal-content">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('userSettingsForm').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h2 class="modulHeader">Administrate User</h2>
@@ -32,7 +32,7 @@
     </div>
 
     <div id="logInForm" class="modal">
-        <div class="modal-content animate">
+        <div class="modal-content">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('logInForm').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h2 class="modulHeader">Login</h2>
@@ -56,7 +56,7 @@
     </div>
 
     <div id="signUpForm" class="modal">
-        <div class="modal-content animate">
+        <div class="modal-content">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('signUpForm').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h2 class="modulHeader">Sign up</h2>
@@ -135,20 +135,18 @@
 
 
     </div>
-    <div class="canvas">
-        <p>Canvas bakgrunn</p>
-        <div onclick="selectActive()" id="enSlide">
-
-            <p>Canvas</p>
-            <input id="testText1" value="Test" maxlength="14">
-        </div>
-    </div>
-
+    <div id="canvas" >
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
     <!-- /// TODO: SLIDES /// -->
     <!-- Footer skal ha en slide som er den en starter med hvor en har muligheten til å legge til en ny slide.
     Når en ny slide er lagt til, så vil en se 2 slides med muligheten til å legge til flere. 
     Kun en slide skal kunne ses i canvas om gangen. -->
-    <div class="footer">Footer</div>
+    <div class="footer">
+        <div id="preview"></div>
+    </div>
+    
     <script>
     
         //let user = document.getElementById("user");
@@ -200,6 +198,7 @@
     </script>
     <script src="js/editingTools.js"></script>
     <script src="js/javascript.js"></script>
+    <script src="js/slides.js"></script>
     
         
 
