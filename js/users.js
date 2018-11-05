@@ -12,13 +12,13 @@ const secret = process.env.SECRET;
 
 
 
-///TODO: Bedre login. Si ifra når passord er feil.
+
 router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
 
     let query = prpSql.findUser;
-    query.values = [username];
+    query.values = [username, username];
 
     try {
 
@@ -31,16 +31,20 @@ router.post("/login/", async function (req, res) {
 
         let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
         let nameCheck = datarows.find(nameCheck => {
-            return username === nameCheck.username;
+            return username === nameCheck.username || username ===nameCheck.email;
         });
 
-
+        
         if (nameCheck && passwordMatch) {
-        let payload = {username: nameCheck.username};
-        let tok = jwt.sign(payload, secret, {expiresIn: "12h"});
+            let payload = {
+                username: nameCheck.username
+            };
+            let tok = jwt.sign(payload, secret, {
+                expiresIn: "12h"
+            });
 
             res.status(200).json({
-                username: username,
+                username: nameCheck.username,
                 token: tok
             });
 
@@ -63,22 +67,55 @@ router.post("/login/", async function (req, res) {
 
 
 
-///TODO: Endre på databasen slik at det brukerene har en bruker rolle. Brukeren må også få beskjed hvis epost eller brukernavn allerede er registrert
+
 router.post("/register/", async function (req, res) {
     let userEmail = req.body.email;
-    let userName = req.body.username;
+    let username = req.body.username;
     let password = req.body.password;
     let role = req.body.role;
     let hashPassw = bcrypt.hashSync(password, 10);
 
-    let query = prpSql.createUser;
-    query.values = [userEmail, userName, hashPassw, role];
-    
+    let queryCreateUser = prpSql.createUser;
+    queryCreateUser.values = [userEmail, username, hashPassw, role];
+
+    let queryFindUser = prpSql.findUser;
+    queryFindUser.values = [username, userEmail];
+
 
 
     try {
-        let code = db.any(query) ? 200 : 500;
-        res.status(code).json({}).end()
+        let findUser = await db.any(queryFindUser);
+        
+        let existingUsr = findUser.find(existingUsr => {
+            return username === existingUsr.username;
+        });
+        
+        let existingMail = findUser.find(existingMail => {
+            return userEmail === existingMail.email;
+        });
+ 
+        
+        
+       if (existingUsr) {
+            res.status(401).json({
+                mld: "Brukernavn allerede registrert"
+            }).end();
+        }else if (existingMail) {
+            res.status(401).json({
+                mld: "Epost allerede registrert"
+            }).end();
+        } else {
+            let createUser = await db.any(queryCreateUser);
+            let payload = {username: username};
+            let tok = jwt.sign(payload, secret, {expiresIn: "12h"});
+            res.status(200).json({
+                username: username,
+                token: tok
+            });
+
+            }
+
+
 
     } catch (err) {
         res.status(500).json({
