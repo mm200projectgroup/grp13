@@ -1,4 +1,4 @@
-        let data = [{
+        /*let data = [{
             presentationsID: 1,
             titel: "Forside",
             text: "Et Esel er ikke en hest",
@@ -14,14 +14,40 @@
             text: "Jeg håper at dette er en fine slide. Det hadde vært syn hvis den gikk utenfor div taggen. La oss håpe at jeg slipper å måtte gjøre mye for å fikse dette. Kanskje det tilog med ikke er et problem. Tror jeg skal bare slå hode på keybordet for å få litt mer text her.. asijfhasjhdfaousjfgaoøsiudpoajghsfouajsdahjsfpaskjdouahsøkgfjsdfhjaøskdpiaoshjgfpoask",
             bakgrunn: "darkslateblue"
         }];
+*/
 
+let addNewSlide = document.getElementById("addNewSlide");
 
+ let data = [{
+     title:"title",
+     text:"text"
+     
+ }];
+ 
+createPresentation(data);
+
+ addNewSlide.onclick = function(){
+    let newSlide = {
+    title:"title",
+    text:"text"
+     };
+     
+     data.push(newSlide);
+     createPresentation(data);
+     showSlides();
+
+ }
+ 
+function createPresentation(data){
+ 
         let canvas = document.getElementById("canvas");
+        canvas.innerHTML="";
         for (let i = 0; i < data.length; i++) {
             let div = document.createElement("div");
             let slides = `
-            <div class="title">${data[i].titel}</div>
-            <div class="text">${data[i].text}</div>
+            <input class="title" id="title${i}" value ="${data[i].title}" maxlength= "14" onchange=updateSlide(${i})>
+            <br>
+            <input class="text" value ="${data[i].text}"> 
         `;
 
 
@@ -30,17 +56,23 @@
             div.id = "slide" + i;
             canvas.appendChild(div)
             document.getElementById("slide" + i).style.backgroundColor = `${data[i].bakgrunn}`;
+            
+
 
 
         }
 
 
+
+
         let preview = document.getElementById("preview");
+        preview.innerHTML="";
+    
         for (let i = 0; i < data.length; i++) {
 
             let div = document.createElement("div");
             let slides = `
-            <div class="previewTitle">${data[i].titel}</div>
+            <div class="previewTitle id="id="previewtitle${i}">${data[i].title}</div>
         `;
 
             div.innerHTML = slides;
@@ -54,18 +86,7 @@
 
 
 
-        function select(evt) {
-            let target = evt.currentTarget.id;
-            let getNr = target.match(/\d+/g).map(Number);
-            let index = parseInt(getNr)+1;
-            console.log(index);
-            
-            currentSlide(index);
-
-        }
-
-
-
+}
 
         let slideIndex = 1;
         showSlides(slideIndex);
@@ -98,5 +119,34 @@
             slides[slideIndex - 1].style.display = "block";
             preview[slideIndex - 1].className += " active";
         }
+    
+        function select(evt) {
+            let target = evt.currentTarget.id;
+            localStorage.setItem("currentSlide", target);
+            let getNr = target.match(/\d+/g).map(Number);
+            let index = parseInt(getNr)+1;
+            console.log(index);
+            
+            currentSlide(index);
 
-        
+        }
+    
+    
+    console.log
+
+
+
+
+        function updateSlide(i){
+            let newTitle = document.getElementById(`title${i}`).value;
+            document.getElementById(`previewtitle${i}`).innerHTML=newTitle;
+            data[i].title = newTitle;
+            
+            console.log(data);
+            
+        }
+
+
+
+
+

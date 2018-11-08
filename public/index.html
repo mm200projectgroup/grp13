@@ -10,26 +10,34 @@
 <body>
 
     <!-- /// Ny pass eller brukernavn -->
-    <div id="userSettingsForm" class="modal">
-        <div class="modal-content">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('userSettingsForm').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <h2 class="modulHeader">Administrate User</h2>
-            </div>
+<div id="userSettingsForm" class="modal">
+    <div class="modal-content animate">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('userSettingsForm').style.display='none'" class="close"
+                  title="Close Modal">&times;</span>
+            <h2 class="modulHeader">Administrate User</h2>
+        </div>
 
-            <div class="container">
-                <label for="username"><b>New Username</b></label>
-                <br>
-                <input type="text" id="newUsername" placeholder="newUsername" name="newUsername">
-                <br>
-                <label for="password"><b>New Password</b></label>
-                <br>
-                <input type="password" id="newPassword" placeholder="newPassword" name="newPassword">
-                <br>
-                <button class="formButtons" onclick="changeLogin()">Change Login Information</button>
-            </div>
+        <div class="container">
+            <label for="newUsername">New Username</label>
+            <br>
+            <input type="text" id="newUsername" placeholder="New username" name="newUsername">
+            <button class="formButtons" onclick="changeUsername()">Change username</button>
+            <br>
+            <label for="newEmail"><b>New Email</b></label>
+            <br>
+            <input type="text" id="newEmail" placeholder="New email" name="newEmail">
+            <button class="formButtons" onclick="changeEmail()">Change email</button>
+            <br>
+            <label for="newPassword"><b>New Password</b></label>
+            <br>
+            <input type="password" id="newPassword" placeholder="New password" name="newPassword">
+            <button class="formButtons" onclick="changePassword()">Change password</button>
+            <br>
+            <div id="userSettingsOutput"></div>
         </div>
     </div>
+</div>
 
     <div id="logInForm" class="modal">
         <div class="modal-content">
@@ -135,16 +143,13 @@
 
 
     </div>
-    <div id="canvas" >
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    </div>
-    <!-- /// TODO: SLIDES /// -->
-    <!-- Footer skal ha en slide som er den en starter med hvor en har muligheten til å legge til en ny slide.
-    Når en ny slide er lagt til, så vil en se 2 slides med muligheten til å legge til flere. 
-    Kun en slide skal kunne ses i canvas om gangen. -->
+    <div id="canvas" ></div>
     <div class="footer">
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
         <div id="preview"></div>
+        <div id="addNewSlide"></div>
+        
     </div>
     
     <script>
@@ -196,6 +201,7 @@
             }
         }
     </script>
+    <script src="js/bcrypt.js"></script>
     <script src="js/editingTools.js"></script>
     <script src="js/javascript.js"></script>
     <script src="js/slides.js"></script>

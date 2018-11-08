@@ -82,17 +82,19 @@ function loggInn() {
 
 
 function register() {
-
+    
+    let hash = bcrypt.hashSync(regPassword.value, 10);
+    
     let data = {
         username: regUsername.value,
-        password: regPassword.value,
+        password: hash,
         email: regEmail.value,
         role: ROLE
     };
 
     sendData("/app/users/register", data)
         .then(json => {
-                    if (STATUS == 200) {
+                if (STATUS == 200) {
                 console.log("yay");
                 
                 localStorage.setItem("logindata", JSON.stringify(json));
@@ -125,37 +127,78 @@ function register() {
 
 }
 
-/*
-function changeLogin() {
+//EDIT USER--------------------------
+async function changeUsername() {
+    let newUsername = document.getElementById("newUsername").value;
+    let user = JSON.parse(localStorage.getItem('logindata')).username;
+    let output = document.getElementById("userSettingsOutput");
     let data = {
-        username: newUsername.value,
-        password: newPassword.value,
+        newUsr:newUsername,
+        username: user
     };
-    sendData("/app/editUsers/changeLogin", data)
+    let res = await sendData("/app/editUsers/changeLogin/username", data);
+        console.log(res);
+        if(res.status == 200){
+            output.style.color = "black";
+            output.innerText = res.message;
+            let user = JSON.parse(localStorage.getItem("logindata"));
+            user.username = newUsername;
+            localStorage.setItem("logindata",JSON.stringify(user));
+        }
+        else if(res.status == 400){
+            output.style.color = "red";
+            output.innerText = res.error;
+        }
+
 }
-*/
+
+async function changeEmail() {
+    let newEmail = document.getElementById("newEmail").value;
+    let user = JSON.parse(localStorage.getItem('logindata')).username;
+    let output = document.getElementById("userSettingsOutput");
+    let data = {
+        email:newEmail,
+        username:user
+    };
+
+    let res = await sendData("/app/editUsers/changeLogin/email", data);
+    if(res.status == 200){
+        output.style.color = "black";
+        output.innerText = res.message;
+    }
+    else if(res.status == 400){
+        output.style.color = "red";
+        output.innerText = res.error;
+    }
+
+}
 
 
 
-//Test funksjoner
-/*
-//Test function. Delete if now longer needed.
-function tempFunction() {
-    return fetch("/app/update/email/", {
-        method: "UPDATE",
-        headers: {
-            "Content-Type": "application/json; charset=utf8"
-        },
-        body: JSON.stringify({
-            newEmail: "nordbom@gmail.com",
-            oldEmail: "nordbom@live.no"
-        })
-    })
-}*/
+async function changePassword() {
+    let prompt = confirm("WARNING: Are you sure about changing the password?");
+    if (prompt !== true) {
+        return;
+    }
 
-/*
-//Test function. Checking if GET works
-(function () {
-    getData("/app/users/getUsers");
-})();
-*/
+    let newPassword = document.getElementById("newPassword").value;
+    let hash = bcrypt.hash(newPassword, 10);
+    let user = JSON.parse(localStorage.getItem("logindata")).username;
+    let output = document.getElementById("userSettingsOutput");
+    let data = {
+        password: hash,
+        username:user
+    };
+
+    let res = await sendData("/app/editUsers/changeLogin/password", data);
+    if(res.status == 200){
+        output.style.color = "black";
+        output.innerText = res.message;
+    }
+    else if(res.status == 400){
+        output.style.color = "red";
+        output.innerText = "Something went wrong";
+    }
+
+}
+//-----------------------------------
