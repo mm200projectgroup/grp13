@@ -2,7 +2,7 @@
     margin: 0px;
     box-sizing: border-box;
     font-family: sans-serif;
-    font-size: 18pt;
+    font-size: 20pt;
 }
 
 
@@ -22,74 +22,55 @@ body {
         "menu footer footer footer";
 }
 
-/*Tekst-------------------------------*/
+
 p {
-    padding-top: 15px;
-    padding-bottom: 10px;
     font-size: 14px;
 }
 
-
 h3 {
-    font-size: 18px;
-    padding-bottom: 10px;
+    font-size: 23px;
 
 }
 
-.text{
-    border-style: hidden;
-    margin-top: 20px;
-    width: auto;
-    margin-left: 30px;
-    margin-right: 30px;
-}
 
-
-.title {
-    border-style: hidden;
-    font-size: 45px;
-    height: auto;
-    margin-top: 2%;
-    margin-left: 25%;
-    margin-right: 25%;
-    text-align: center;
-}
-
-.undertitle {
-    text-align: center;
-    font-size: 40px;
-    padding: 60px 12px;
-}
-
-/*----------------------------------------*/
 
 #header {
     grid-area: header;
-    background: #008ae6;
+    background: cornflowerblue;
 
 }
 
 .menu {
     grid-area: menu;
-    background: #008ae6;
+    background: gray;
+    border: solid 1px aliceblue;
+
 }
 
 #canvas {
     grid-area: canvas;
     position: relative;
-    margin: 5%;  
+    margin: 5%;
+    
 }
 
 .footer {
     grid-area: footer;
     background: gray;
+    border: solid 1px aliceblue;
+    
+
 }
 
 
+/*CANVAS */
 .mySlides {
     background-color: white;
     width: 100%;
     height: 100%;
+
+    
+
 }
 
 /* Next & previous buttons */
@@ -97,9 +78,10 @@ h3 {
 .next {
     cursor: pointer;
     position: absolute;
-    bottom:25px;
+    top: 50%;
     width: auto;
     padding: 16px;
+    margin-top: -22px;
     color: white;
     font-weight: bold;
     font-size: 18px;
@@ -107,6 +89,7 @@ h3 {
     border-radius: 0 3px 3px 0;
 }
 
+/* Position the "next button" to the right */
 .next {
     right: 0;
     border-radius: 3px 0 0 3px;
@@ -118,7 +101,6 @@ h3 {
 }
 
 
-<<<<<<< HEAD
 /*SLIDE*/
 .text{
     border-style: hidden;
@@ -161,11 +143,6 @@ h3 {
 
 .selected{
     border: 2px solid blue;
-=======
-
-/*Footer ------------------------------- */
-.myPreview {
->>>>>>> 47dd2e3ff5e2976ed4aff632682a14b22751adac
     background-color: white;
     height: 100px;
     width: 150px;
@@ -174,20 +151,21 @@ h3 {
 }
 
 .previewTitle {
-    font-size: 15px;
-    padding-left: 40%;
+    text-align: center;
     
 }
 
-/*--Footer-Pluss-tegn--------------------*/
+
 #addNewSlide{
-    cursor: pointer;
-    background-color: darkgray;
+    background-color: #000000;
+    border-radius:15px;
+    -webkit-border-radius:15px;
+    -moz-border-radius:15px;
     width: 30px;
     height: 30px;
     position: relative;
     top:35px;
-    left:5px;
+    left:10px;
 }
 
 #addNewSlide:after {
@@ -198,20 +176,20 @@ h3 {
     -webkit-border-radius: 1px;
     -moz-border-radius: 1px;
     position: absolute;
-    top:13px;
-    left: 5px;
+    top:15px;
+    left: 4px;
     content:"";
 }
 #addNewSlide:before {
-    background-color: #FFFFFF;
+    background-color: green;
     width: 4px;
     height: 20px;
     border-radius: 1px;
     -webkit-border-radius: 1px;
     -moz-border-radius: 1px;
     position: absolute;
-    top:5px;
-    left: 13px;
+    top:4px;
+    left: 15px;
     content:"";
 }
 
@@ -219,26 +197,24 @@ h3 {
     display: inline-block;
 }
 
-/*---------------------------------------*/
 
 /*MENY */
 #textMenu {
-    background: #b3e0ff;
+    background: pink;
     padding-left: 30px;
     padding-top: 30px;
 }
 
 #imageMenu {
-    background: #80ccff;
+    background: green;
     padding-left: 30px;
     padding-top: 30px;
-    padding-bottom: 30px;
 
 }
 
 
 
-/*Buttons-for-TEXT-editing---------------*/
+/* /// Text editing --- */
 
 #butB {
     font-weight: bold;
@@ -250,8 +226,7 @@ h3 {
 }
 
 #butU {
-    /*text-decoration: underline;*/
-    font-variant: small-caps;
+    text-decoration: underline;
 }
 
 #butU,
@@ -268,12 +243,12 @@ h3 {
 }
 
 
-/*Image-editing---------------------------------*/
+
+/* /// Image editing --- */
 #addImg {
     font-size: 14px;
-    height: 30px;
+    height: 40px;
     width: 100px;
-    align-content: center;
 
 }
 
@@ -282,23 +257,21 @@ h3 {
     width: 100px;
 }
 
-option[value]{
-    font-size: 14px;
-}
-
-/*User-Pop-up-windows---------------------------*/
+/*MENYEND */
 
 .modulHeader {
-    font-size: 25px;
+    font-size: 35px;
 }
+
 
 #user {
     text-align: right;
     padding: 20px 20px;
     color: white;
-    font-size: 14px;
+    font-size: 20px;
 }
 
+/* Full-width input fields */
 input[type=text],
 input[type=password] {
     width: 100%;
@@ -310,8 +283,10 @@ input[type=password] {
     border: 1px solid #ccc;
     box-sizing: border-box;
     text-align: center;
-    font-size: 14px;
+    font-size: 20px;
 }
+
+
 
 #signInBtn,
 #loginBtn {
@@ -322,8 +297,8 @@ input[type=password] {
     background-color: white;
     margin: 8px;
     font-family: sans-serif;
-    font-size: 14px;
-    /*border-radius: 25px;*/
+    font-size: 10pt;
+    border-radius: 25px;
     cursor: pointer;
     user-select: none;
     padding: 14px 20px;
@@ -334,11 +309,11 @@ input[type=password] {
     color: white;
     border: 0px;
     display: inline-block;
-    background-color: #008ae6;
+    background-color: cornflowerblue;
     margin: 8px;
     font-family: sans-serif;
     font-size: 14pt;
-    /*border-radius: 25px;*/
+    border-radius: 25px;
     cursor: pointer;
     user-select: none;
     padding: 14px 20px;
@@ -346,18 +321,21 @@ input[type=password] {
 
 }
 
+
+
+/* Center the image and position the close button */
 .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
     position: relative;
-    font-size: 18;
 }
+
 
 .container {
     text-align: center;
     padding: 16px;
     margin-bottom: 30px;
-    font-size: 14px
+    font-size: 20px
 }
 
 span.psw {
@@ -369,7 +347,7 @@ span.psw {
     color: white;
     border: 0px;
     display: inline-block;
-    background-color: #008ae6;
+    background-color: cornflowerblue;
     margin: 8px;
     font-family: sans-serif;
     font-size: 14pt;
@@ -409,7 +387,7 @@ span.psw {
     margin: 5% auto 15% auto;
     /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 40%;
+    width: 50%;
     /* Could be more or less, depending on screen size */
 }
 
@@ -428,6 +406,7 @@ span.psw {
     color: red;
     cursor: pointer;
 }
+
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
