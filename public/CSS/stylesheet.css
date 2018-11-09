@@ -128,10 +128,21 @@ h3 {
 }
 
 
+
+
 /* ---Footer ---- */
 
-.myPreview {
 
+.myPreview {
+    background-color: white;
+    height: 100px;
+    width: 150px;
+    margin: 30px;
+}
+
+
+.selected{
+    border: 2px solid blue;
     background-color: white;
     height: 100px;
     width: 150px;

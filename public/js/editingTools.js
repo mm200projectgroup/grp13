@@ -114,3 +114,15 @@ function toUnderline() {
         activeInput.style.fontVariant = "small-caps";
     }
 }
+
+
+/*
+function changeColor(color){
+    
+    let currentSlideID = localStorage.getItem('currentSlide');
+     document.getElementById(currentSlideID).style.backgroundColor=color; 
+    updateBackground(currentSlideID, color);
+
+
+    
+}*/

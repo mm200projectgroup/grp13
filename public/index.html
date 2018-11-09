@@ -120,6 +120,7 @@
             <p>Scale image</p>
             <input id="imgSlider" type="range" min="10" max="1000" step="1">
             <br>
+            
             <!--//Div som bilder blir lagt inn i-->
             <!-- <div id="presObj" style=" border-style: solid;"></div> -->
 
@@ -137,6 +138,10 @@
                 <option value="saturate(8)">Saturate</option>
                 <option value="sepia(100%)">Sepia</option>
             </select>
+        </div>
+        <div id="colorPicker">
+        <label for="pickcolor">Color</label> 
+        <input type="color" id="pickcolor" value="#fdffff" onchange="updateSlide();" />
         </div>
 
 
