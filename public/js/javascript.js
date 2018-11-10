@@ -202,3 +202,25 @@ async function changePassword() {
 
 }
 //-----------------------------------
+
+
+
+//SAVE PRESENTATION TO DB---------------------------
+function savePresentation() {
+    let data = {
+        presentationTitle: "",
+        presentationData: presentation
+    };
+
+
+    sendData("/app/../..", data)
+        .then(json => {
+
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+}
+
+//------------------------------------------------

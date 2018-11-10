@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
 </head>
@@ -10,34 +10,33 @@
 <body>
 
     <!-- /// Ny pass eller brukernavn -->
-<div id="userSettingsForm" class="modal">
-    <div class="modal-content animate">
-        <div class="imgcontainer">
-            <span onclick="document.getElementById('userSettingsForm').style.display='none'" class="close"
-                  title="Close Modal">&times;</span>
-            <h2 class="modulHeader">Administrate User</h2>
-        </div>
+    <div id="userSettingsForm" class="modal">
+        <div class="modal-content animate">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('userSettingsForm').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <h2 class="modulHeader">Administrate User</h2>
+            </div>
 
-        <div class="container">
-            <label for="newUsername">New Username</label>
-            <br>
-            <input type="text" id="newUsername" placeholder="New username" name="newUsername">
-            <button class="formButtons" onclick="changeUsername()">Change username</button>
-            <br>
-            <label for="newEmail"><b>New Email</b></label>
-            <br>
-            <input type="text" id="newEmail" placeholder="New email" name="newEmail">
-            <button class="formButtons" onclick="changeEmail()">Change email</button>
-            <br>
-            <label for="newPassword"><b>New Password</b></label>
-            <br>
-            <input type="password" id="newPassword" placeholder="New password" name="newPassword">
-            <button class="formButtons" onclick="changePassword()">Change password</button>
-            <br>
-            <div id="userSettingsOutput"></div>
+            <div class="container">
+                <label for="newUsername">New Username</label>
+                <br>
+                <input type="text" id="newUsername" placeholder="New username" name="newUsername">
+                <button class="formButtons" onclick="changeUsername()">Change username</button>
+                <br>
+                <label for="newEmail"><b>New Email</b></label>
+                <br>
+                <input type="text" id="newEmail" placeholder="New email" name="newEmail">
+                <button class="formButtons" onclick="changeEmail()">Change email</button>
+                <br>
+                <label for="newPassword"><b>New Password</b></label>
+                <br>
+                <input type="password" id="newPassword" placeholder="New password" name="newPassword">
+                <button class="formButtons" onclick="changePassword()">Change password</button>
+                <br>
+                <div id="userSettingsOutput"></div>
+            </div>
         </div>
     </div>
-</div>
 
     <div id="logInForm" class="modal">
         <div class="modal-content">
@@ -120,7 +119,7 @@
             <p>Scale image</p>
             <input id="imgSlider" type="range" min="10" max="1000" step="1">
             <br>
-            
+
             <!--//Div som bilder blir lagt inn i-->
             <!-- <div id="presObj" style=" border-style: solid;"></div> -->
             <p>Select filter</p>
@@ -140,27 +139,35 @@
             </select>
         </div>
         <div id="colorPicker">
-        <label for="pickcolor">Color</label> 
-        <input type="color" id="pickcolor" value="#fdffff" onchange="updateSlide();" />
+            <label for="pickcolor">Color</label>
+            <input type="color" id="pickcolor" value="#fdffff" onchange="updateSlide();" />
         </div>
 
 
 
-
     </div>
-    <div id="canvas" ></div>
+    <div id="canvas"></div>
+    <button id="fullscreenBtn">FullScreen</button>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
     <div class="footer">
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
         <div id="preview"></div>
         <div id="addNewSlide"></div>
-        
+
     </div>
-    
+
     <script>
-    
-        //let user = document.getElementById("user");
+        let presentation = [{
+            title: "",
+            text: "",
+            bakgrunnColor: ""
+
+        }];
         
+        
+
+
+
         let loggInnUsername = document.getElementById("loggInnUsername");
         let loggInnpassword = document.getElementById("loggInnpassword");
 
@@ -173,14 +180,14 @@
 
         let outputLogIn1 = document.getElementById("outputLogIn");
         let outputSignUp1 = document.getElementById("outputSignUp");
-        
-        
+
+
 
         //Change header template
         let header = document.getElementById("header");
         setHeaderView("notSignedIn", header);
-        
-        
+
+
 
         function setHeaderView(id) {
             header.innerHTML = "";
@@ -210,8 +217,8 @@
     <script src="js/editingTools.js"></script>
     <script src="js/javascript.js"></script>
     <script src="js/slides.js"></script>
-    
-        
+
+
 
 </body>
 

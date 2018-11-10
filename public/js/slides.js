@@ -1,46 +1,43 @@
 let addNewSlide = document.getElementById("addNewSlide");
+let fullscreenBtn = document.getElementById("fullscreenBtn");
 
-let data = [{
-    title: "",
-    text: "",
-    bakgrunnColor: ""
-
- }];
-
-createPresentation(data);
+createPresentation(presentation);
 
 addNewSlide.onclick = function () {
+    let color = document.getElementById("pickcolor");
+    color.value = "#FFFFFF"
+
     let newSlide = {
         title: "",
         text: "",
         bakgrunnColor: ""
     };
 
-    data.push(newSlide);
-    createPresentation(data);
-    currentSlide(data.length);
+    presentation.push(newSlide);
+    createPresentation(presentation);
+    currentSlide(presentation.length);
 
 }
 
-function createPresentation(data) {
+function createPresentation(presentation) {
     let i;
 
     let canvas = document.getElementById("canvas");
     canvas.innerHTML = "";
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < presentation.length; i++) {
         let div = document.createElement("div");
         let header = `
-            <input class="title" id="title${i}" placeholder="Title" value="${data[i].title}" maxlength= "14" onchange=updateSlide()>
+            <input class="title" id="title${i}" placeholder="Title" value="${presentation[i].title}" maxlength= "14" onchange=updateSlide()>
             <br>
-            <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${data[i].text}</textarea> 
+            <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation[i].text}</textarea> 
         `;
 
 
         div.innerHTML = header;
-        div.className = "mySlides";
+        div.className = "mySlides" + " editMode";
         div.id = "slide" + i;
         canvas.appendChild(div)
-        document.getElementById("slide" + i).style.backgroundColor = `${data[i].bakgrunnColor}`;
+        document.getElementById("slide" + i).style.backgroundColor = `${presentation[i].bakgrunnColor}`;
 
 
     }
@@ -49,7 +46,7 @@ function createPresentation(data) {
     let preview = document.getElementById("preview");
     preview.innerHTML = "";
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < presentation.length; i++) {
 
         let div = document.createElement("div");
         let slides = `
@@ -68,8 +65,21 @@ function createPresentation(data) {
 
 }
 
+
+document.onkeyup = function (event) {
+    let x = event.which || event.keyCode;
+    if (x == 37) {
+        plusSlides(-1);
+    } else if (x == 39) {
+        plusSlides(1);
+    }
+}
+
+
+
 let slideIndex = 1;
 showSlides(slideIndex);
+
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
@@ -127,52 +137,24 @@ function activeTextArea(event) {
     if (textArea.value === '') {
         textArea.value += '• ';
     }
-    
-    textArea.onkeyup=function(event){
+
+    textArea.onkeyup = function (event) {
         let x = event.which || event.keyCode;
-        if(x==13){
-        textArea.value += '• ';
+        if (x == 13) {
+            textArea.value += '• ';
         }
     }
-    
-    textArea.onchange=function(){
+
+    textArea.onchange = function () {
         updateSlide();
     }
-    
-    
-/*
-textArea.addEventListener("keyup", function(event){
-    if(event.keyCode==13){
-     textArea.value += '• ';
-    }
-});
-*/
+
+
 }
 
 
 
 
-/*
-
-        function updateTitle(i){
-            let newTitle = document.getElementById(`title${i}`).value;
-            
-            data[i].title = newTitle;
-            console.log(data);
-            
-        }
-
-    ///TODO: Optimalisere "currentSlide slik at den bytter når man bytter slide. markere hvilken slide man er på
-        function updateBackground(currentSlideID, newcolor){
-
-            let getNr = currentSlideID.match(/\d+/g).map(Number);
-            let i = parseInt(getNr);
-            
-            data[i].bakgrunnColor=newcolor;
-         
-            console.log(data);
-            
-        }*/
 
 
 function updateSlide() {
@@ -182,19 +164,68 @@ function updateSlide() {
 
     //UpdateTitle
     let newTitle = document.getElementById(`title${i}`).value;
-    data[i].title = newTitle;
-    
+    presentation[i].title = newTitle;
+
     //UpdateText
-    let newText=
-    document.getElementById(`text${i}`).value;
-    data[i].text = newText;
-    
+    let newText =
+        document.getElementById(`text${i}`).value;
+    presentation[i].text = newText;
+
     //UpdateBackgroundColor
     let newColor = document.getElementById("pickcolor").value;
     document.getElementById(currentSlideID).style.backgroundColor = newColor;
-    data[i].bakgrunnColor = newColor;
+    presentation[i].bakgrunnColor = newColor;
 
 
-    console.log(data);
+    console.log(presentation);
+
+}
+
+
+
+
+
+
+
+
+//Tar på og av fullscreen
+fullscreenBtn.onclick = function () {
+    var elem = document.documentElement;
+    let currentSlideID = localStorage.getItem('currentSlide');
+    let slides = document.getElementsByClassName("mySlides");
+    //Ser om current slide er i editMode
+    var check = document.getElementById(currentSlideID).classList.contains("editMode");
+
+    //SLår på fullscreen
+    if (check) {
+        for (i = 0; i < slides.length; i++) {
+            slides[i].className = slides[i].className.replace(" editMode", " fullscreen");
+        }
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { /* Firefox */
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+            elem.msRequestFullscreen();
+        }
+        //Slå av fullscreen
+    } else {
+        for (i = 0; i < slides.length; i++) {
+            slides[i].className = slides[i].className.replace(" fullscreen", " editMode");
+        }
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { /* Firefox */
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE/Edge */
+            document.msExitFullscreen();
+        }
+
+
+    }
 
 }
