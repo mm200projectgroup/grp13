@@ -65,9 +65,18 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-    
-    
+  z-index: 1;  
+}
+
+
+.fullscreen textarea{
+font-size: 80px;
+margin-top: 5%;
+margin-left: 5%;
+}
+
+.fullscreen input{
+font-size: 110px
 }
 
 #fullscreenBtn {
@@ -99,21 +108,20 @@ h3 {
 }
 
 .text{
-    width: 80%;
+    width: 50%;
     height: 60%;
     background-color: transparent;
     border-style: hidden;
-    margin-top: 20px;
-    width: auto;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-top: 5%;
+    margin-left: 5%;
+    font-size: 40px
 }
 
 
 .title {
     background-color: transparent;
     border-style: hidden;
-    font-size: 45px;
+    font-size: 60px;
     width: 50%;
     height: auto;
     margin-top: 2%;
