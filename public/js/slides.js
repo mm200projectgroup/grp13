@@ -10,7 +10,9 @@ addNewSlide.onclick = function () {
     let newSlide = {
         title: "",
         text: "",
-        bakgrunnColor: ""
+        bakgrunnColor: "",
+        titleColor:"",
+        textColor:""
     };
 
     presentation.push(newSlide);
@@ -19,15 +21,15 @@ addNewSlide.onclick = function () {
 
 }
 
+
 function createPresentation(presentation) {
     let i;
-
     let canvas = document.getElementById("canvas");
     canvas.innerHTML = "";
     for (let i = 0; i < presentation.length; i++) {
         let div = document.createElement("div");
         let header = `
-            <input class="title" id="title${i}" placeholder="Title" value="${presentation[i].title}" maxlength= "14" onchange=updateSlide()>
+            <input class="title" id="title${i}" placeholder="Title" value="${presentation[i].title}" maxlength= "14" onchange=updateSlide() style="color:">
             <br>
             <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation[i].text}</textarea> 
         `;
@@ -91,6 +93,14 @@ function currentSlide(n) {
 }
 
 
+//Selecting the preview
+function selectPreview(evt) {
+    let target = evt.currentTarget.id;
+    let index = getCurrentIndex(target)+1
+    currentSlide(index);
+}
+
+
 function showSlides(n) {
     let i;
     let slides = document.getElementsByClassName("mySlides");
@@ -118,22 +128,20 @@ function showSlides(n) {
 }
 
 
-
-
-function selectPreview(evt) {
-    let target = evt.currentTarget.id;
+//Find the index of current target
+function getCurrentIndex(target){
     let getNr = target.match(/\d+/g).map(Number);
-    let index = parseInt(getNr) + 1;
-    currentSlide(index);
+    return parseInt(getNr);
 }
 
 
 
-function activeTextArea(event) {
-    let target = event.target.id;
 
-    let textArea = document.getElementById(target);
 
+function activeTextArea(evt) {
+    let target = evt.currentTarget;
+    let index = getCurrentIndex(target.id)+1
+    let textArea = document.getElementById(target.id);
     if (textArea.value === '') {
         textArea.value += '• ';
     }
@@ -155,12 +163,9 @@ function activeTextArea(event) {
 
 
 
-
-
 function updateSlide() {
     let currentSlideID = localStorage.getItem('currentSlide');
-    let getNr = currentSlideID.match(/\d+/g).map(Number);
-    let i = parseInt(getNr);
+    let i = getCurrentIndex(currentSlideID)
 
     //UpdateTitle
     let newTitle = document.getElementById(`title${i}`).value;
