@@ -98,8 +98,15 @@
     </template>
 
     <template id="notSignedIn">
+        
+        <div class="dropdown">
+            <button class="dropbtn">Fil</button>
+            <div class="dropdown-content">
+                <a onclick="savePresentation()">Save presentation</a>
+            </div>
+        </div>
+        <input id="prenestationTitle" placeholder="Presentation Title..">
         <button id="loginBtn" onclick="document.getElementById('signUpForm').style.display='block'" style="width:auto;">Sign up</button>
-
         <button id="signInBtn" onclick="document.getElementById('logInForm').style.display='block'" style="width:auto;">Login</button>
     </template>
 
@@ -162,11 +169,12 @@
             title: "",
             text: "",
             bakgrunnColor: "",
-            titleColor:"",
-            textColor:""
+            titleColor: "",
+            textColor: "",
+            media: ""
 
         }];
-        
+
         
 
 

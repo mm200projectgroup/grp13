@@ -14,7 +14,7 @@ body {
     grid-template-rows: 60px 1fr 150px;
 
     grid-template-areas:
-        "header header header header"
+        "menu header header header"
         "menu canvas canvas canvas"
         "menu footer footer footer";
 }
@@ -24,6 +24,44 @@ body {
     background: #008ae6;
 
 }
+/*HEADER---------------------*/
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
 
 
 /*Slide-and-canvas---------------------*/
@@ -32,15 +70,6 @@ body {
 }
 
 
-/*.mySlides {
-    background-color: white;
-    width: 60%;
-    height: 80%;
-    margin-top:4%;
-    margin-left: 20%;
-    margin-right: 20%;
-
-}*/
 
 .mySlides{
     background-color: white;
@@ -156,8 +185,20 @@ h3 {
     height: 100px;
     width: 150px;
     margin: 30px;
-    
 
+}
+
+.deleteSlide {
+    
+    color: #000;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.deleteSlide:hover,
+.deleteSlide:focus {
+    color: red;
+    cursor: pointer;
 }
 
 .selected{

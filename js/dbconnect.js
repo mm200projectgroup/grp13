@@ -24,6 +24,10 @@ prpSql.deleteUser = new PrpSt('deleteUser', 'UPDATE public."users" SET role = 0,
 prpSql.createUser = new PrpSt('createUser',`INSERT INTO public."users" ("id", "email", "username", "hash", "role") VALUES (DEFAULT, $1, $2, $3, $4) RETURNING "id", "email", "username", "hash", "role"`);
 
 
+//Presentation------------
+
+prpSql.newPresentation = new PrpSt('newPresentation', `INSERT INTO public."presentation" ("presentationid", "titel", "slides") VALUES (DEFAULT, $1, $2) RETURNING "presentationid", "titel", "slides"`);
+
 
 //export module
 module.exports.db = db; //db connection

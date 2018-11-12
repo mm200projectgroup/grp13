@@ -182,7 +182,7 @@ async function changePassword() {
     }
 
     let newPassword = document.getElementById("newPassword").value;
-    let hash = bcrypt.hash(newPassword, 10);
+    let hash = bcrypt.hashSync(newPassword, 10);
     let user = JSON.parse(localStorage.getItem("logindata")).username;
     let output = document.getElementById("userSettingsOutput");
     let data = {
@@ -249,21 +249,17 @@ async function getHash() {
 
 
 //SAVE PRESENTATION TO DB---------------------------
-function savePresentation() {
+async function savePresentation() {
+let title = document.getElementById("prenestationTitle")
+let slides = {"slides":presentation}
+console.log(slides)
     let data = {
-        presentationTitle: "",
-        presentationData: presentation
+        presentationTitle: title.value,
+        presentationData: slides
     };
 
 
-    sendData("/app/../..", data)
-        .then(json => {
-
-        })
-        .catch(error => {
-            console.log(error);
-        });
-
+    let res = await sendData("/app/presentation/savePresentation/", data);
 }
 
 //------------------------------------------------

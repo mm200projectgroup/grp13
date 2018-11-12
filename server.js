@@ -23,6 +23,9 @@ app.use('/app/users/', users);
 const editUsers = require('./js/editUsers.js');//router til editUsers.js
 app.use('/app/editUsers/', editUsers);
 
+const presentation = require('./js/presentation.js');//router til editUsers.js
+app.use('/app/presentation/', presentation);
+
 
 app.listen(app.get('port'), function () {
     console.log('server running', app.get('port'));

@@ -126,29 +126,5 @@ router.post("/register/", async function (req, res) {
 
 
 
-
-
-/*
-//Test for å se om getData funker
-router.get("/getUsers/", async function (req, res){
-    let query = 'SELECT * FROM public."users"';
-    
-    
-    try{
-    let users = await db.any(query);
-    console.log(users);
-    res.status(200).json(users);
-        
-    }catch (err) {
-        res.status(500).json({
-            error: err
-        }); //something went wrong!
-    }
-
-    
-});
-
-*/
-
 //export module -------------------------------------
 module.exports = router;

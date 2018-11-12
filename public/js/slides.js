@@ -1,6 +1,7 @@
 let addNewSlide = document.getElementById("addNewSlide");
 let fullscreenBtn = document.getElementById("fullscreenBtn");
 
+
 createPresentation(presentation);
 
 addNewSlide.onclick = function () {
@@ -36,7 +37,6 @@ function createPresentation(presentation) {
         
         let imageContainer = document.createElement("div");
         
-        
 
         slideDiv.innerHTML = slideContent;
         slideDiv.className = "mySlides" + " editMode";
@@ -46,7 +46,6 @@ function createPresentation(presentation) {
         slideDiv.appendChild(imageContainer);
         canvas.appendChild(slideDiv)
         document.getElementById("slide" + i).style.backgroundColor = `${presentation[i].bakgrunnColor}`;
-
 
     }
 
@@ -58,9 +57,12 @@ function createPresentation(presentation) {
 
         let div = document.createElement("div");
         let slides = `
-            <div class="previewTitle id="previewtitle${i}">${i+1}</div>
+            <span onclick="deleteSlide(${i})" class="deleteSlide">&times;</span>
+            <p class="previewTitle" id="previewtitle${i}">${i+1}</p>
         `;
-
+        
+        
+        
         div.innerHTML = slides;
         div.className = "myPreview";
         div.id = "preview" + i;
@@ -68,8 +70,6 @@ function createPresentation(presentation) {
         preview.appendChild(div);
 
     }
-
-
 
 }
 
@@ -111,6 +111,8 @@ function showSlides(n) {
     let i;
     let slides = document.getElementsByClassName("mySlides");
     let preview = document.getElementsByClassName("myPreview");
+    let deleteSlideBtn = document.getElementsByClassName("deleteSlide");
+    
     if (n > slides.length) {
         slideIndex = 1
     }
@@ -122,11 +124,16 @@ function showSlides(n) {
     }
     for (i = 0; i < preview.length; i++) {
         preview[i].className = preview[i].className.replace(" selected", "");
+        deleteSlideBtn[i].style.display = "none";
     }
     slides[slideIndex - 1].style.display = "block";
-
+    
     preview[slideIndex - 1].className += " selected";
+    
+    deleteSlideBtn[slideIndex - 1].style.display = "block";
 
+    
+    
     localStorage.clear('currentSlide');
     let activeSlide = slides[slideIndex - 1].id
     localStorage.setItem('currentSlide', activeSlide);
@@ -178,7 +185,7 @@ function updateSlide() {
     //UpdateText
     let newText =
         document.getElementById(`text${i}`).value;
-    presentation[i].text = newText;
+        presentation[i].text = newText;
 
     //UpdateBackgroundColor
     let newColor = document.getElementById("pickcolor").value;
@@ -188,6 +195,12 @@ function updateSlide() {
 
     console.log(presentation);
 
+}
+
+function deleteSlide(i){
+    presentation.splice(i, 1);
+    createPresentation(presentation);
+    
 }
 
 
