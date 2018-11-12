@@ -204,6 +204,49 @@ async function changePassword() {
 //-----------------------------------
 
 
+//---------------DELETE USER--------------------
+async function deleteUser() {
+    let prompt = window.prompt("Please enter your password to confirm. WARNING:This will permanently delete your account!");
+    console.log(prompt);
+    let n = await getHash();
+    console.log(n);
+    let hash = n.hash;
+    let user = JSON.parse(localStorage.getItem("logindata")).username;
+
+    if(!bcrypt.compareSync(prompt, hash)){
+        return window.alert("Imma need you to enter the correct password, chief");
+    }
+
+
+    let cfg = {
+        method: 'DELETE'
+    };
+
+    let res = await fetch("/app/editUsers/changeLogin/" + user, cfg);
+    if (res.status == "200") {
+        logOut();
+    }
+    else {
+        console.error(res);
+    }
+
+
+}
+
+function logOut() {
+    localStorage.removeItem('logindata');
+    document.getElementById("userSettingsForm").style.display = "none";
+    setHeaderView("notSignedIn", header);
+}
+
+async function getHash() {
+    let username = JSON.parse(localStorage.getItem('logindata')).username;
+    return fetch('/app/editUsers/hash/' + username).then(data => {
+        return data.json();
+    });
+}
+
+
 
 //SAVE PRESENTATION TO DB---------------------------
 function savePresentation() {

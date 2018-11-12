@@ -27,18 +27,24 @@ function createPresentation(presentation) {
     let canvas = document.getElementById("canvas");
     canvas.innerHTML = "";
     for (let i = 0; i < presentation.length; i++) {
-        let div = document.createElement("div");
-        let header = `
+        let slideDiv = document.createElement("div");
+        let slideContent = `
             <input class="title" id="title${i}" placeholder="Title" value="${presentation[i].title}" maxlength= "14" onchange=updateSlide() style="color:">
             <br>
             <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation[i].text}</textarea> 
         `;
+        
+        let imageContainer = document.createElement("div");
+        
+        
 
-
-        div.innerHTML = header;
-        div.className = "mySlides" + " editMode";
-        div.id = "slide" + i;
-        canvas.appendChild(div)
+        slideDiv.innerHTML = slideContent;
+        slideDiv.className = "mySlides" + " editMode";
+        slideDiv.id = "slide" + i;
+        imageContainer.className="slideImg";
+        imageContainer.id="imgCont"+i;
+        slideDiv.appendChild(imageContainer);
+        canvas.appendChild(slideDiv)
         document.getElementById("slide" + i).style.backgroundColor = `${presentation[i].bakgrunnColor}`;
 
 
@@ -136,8 +142,6 @@ function getCurrentIndex(target){
 
 
 
-
-
 function activeTextArea(evt) {
     let target = evt.currentTarget;
     let index = getCurrentIndex(target.id)+1
@@ -195,11 +199,11 @@ function updateSlide() {
 
 //Tar på og av fullscreen
 fullscreenBtn.onclick = function () {
-    var elem = document.documentElement;
+    let elem = document.documentElement;
     let currentSlideID = localStorage.getItem('currentSlide');
     let slides = document.getElementsByClassName("mySlides");
     //Ser om current slide er i editMode
-    var check = document.getElementById(currentSlideID).classList.contains("editMode");
+    let check = document.getElementById(currentSlideID).classList.contains("editMode");
 
     //SLår på fullscreen
     if (check) {

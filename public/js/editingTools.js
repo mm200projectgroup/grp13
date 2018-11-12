@@ -31,7 +31,8 @@ function imgResizer() {
 	function addImg() {
 		//Lag egen div til hvor bilde skal være og legg den som verdi.
 		let slideId = localStorage.getItem("currentSlide");
-		let presObject = document.getElementById(slideId);
+        let index = getCurrentIndex(slideId);
+		let presObject = document.getElementById("imgCont"+index);
 		//her settes størrelsen til diven 
 		//let canvasWidth = parseInt(presObject.style.width, 10);
 		//Denne åpner et prompt vindu hvor du legger inn bildelinken

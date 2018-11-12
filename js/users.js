@@ -23,7 +23,7 @@ router.post("/login/", async function (req, res) {
     try {
 
         let datarows = await db.any(query);
-        if (datarows.length == 0) {
+        if (datarows.length === 0) {
             res.status(401).json({
                 mld: "Feil brukernavn eller passord"
             });
@@ -123,6 +123,8 @@ router.post("/register/", async function (req, res) {
     }
 
 });
+
+
 
 
 

@@ -61,23 +61,24 @@ router.post('/changeLogin/password', async function (request, res) {
    res.send(JSON.stringify({"message":"Password changed successfully","status":"200"})).end();
 });
 
-function handleError(e) {
-    console.log(e);
-}
-
-async function checkEmailAvailable(email) {
-    let query = prpSql.findUser;
-    query.values = [null, email];
-
-    let results = await db.any(query);
-    return results.length === 0;
-}
 
 
-router.delete("/changeLogin/", async function (req, res) {
+router.delete("/changeLogin/:username", async function (req, res) {
 
+    let username = req.params['username'];
 
+    let deleteQuery = prpSql.deleteUser;
+    deleteQuery.values = [username, ""];
+    db.none(deleteQuery);
+    res.status(200).end();
 });
 
+router.get("/hash/:username", async function (req, res) {
+    let username = req.params["username"];
+    let hashQuery = prpSql.getHash;
+    hashQuery.values = [username];
+    let hash = await db.one(hashQuery);
+    res.status(200).json(hash).end();
+});
 
 module.exports = router;
