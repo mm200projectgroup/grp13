@@ -31,7 +31,7 @@ function createPresentation(presentation) {
     for (let i = 0; i < presentation.length; i++) {
         let slideDiv = document.createElement("div");
         let slideContent = `
-            <input class="title" id="title${i}" placeholder="Title" value="${presentation[i].title}" maxlength= "14" onchange=updateSlide() style="color:">
+            <input class="title" id="title${i}" placeholder="Title" value="${presentation[i].title}" maxlength= "14" onchange=updateSlide() autocomplete="off">
             <br>
             <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation[i].text}</textarea> 
         `;
@@ -138,7 +138,6 @@ function showSlides(n) {
 
     
     
-    localStorage.clear('currentSlide');
     let activeSlide = slides[slideIndex - 1].id
     localStorage.setItem('currentSlide', activeSlide);
     

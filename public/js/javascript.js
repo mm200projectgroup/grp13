@@ -1,7 +1,8 @@
 let STATUS;
 let ROLE = 1;
 
-
+let token;
+let userId
 
 
 
@@ -54,7 +55,8 @@ function loggInn() {
                 console.log("yay");
                 
                 localStorage.setItem("logindata", JSON.stringify(json));
-                let token = JSON.parse(localStorage.getItem("logindata")).token;
+                token = JSON.parse(localStorage.getItem("logindata")).token;
+                userId = JSON.parse(localStorage.getItem("logindata")).userId;
               
                 logInForm.style.display = "none";
                 setHeaderView("signedIn", header);
@@ -98,7 +100,8 @@ function register() {
                 console.log("yay");
                 
                 localStorage.setItem("logindata", JSON.stringify(json));
-                let token = JSON.parse(localStorage.getItem("logindata")).token;
+                token = JSON.parse(localStorage.getItem("logindata")).token;
+                userId = JSON.parse(localStorage.getItem("logindata")).userId;
               
                 signUpForm.style.display = "none";
                 setHeaderView("signedIn", header);
@@ -255,11 +258,17 @@ let slides = {"slides":presentation}
 console.log(slides)
     let data = {
         presentationTitle: title.value,
-        presentationData: slides
+        presentationData: slides,
+        token: token,
+        userId: userId
     };
 
 
     let res = await sendData("/app/presentation/savePresentation/", data);
+    
+    if (res.status = 200){
+    console.log(res.pres);
+    }
 }
 
 //------------------------------------------------

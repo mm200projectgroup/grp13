@@ -45,6 +45,7 @@ router.post("/login/", async function (req, res) {
 
             res.status(200).json({
                 username: nameCheck.username,
+                userId: nameCheck.id,
                 token: tok
             });
 
@@ -109,6 +110,7 @@ router.post("/register/", async function (req, res) {
             let tok = jwt.sign(payload, secret, {expiresIn: "12h"});
             res.status(200).json({
                 username: username,
+                userId: createUser.id,
                 token: tok
             });
 

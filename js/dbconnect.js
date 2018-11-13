@@ -26,7 +26,7 @@ prpSql.createUser = new PrpSt('createUser',`INSERT INTO public."users" ("id", "e
 
 //Presentation------------
 
-prpSql.newPresentation = new PrpSt('newPresentation', `INSERT INTO public."presentation" ("presentationid", "titel", "slides") VALUES (DEFAULT, $1, $2) RETURNING "presentationid", "titel", "slides"`);
+prpSql.newPresentation = new PrpSt('newPresentation', `INSERT INTO public."presentation" ("presentationid", "titel", "slides", "ownerid") VALUES (DEFAULT, $1, $2, $3) RETURNING "presentationid", "titel", "slides", "ownerid"`);
 
 
 //export module

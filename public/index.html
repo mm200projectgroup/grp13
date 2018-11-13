@@ -39,6 +39,8 @@
         </div>
     </div>
 
+    
+    
     <div id="logInForm" class="modal">
         <div class="modal-content">
             <div class="imgcontainer">
@@ -94,11 +96,6 @@
     <div id="header"></div>
 
     <template id="signedIn">
-        <h3 id="user"></h3>
-    </template>
-
-    <template id="notSignedIn">
-        
         <div class="dropdown">
             <button class="dropbtn">Fil</button>
             <div class="dropdown-content">
@@ -106,6 +103,10 @@
             </div>
         </div>
         <input id="prenestationTitle" placeholder="Presentation Title..">
+        <h3 id="user"></h3>
+    </template>
+
+    <template id="notSignedIn">
         <button id="loginBtn" onclick="document.getElementById('signUpForm').style.display='block'" style="width:auto;">Sign up</button>
         <button id="signInBtn" onclick="document.getElementById('logInForm').style.display='block'" style="width:auto;">Login</button>
     </template>
@@ -158,7 +159,7 @@
     </div>
     <div id="canvas"></div>
     <button id="fullscreenBtn">FullScreen</button>
-      <a class="prev" onclick="plusSlides(-1)" style="z-index: 2">&#10094;</a>
+    <a class="prev" onclick="plusSlides(-1)" style="z-index: 2">&#10094;</a>
     <a class="next" onclick="plusSlides(1)" style="z-index: 2">&#10095;</a>
     <div class="footer" id="footer">
         <div id="preview"></div>
@@ -177,11 +178,11 @@
             titleColor: "",
             textColor: "",
             media: "",
-            notes:""
+            notes: ""
 
         }];
 
-        
+
 
 
 
@@ -198,11 +199,29 @@
         let outputLogIn1 = document.getElementById("outputLogIn");
         let outputSignUp1 = document.getElementById("outputSignUp");
 
-
-
         //Change header template
         let header = document.getElementById("header");
-        setHeaderView("notSignedIn", header);
+        //username shown
+
+
+
+
+        window.onload = function() {
+            if (localStorage.logindata == null) {
+                setHeaderView("notSignedIn", header);
+            } else {
+
+                setHeaderView("signedIn", header);
+                let user = document.getElementById("user");
+                let username = JSON.parse(localStorage.getItem("logindata")).username;
+                console.log(username);
+                user.innerHTML = username;
+                user.onclick = function changePassword() {
+                    document.getElementById('userSettingsForm').style.display = 'block'
+                };
+            }
+
+        }
 
 
 
