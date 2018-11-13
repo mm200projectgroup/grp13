@@ -13,7 +13,8 @@ addNewSlide.onclick = function () {
         text: "",
         bakgrunnColor: "",
         titleColor:"",
-        textColor:""
+        textColor:"",
+        notes:""
     };
 
     presentation.push(newSlide);
@@ -75,7 +76,10 @@ function createPresentation(presentation) {
 
 
 document.onkeyup = function (event) {
-    let x = event.which || event.keyCode;
+    if(document.activeElement.nodeName === "INPUT" ||document.activeElement.nodeName === "TEXTAREA"){
+        return;
+    }
+    let x = event.which || event.keyCode || event.code || event.keyIdentifier;
     if (x == 37) {
         plusSlides(-1);
     } else if (x == 39) {
@@ -137,6 +141,8 @@ function showSlides(n) {
     localStorage.clear('currentSlide');
     let activeSlide = slides[slideIndex - 1].id
     localStorage.setItem('currentSlide', activeSlide);
+    
+     updateNotes(slideIndex -1);
 
 }
 
@@ -250,4 +256,28 @@ fullscreenBtn.onclick = function () {
 
     }
 
+}
+
+
+
+//------------------------------------------------
+//-----------SHOW/HIDE PRESENTER NOTES---------------------------------
+function toggleNotes(e) {
+    let notes = document.getElementById("slideNotes");
+    let footer = document.getElementById("footer");
+
+    notes.style.zIndex = notes.style.zIndex * -1;
+}
+
+function saveNotes() {
+    let id = localStorage.getItem("currentSlide").slice(5);
+    presentation[id].notes = document.getElementById("notes").value;
+}
+
+function updateNotes(n) {
+    let notes = document.getElementById("notes");
+    notes.value = "";
+    if(presentation[n]){
+        notes.value = presentation[n].notes;
+    }
 }
