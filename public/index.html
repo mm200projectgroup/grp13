@@ -7,8 +7,7 @@
     <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
 </head>
 
-<body>
-
+<body onclick="selectActive()">
     <!-- /// Ny pass eller brukernavn -->
     <div id="userSettingsForm" class="modal">
         <div class="modal-content animate">
@@ -39,8 +38,8 @@
         </div>
     </div>
 
-    
-    
+
+
     <div id="logInForm" class="modal">
         <div class="modal-content">
             <div class="imgcontainer">
@@ -92,6 +91,20 @@
             </div>
         </div>
     </div>
+    <div id="openPres" class="modal">
+        <div class="modal-content">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('openPres').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <h2 class="modulHeader">Open presentation</h2>
+            </div>
+
+            <div class="container">
+
+                <button>Open</button>
+
+            </div>
+        </div>
+    </div>
 
     <div id="header"></div>
 
@@ -99,10 +112,11 @@
         <div class="dropdown">
             <button class="dropbtn">Fil</button>
             <div class="dropdown-content">
-                <a onclick="savePresentation()">Save presentation</a>
+                <a onclick="savePresentation()">Save</a>
+                <a onclick=" document.getElementById('openPres').style.display = 'block'">Open</a>
             </div>
         </div>
-        <input id="prenestationTitle" placeholder="Presentation Title..">
+        <input id="presentationTitle" placeholder="Presentation Title..">
         <h3 id="user"></h3>
     </template>
 
@@ -115,9 +129,29 @@
     <div class="menu">
         <div id="textMenu">
             <h3>Text editing</h3>
-            <button id="butB" onclick="toBold">B</button>
-            <button id="butI" onclick="toItalic">I</button>
-            <button id="butU" onclick="toUnderline">Aa</button>
+            <button id="butB" onclick="toBold()">B</button>
+            <button id="butI" onclick="toItalic()">I</button>
+            <button id="butAa" onclick="toSmallCaps()">Aa</button>
+
+
+            <p>Select font</p>
+            <select onchange="changeFont(this);" id="fontList">
+                <option selected>Arial</option>
+                <option>Georgia</option>
+                <option>Palatino Linotype</option>
+                <option>Book Antiqua</option>
+                <option>Times New Roman</option>
+                <option>Helvetica</option>
+                <option>Arial Black</option>
+                <option>Impact</option>
+                <option>Lucida Sans Unicode</option>
+                <option>Tahoma</option>
+                <option>Verdana</option>
+                <option>Courier New</option>
+                <option>Lucida Console</option>
+            </select>
+
+
         </div>
         <div id="imageMenu">
             <h3>Image Editing</h3>
@@ -152,6 +186,13 @@
             <input type="color" id="pickcolor" value="#fdffff" onchange="updateSlide();" />
             <br>
             <button onclick="toggleNotes(event)">Toggle notes</button>
+            <br>
+            <label for="templates">Templates</label>
+            <select id="templates" onchange="changeTemplate(parseInt(this.value))">
+                <option value="0">Title</option>
+                <option value="1">Default</option>
+                <option value="2">Media</option>
+            </select>
         </div>
 
 
@@ -176,9 +217,11 @@
             text: "",
             bakgrunnColor: "",
             titleColor: "",
-            textColor: "",
-            media: "",
-            notes: ""
+            style: "",
+            media: [],
+            notes:"",
+            template:0
+
 
         }];
 
@@ -207,6 +250,7 @@
 
 
         window.onload = function() {
+            localStorage.removeItem('presentationid');
             if (localStorage.logindata == null) {
                 setHeaderView("notSignedIn", header);
             } else {
@@ -233,11 +277,10 @@
 
         }
 
-
-
         // Get the modal
-        var logInForm = document.getElementById('logInForm');
-        var signUpForm = document.getElementById('signUpForm');
+        let logInForm = document.getElementById('logInForm');
+        let signUpForm = document.getElementById('signUpForm');
+        let openPres = document.getElementById('openPres');
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
@@ -246,6 +289,9 @@
             }
             if (event.target == signUpForm) {
                 signUpForm.style.display = "none";
+            }
+            if (event.target == openPres) {
+                openPres.style.display = "none";
             }
         }
     </script>

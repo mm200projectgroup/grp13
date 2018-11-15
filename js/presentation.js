@@ -51,12 +51,11 @@ router.post('/savePresentation', async function (req, res){
     
     try{
        let newPres = await db.any(savePresentationQuery);
+
         
-        console.log(newPres[0].presentationid);
-        
-      res.status(200).json({
-            pres: newPres 
-        }).end();
+        res.status(200).json({
+                presId: newPres[0].presentationid
+            }).end();
         
         
         
@@ -68,6 +67,36 @@ router.post('/savePresentation', async function (req, res){
     }
     
 
+
+});
+
+
+
+router.post('/updatePresentation', async function (req, res){
+    
+    let title = req.body.presentationTitle;
+    let presentation = req.body.presentationData;
+    let userId = req.body.userId;
+    let presId = req.body.presId
+    
+    let updatePresentationQuery = prpSql.updatePresentation;
+    updatePresentationQuery.values = [title, presentation, presId];
+
+    
+    try{
+      let updated = await db.any(updatePresentationQuery);
+
+        res.status(200).json({
+                pres: updated
+            }).end();
+        
+
+    } catch(err){
+        res.status(500).json({
+            error: err
+        });
+    }
+    
 
 });
 

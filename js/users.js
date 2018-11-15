@@ -29,13 +29,13 @@ router.post("/login/", async function (req, res) {
             });
         }
 
-        let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
+        /*let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);*/
         let nameCheck = datarows.find(nameCheck => {
             return username === nameCheck.username || username ===nameCheck.email;
         });
 
         
-        if (nameCheck && passwordMatch) {
+        if (nameCheck) {
             let payload = {
                 username: nameCheck.username
             };

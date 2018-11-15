@@ -1,0 +1,625 @@
+* {
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 18pt;
+}
+
+
+body {
+    height: 100vh;
+    display: grid;
+    background-color: lightgrey;
+    grid-template-columns: 250px 1fr 1fr 1fr;
+    grid-template-rows: 60px 1fr 180px;
+
+    grid-template-areas:
+        "menu header header header"
+        "menu canvas canvas canvas"
+        "menu footer footer footer";
+}
+
+#header {
+    grid-area: header;
+    background: #008ae6;
+}
+
+.dropbtn {
+    float: left;
+    color: black;
+    border: 0px;
+    display: inline-block;
+    background-color: white;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    /*border-radius: 25px;*/
+    cursor: pointer;
+    user-select: none;
+    padding: 12px 12px;
+}
+
+#presentationTitle {
+    margin:8px;
+    margin-left: 30%;
+    display: inline-block;
+    background-color: white;
+    font-family: sans-serif;
+    font-size: 14px;
+    user-select: none;
+    padding: 10px 80px;
+}
+
+#noteButton,
+#fullscreenBtn{
+    color: black;
+    border: 0px;
+    background-color: white;
+    margin-bottom: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    padding: 8px 20px;
+    
+}
+
+
+
+
+/*Slide-and-canvas---------------------*/
+#canvas {
+    grid-area: canvas;
+}
+
+.mySlides{
+    background-color: white;
+}
+
+
+.editMode {
+    width: 60%;
+    height: 80%;
+    margin-top:5%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+
+.fullscreen{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;  
+}
+
+
+.fullscreen textarea{
+    font-size: 80px;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.fullscreen input{
+    font-size: 110px
+}
+
+
+.deleteSlide {
+    cursor: pointer;
+    color: red;
+    padding-left: 5px;
+}
+
+
+
+
+/*-----------^Slide-and-canvas^----------*/
+
+/*Tekst-------------------------------*/
+p {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+
+
+h3 {
+    font-size: 18px;
+    padding-bottom: 10px;
+
+}
+
+.text{
+    width: 50%;
+    height: 60%;
+    background-color: transparent;
+    border-style: hidden;
+    margin-top: 5%;
+    margin-left: 5%;
+    font-size: 40px
+}
+
+label {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+
+
+.title {
+    background-color: transparent;
+    border-style: hidden;
+    font-size: 60px;
+    width: 50%;
+    height: auto;
+    margin-top: 2%;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: center;
+}
+
+.undertitle {
+    text-align: center;
+    font-size: 40px;
+    padding: 60px 12px;
+}
+
+/*----------------^Text^------------------*/
+
+
+/*Footer ------------------------------- */
+
+.footer {
+    display:inline-block;
+    grid-area: footer;
+    background: gray;
+    white-space:nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.previewTitle {
+    font-size: 30px;
+    margin-left: 45%;
+    margin-top: 5%;
+    font-family: sans-serif;
+    
+}
+
+.myPreview {
+    display:inline-block;
+    background-color: white;
+    border: 2px solid white;
+    width: 200px;
+    height: 120px;
+    margin: 30px;
+    
+}
+
+.selected{
+    border: 2px solid #008ae6;
+}
+
+
+/*-Scrollbar---- */
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: gray; 
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: lightgray; 
+}
+
+
+
+/*-------Next-&-previous-buttons--------*/
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    height:180px;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 75px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+    
+}
+
+
+.prev {
+    left: 250px;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+/*------------^Next-and-prev-buttons^------------*/
+
+/*--Footer-Pluss-tegn--------------------*/
+#addNewSlide{
+    cursor: pointer;
+    background-color: darkgray;
+    transition: 0.6s ease;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    margin-bottom: 40px;
+    top:35px;
+    left:5px;
+}
+
+#addNewSlide:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+#addNewSlide:after {
+    background-color: #FFFFFF;
+    width: 20px;
+    height: 4px;
+    border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    position: absolute;
+    top:13px;
+    left: 5px;
+    content:"";
+}
+
+#addNewSlide:before {
+    background-color: #FFFFFF;
+    width: 4px;
+    height: 20px;
+    border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    position: absolute;
+    top:5px;
+    left: 13px;
+    content:"";
+}
+
+.footer div{
+    display: inline-block;
+}
+
+/*-------------^Footer-Stuff^-------------*/
+
+/*Editing-Menu---------------------------*/
+
+.menu {
+    grid-area: menu;
+    background: #b3e0ff;
+    outline-color: #b3e0ff;
+}
+
+#textMenu {
+    background: #1aa3ff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#imageMenu {
+    background: #4db8ff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+}
+
+#colorPicker {
+    background: #80ccff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#selectTemplate {
+    background: #1aa3ff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}
+
+#otherSettings {
+    background: #1aa3ff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}
+/*----AUDIO------------------------------*/
+
+#audioMenu {
+    background: #80ccff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}
+
+#addAudio {
+    cursor: pointer;
+    font-size: 14px;
+    height: 30px;
+    width: 100px;
+    align-content: center;
+}
+
+/*-------VIDEO----------------------*/
+
+#videoMenu {
+    background: #80ccff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}
+
+#addVideo {
+    cursor: pointer;
+    font-size: 14px;
+    height: 30px;
+    width: 100px;
+    align-content: center;
+}
+
+
+/*------TEXT-editing-Buttons--------*/
+
+#butB {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#butI {
+    cursor: pointer;
+    font-style: italic;
+}
+
+#butAa {
+    cursor: pointer;
+    /*text-decoration: underline;*/
+    font-variant: small-caps;
+}
+
+#butAa,
+#butI,
+#butB {
+    font-size: 14px;
+    height: 40px;
+    width: 40px;
+    margin-right: 5px;
+    border: 1px solid #000000;
+    background-color: lightgrey;
+    align-content: center;
+    margin-bottom: 20px;
+}
+
+option {
+    font-size: 14px;
+}
+
+#fontList {
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px;
+}
+
+
+/*-------Image-editing----------------------*/
+#addImg {
+    cursor: pointer;
+    font-size: 14px;
+    height: 30px;
+    width: 100px;
+    align-content: center;
+}
+
+#filter {
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px;
+}
+
+option[value]{
+    font-size: 14px;
+}
+
+/*--Template-buttons---------------------------*/
+
+
+#butTem1,
+#butTem2,
+#butTem3{
+    font-size: 14px;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    margin-right: 5px;
+    border: 1px solid #000000;
+    background-color: lightgrey;
+    align-content: center;
+    margin-bottom: 20px;
+}
+
+/*------------------^Editing-menu^--------------*/
+
+
+
+/*User-Pop-up-windows---------------------------*/
+
+.modulHeader {
+    font-size: 25px;
+}
+
+#user {
+    text-align: right;
+    padding: 20px 20px;
+    color: white;
+    font-size: 14px;
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 14px;
+}
+
+#signInBtn,
+#loginBtn {
+    float: right;
+    color: black;
+    border: 0px;
+    display: inline-block;
+    background-color: white;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    /*border-radius: 25px;*/
+    cursor: pointer;
+    user-select: none;
+    padding: 12px 20px;
+
+}
+
+.formButtons {
+    color: white;
+    border: 0px;
+    display: inline-block;
+    background-color: #008ae6;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14pt;
+    /*border-radius: 25px;*/
+    cursor: pointer;
+    user-select: none;
+    padding: 14px 20px;
+    transition: transform 0.2s;
+
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+    font-size: 18;
+}
+
+.container {
+    text-align: center;
+    padding: 16px;
+    margin-bottom: 30px;
+    font-size: 14px
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+.hideButtons {
+    color: white;
+    border: 0px;
+    display: inline-block;
+    background-color: #008ae6;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14pt;
+    border-radius: 25px;
+    cursor: pointer;
+    user-select: none;
+    padding: 14px 20px;
+    transition: transform 0.2s;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    /*overflow: auto;*/
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 40%;
+    /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+/*-------------^-user-windows^-----------------*/

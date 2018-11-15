@@ -14,7 +14,9 @@ addNewSlide.onclick = function () {
         bakgrunnColor: "",
         titleColor:"",
         textColor:"",
-        notes:""
+        media: [],
+        notes: "",
+        template: 1
     };
 
     presentation.push(newSlide);
@@ -24,29 +26,40 @@ addNewSlide.onclick = function () {
 }
 
 
-function createPresentation(presentation) {
+function createPresentation(array) {
     let i;
     let canvas = document.getElementById("canvas");
     canvas.innerHTML = "";
-    for (let i = 0; i < presentation.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         let slideDiv = document.createElement("div");
-        let slideContent = `
-            <input class="title" id="title${i}" placeholder="Title" value="${presentation[i].title}" maxlength= "14" onchange=updateSlide() autocomplete="off">
+        let slideContent;
+        if (array[i].template === 1) {
+            slideContent = `
+            <input class="title" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateSlide()" style="color:">
             <br>
-            <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation[i].text}</textarea> 
+            <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${array[i].text}</textarea> 
         `;
-        
-        let imageContainer = document.createElement("div");
-        
+        }
+        else if (array[i].template === 0) {
+            slideContent = `
+                <input class="title" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength="14" onchange="updateSlide()">
+                <br>
+                <textarea class="undertitle" id="text${i}" placeholder="Text" onfocus="activeTextArea(event)">${array[i].text}</textarea> 
+            `;
+        }
+        else if (array[i].template === 2) {
+            slideContent = `
+            <input class="title" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateSlide()" style="color:">
+            <div class="slideImg" id="imgCont${i}"></div>
+            `;
+        }
+
 
         slideDiv.innerHTML = slideContent;
         slideDiv.className = "mySlides" + " editMode";
         slideDiv.id = "slide" + i;
-        imageContainer.className="slideImg";
-        imageContainer.id="imgCont"+i;
-        slideDiv.appendChild(imageContainer);
-        canvas.appendChild(slideDiv)
-        document.getElementById("slide" + i).style.backgroundColor = `${presentation[i].bakgrunnColor}`;
+        canvas.appendChild(slideDiv);
+        document.getElementById("slide" + i).style.backgroundColor = `${array[i].bakgrunnColor}`;
 
     }
 
@@ -54,16 +67,15 @@ function createPresentation(presentation) {
     let preview = document.getElementById("preview");
     preview.innerHTML = "";
 
-    for (let i = 0; i < presentation.length; i++) {
+    for (let i = 0; i < array.length; i++) {
 
         let div = document.createElement("div");
         let slides = `
             <span onclick="deleteSlide(${i})" class="deleteSlide">&times;</span>
-            <p class="previewTitle" id="previewtitle${i}">${i+1}</p>
+            <p class="previewTitle" id="previewtitle${i}">${i + 1}</p>
         `;
-        
-        
-        
+
+
         div.innerHTML = slides;
         div.className = "myPreview";
         div.id = "preview" + i;
@@ -132,6 +144,8 @@ function showSlides(n) {
     }
     slides[slideIndex - 1].style.display = "block";
     
+    document.getElementById("templates").selectedIndex = presentation[slideIndex - 1].template;
+    
     preview[slideIndex - 1].className += " selected";
     
     deleteSlideBtn[slideIndex - 1].style.display = "block";
@@ -181,21 +195,42 @@ function activeTextArea(evt) {
 
 function updateSlide() {
     let currentSlideID = localStorage.getItem('currentSlide');
-    let i = getCurrentIndex(currentSlideID)
+    let i = getCurrentIndex(currentSlideID);
+    let title = document.getElementById(`title${i}`);
+    let text = document.getElementById(`text${i}`);
+    let color = document.getElementById("pickcolor");
 
     //UpdateTitle
-    let newTitle = document.getElementById(`title${i}`).value;
-    presentation[i].title = newTitle;
+    if(title){
+        let newTitle = document.getElementById(`title${i}`).value;
+        presentation[i].title = newTitle;
+    }
 
     //UpdateText
-    let newText =
-        document.getElementById(`text${i}`).value;
+    if(text){
+        let newText = document.getElementById(`text${i}`).value;
         presentation[i].text = newText;
+    }
+    
+        
+    //UpdateSTYLE---------------
+    let newStyle = activeInput.style.cssText;
+    document.getElementById(currentSlideID).style.cssText = newStyle;
+    
+    presentation[i].style = newStyle;
 
     //UpdateBackgroundColor
-    let newColor = document.getElementById("pickcolor").value;
-    document.getElementById(currentSlideID).style.backgroundColor = newColor;
-    presentation[i].bakgrunnColor = newColor;
+    if(color){
+        let newColor = document.getElementById("pickcolor").value;
+        document.getElementById(currentSlideID).style.backgroundColor = newColor;
+        presentation[i].bakgrunnColor = newColor;
+    }
+    
+    
+        presentation[i].media.forEach(e => {
+        document.getElementById(`imgCont${i}`).appendChild(e);
+        e.focus();
+    });
 
 
     console.log(presentation);
@@ -280,3 +315,39 @@ function updateNotes(n) {
         notes.value = presentation[n].notes;
     }
 }
+
+
+
+
+//----------UPDATE TEMPLATE------------
+//0 = Title, 1 = Default, 2 = Media
+function changeTemplate(template) {
+    let slide = localStorage.getItem("currentSlide");
+    let num = slide.slice(5);
+    presentation[num].template = template;
+    let slideContent = document.getElementById(slide);
+    switch (template) {
+
+        case 0:
+            slideContent.innerHTML = `
+                <input class="title" id="title${num}" placeholder="Title" value="${presentation[num].title}" maxlength="14" onchange="updateSlide()">
+                <br>
+                <textarea class="undertitle" id="text${num}" placeholder="Text" onfocus="activeTextArea(event)">${presentation[num].text}</textarea> 
+            `;
+            break;
+        case 1:
+            slideContent.innerHTML = `
+            <input class="title" id="title${num}" placeholder="Title" value="${presentation[num].title}" maxlength= "14" onchange="updateSlide()" style="color:">
+            <br>
+            <textarea class="text" id="text${num}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation[num].text}</textarea> 
+        `;
+            break;
+        case 2:
+            slideContent.innerHTML = `
+            <input class="title" id="title${num}" placeholder="Title" value="${presentation[num].title}" maxlength= "14" onchange="updateSlide()" style="color:">
+            <div class="slideImg" id="imgCont${num}"></div>
+            `;
+            break;
+    }
+}
+

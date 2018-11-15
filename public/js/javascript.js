@@ -1,8 +1,7 @@
 let STATUS;
 let ROLE = 1;
 
-let token;
-let userId
+
 
 
 
@@ -17,7 +16,7 @@ function sendData(endpoint, data) {
     }).then(data => {
         STATUS = data.status;
         return data.json();
-        
+
     });
 }
 
@@ -39,54 +38,55 @@ function getData(endpoint) {
 
 
 
+async function loggInn() {
+
+    try {
+        let hash = await getHash(loggInnUsername.value);
+        console.log(hash);
+        if (!bcrypt.compareSync(loggInnpassword.value, hash.hash)) {
+            outputLogIn1.innerHTML = "Feil brukernavn eller passord";
+            return;
+        }
+        let data = {
+            username: loggInnUsername.value,
+            password: hash
+        };
+        let json = await sendData("/app/users/login", data);
+
+        if (json.username) {
+            console.log("yay");
+
+            localStorage.setItem("logindata", JSON.stringify(json));
+            let token = JSON.parse(localStorage.getItem("logindata")).token;
+
+            logInForm.style.display = "none";
+            setHeaderView("signedIn", header);
+
+            let user = document.getElementById("user");
+            user.innerHTML = json.username;
+            user.onclick = function changePassword() {
+            document.getElementById('userSettingsForm').style.display = 'block'
+            };
 
 
-function loggInn() {
-    let data = {
-        username: loggInnUsername.value,
-        password: loggInnpassword.value
-    };
+        } else {
+            console.log("ops");
+            outputLogIn1.innerHTML = json.mld;
+        }
 
+    } catch (e) {
+        console.log(e);
+    }
 
-    sendData("/app/users/login", data)
-        .then(json => {
-            console.log(status);
-            if (STATUS == 200) {
-                console.log("yay");
-                
-                localStorage.setItem("logindata", JSON.stringify(json));
-                token = JSON.parse(localStorage.getItem("logindata")).token;
-                userId = JSON.parse(localStorage.getItem("logindata")).userId;
-              
-                logInForm.style.display = "none";
-                setHeaderView("signedIn", header);
-                
-                let user = document.getElementById("user");
-                user.innerHTML = json.username;
-                user.onclick = function changePassword() {
-                document.getElementById('userSettingsForm').style.display = 'block'
-                };
-
-      
-
-            } else {
-                console.log("ops");
-                outputLogIn1.innerHTML = json.mld;
-            }
-        })
-        .catch(error => {
-            outputLogIn1.innerHTML = error;
-            console.log(error);
-        });
 
 }
 
 
 
 function register() {
-    
+
     let hash = bcrypt.hashSync(regPassword.value, 10);
-    
+
     let data = {
         username: regUsername.value,
         password: hash,
@@ -96,29 +96,27 @@ function register() {
 
     sendData("/app/users/register", data)
         .then(json => {
-                if (STATUS == 200) {
+            if (STATUS == 200) {
                 console.log("yay");
-                
+
                 localStorage.setItem("logindata", JSON.stringify(json));
-                token = JSON.parse(localStorage.getItem("logindata")).token;
-                userId = JSON.parse(localStorage.getItem("logindata")).userId;
-              
+
                 signUpForm.style.display = "none";
                 setHeaderView("signedIn", header);
-                
+
                 let user = document.getElementById("user");
                 user.innerHTML = json.username;
                 user.onclick = function changePassword() {
-                document.getElementById('userSettingsForm').style.display = 'block'
+                    document.getElementById('userSettingsForm').style.display = 'block'
                 };
 
-      
+
 
             } else {
                 outputSignUp1.innerHTML = json.mld;
             }
-        
-        
+
+
         })
         .catch(error => {
             outputSignUp1.style.color = "red";
@@ -136,22 +134,21 @@ async function changeUsername() {
     let user = JSON.parse(localStorage.getItem('logindata')).username;
     let output = document.getElementById("userSettingsOutput");
     let data = {
-        newUsr:newUsername,
+        newUsr: newUsername,
         username: user
     };
     let res = await sendData("/app/editUsers/changeLogin/username", data);
-        console.log(res);
-        if(res.status == 200){
-            output.style.color = "black";
-            output.innerText = res.message;
-            let user = JSON.parse(localStorage.getItem("logindata"));
-            user.username = newUsername;
-            localStorage.setItem("logindata",JSON.stringify(user));
-        }
-        else if(res.status == 400){
-            output.style.color = "red";
-            output.innerText = res.error;
-        }
+    console.log(res);
+    if (res.status == 200) {
+        output.style.color = "black";
+        output.innerText = res.message;
+        let user = JSON.parse(localStorage.getItem("logindata"));
+        user.username = newUsername;
+        localStorage.setItem("logindata", JSON.stringify(user));
+    } else if (res.status == 400) {
+        output.style.color = "red";
+        output.innerText = res.error;
+    }
 
 }
 
@@ -160,16 +157,15 @@ async function changeEmail() {
     let user = JSON.parse(localStorage.getItem('logindata')).username;
     let output = document.getElementById("userSettingsOutput");
     let data = {
-        email:newEmail,
-        username:user
+        email: newEmail,
+        username: user
     };
 
     let res = await sendData("/app/editUsers/changeLogin/email", data);
-    if(res.status == 200){
+    if (res.status == 200) {
         output.style.color = "black";
         output.innerText = res.message;
-    }
-    else if(res.status == 400){
+    } else if (res.status == 400) {
         output.style.color = "red";
         output.innerText = res.error;
     }
@@ -190,15 +186,14 @@ async function changePassword() {
     let output = document.getElementById("userSettingsOutput");
     let data = {
         password: hash,
-        username:user
+        username: user
     };
 
     let res = await sendData("/app/editUsers/changeLogin/password", data);
-    if(res.status == 200){
+    if (res.status == 200) {
         output.style.color = "black";
         output.innerText = res.message;
-    }
-    else if(res.status == 400){
+    } else if (res.status == 400) {
         output.style.color = "red";
         output.innerText = "Something went wrong";
     }
@@ -216,7 +211,7 @@ async function deleteUser() {
     let hash = n.hash;
     let user = JSON.parse(localStorage.getItem("logindata")).username;
 
-    if(!bcrypt.compareSync(prompt, hash)){
+    if (!bcrypt.compareSync(prompt, hash)) {
         return window.alert("Imma need you to enter the correct password, chief");
     }
 
@@ -228,13 +223,15 @@ async function deleteUser() {
     let res = await fetch("/app/editUsers/changeLogin/" + user, cfg);
     if (res.status == "200") {
         logOut();
-    }
-    else {
+    } else {
         console.error(res);
     }
 
 
 }
+
+
+
 
 function logOut() {
     localStorage.removeItem('logindata');
@@ -242,33 +239,84 @@ function logOut() {
     setHeaderView("notSignedIn", header);
 }
 
-async function getHash() {
-    let username = JSON.parse(localStorage.getItem('logindata')).username;
-    return fetch('/app/editUsers/hash/' + username).then(data => {
+
+async function getHash(usr) {
+    let username;
+    if (usr) {
+        username = usr;
+    } else {
+        username = JSON.parse(localStorage.getItem('logindata')).username;
+    }
+    return await fetch('/app/editUsers/hash/' + username).then(data => {
         return data.json();
     });
+}
+
+function savePresentation() {
+    if (localStorage.presentationid == null) {
+        saveNewPresentation();
+    } else {
+        updatePresentation();
+    }
 }
 
 
 
 //SAVE PRESENTATION TO DB---------------------------
-async function savePresentation() {
-let title = document.getElementById("prenestationTitle")
-let slides = {"slides":presentation}
-console.log(slides)
+async function saveNewPresentation() {
+
+
+    let token = JSON.parse(localStorage.getItem("logindata")).token;
+    let userId = JSON.parse(localStorage.getItem("logindata")).userId;
+    let title = document.getElementById("presentationTitle")
+    let slides = {
+        "slides": presentation
+    }
+
+
     let data = {
         presentationTitle: title.value,
         presentationData: slides,
         token: token,
         userId: userId
+
     };
 
 
     let res = await sendData("/app/presentation/savePresentation/", data);
-    
-    if (res.status = 200){
-    console.log(res.pres);
+
+    if (res.status = 200) {
+        localStorage.setItem("presentationid", JSON.stringify(res.presId));
+
+        let presdata = JSON.parse(localStorage.getItem('presentation'));
+        
     }
 }
 
 //------------------------------------------------
+
+async function updatePresentation(){
+    let presId = JSON.parse(localStorage.getItem("presentationid"));
+    let token = JSON.parse(localStorage.getItem("logindata")).token;
+    let userId = JSON.parse(localStorage.getItem("logindata")).userId;
+    let title = document.getElementById("presentationTitle")
+    let slides = {
+        "slides": presentation
+    }
+    
+    
+    let data = {
+        presentationTitle: title.value,
+        presentationData: slides,
+        token: token,
+        userId: userId,
+        presId: presId
+    };
+    
+    
+    let res = await sendData("/app/presentation/updatePresentation/", data);
+
+    
+    
+    
+}

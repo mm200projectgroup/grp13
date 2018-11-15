@@ -28,6 +28,7 @@ prpSql.createUser = new PrpSt('createUser',`INSERT INTO public."users" ("id", "e
 
 prpSql.newPresentation = new PrpSt('newPresentation', `INSERT INTO public."presentation" ("presentationid", "titel", "slides", "ownerid") VALUES (DEFAULT, $1, $2, $3) RETURNING "presentationid", "titel", "slides", "ownerid"`);
 
+prpSql.updatePresentation = new PrpSt('updatePresentation','UPDATE public."presentation" SET "titel" = $1, "slides" = $2 WHERE "presentationid" = $3 RETURNING "titel", "slides"');
 
 //export module
 module.exports.db = db; //db connection
