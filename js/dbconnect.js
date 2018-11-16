@@ -30,6 +30,8 @@ prpSql.newPresentation = new PrpSt('newPresentation', `INSERT INTO public."prese
 
 prpSql.updatePresentation = new PrpSt('updatePresentation','UPDATE public."presentation" SET "titel" = $1, "slides" = $2 WHERE "presentationid" = $3 RETURNING "titel", "slides"');
 
+prpSql.getPresentations = new PrpSt('getPresentations','SELECT * FROM public."presentation" WHERE "ownerid" = $1');
+
 //export module
 module.exports.db = db; //db connection
 module.exports.prpSql = prpSql; //prepared sql statements

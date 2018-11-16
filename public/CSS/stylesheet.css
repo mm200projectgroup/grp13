@@ -73,17 +73,17 @@ body {
 
 .mySlides{
     background-color: white;
- 
     
 }
 
 
 .editMode {
-    width: 60%;
-    height: 80%;
-    margin-top:4%;
-    margin-left: 20%;
-    margin-right: 20%;
+    width: 60vw;
+    height: 30vw;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    margin-left: 15%;
+    margin-right: 15%;
 
 }
 
@@ -100,12 +100,13 @@ body {
 
 .fullscreen textarea{
 font-size: 80px;
-margin-top: 5%;
-margin-left: 5%;
+
+
 }
 
 .fullscreen input{
-font-size: 110px
+font-size: 110px;
+
 }
 
 #fullscreenBtn {
@@ -137,7 +138,7 @@ h3 {
 }
 
 .text{
-    width: 50%;
+    width: 90%;
     height: 60%;
     background-color: transparent;
     border-style: hidden;
@@ -159,10 +160,25 @@ h3 {
     text-align: center;
 }
 
-.undertitle {
+.mainTitle {
+    background-color: transparent;
+    border-style: hidden;
+    font-size: 5vw;
+    width: 100%;
+    height: auto;
+    margin-top: 15%;
     text-align: center;
-    font-size: 40px;
-    padding: 60px 12px;
+}
+
+.undertitle {
+    background-color: transparent;
+    text-align: center;
+    font-size: 2vw;
+    width: 100%;
+    height: auto;
+    margin-top: 2%;
+    text-align: center;
+    border: none;
 }
 
 /*----------------^Text^------------------*/
@@ -189,7 +205,6 @@ h3 {
 }
 
 .deleteSlide {
-    
     color: #000;
     font-size: 30px;
     font-weight: bold;
@@ -318,6 +333,10 @@ h3 {
     padding-bottom: 30px;
 
 }
+
+
+
+
 
 
 

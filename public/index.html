@@ -98,8 +98,8 @@
                 <h2 class="modulHeader">Open presentation</h2>
             </div>
 
-            <div class="container">
-
+            <div id="loadedPresentation" class="container">
+                
                 <button>Open</button>
 
             </div>
@@ -184,6 +184,7 @@
         <div id="colorPicker">
             <label for="pickcolor">Color</label>
             <input type="color" id="pickcolor" value="#fdffff" onchange="updateSlide();" />
+        </div>
             <br>
             <button onclick="toggleNotes(event)">Toggle notes</button>
             <br>
@@ -193,7 +194,7 @@
                 <option value="1">Default</option>
                 <option value="2">Media</option>
             </select>
-        </div>
+        
 
 
 

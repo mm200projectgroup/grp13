@@ -279,7 +279,6 @@ async function saveNewPresentation() {
         presentationData: slides,
         token: token,
         userId: userId
-
     };
 
 
@@ -315,8 +314,34 @@ async function updatePresentation(){
     
     
     let res = await sendData("/app/presentation/updatePresentation/", data);
-
-    
-    
-    
 }
+
+getAllPresentaionToUser();
+async function getAllPresentaionToUser(){
+    let userId = JSON.parse(localStorage.getItem("logindata")).userId;
+    let token = JSON.parse(localStorage.getItem("logindata")).token;
+    console.log(userId);
+    let data = {
+        userId: userId,
+        token: token
+    }
+    
+        
+    let res = await sendData("/app/presentation/listOutPresentations/", data);
+    
+    let listDiv = document.getElementById("loadedPresentation");
+    console.log(res);
+    
+    if(res.status =200){
+        localStorage.setItem("loadedPresentation", JSON.stringify(res.loadPres));
+        
+        
+        for(let i = 0; i < res.loadPres.length; i++){
+        listDiv.innerHTML += `<p>${res.loadPres[i].titel}</p>`;   
+        }
+        
+    }
+    
+      
+}
+

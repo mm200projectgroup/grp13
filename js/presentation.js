@@ -17,7 +17,6 @@ router.use(function (req, res, next) {
 
    
     let token = req.body.token;
-    console.log(token)
     if (!token) {
         res.status(403).json({
             msg: "No token received"
@@ -91,15 +90,37 @@ router.post('/updatePresentation', async function (req, res){
             }).end();
         
 
-    } catch(err){
+    }catch(err){
         res.status(500).json({
             error: err
         });
     }
-    
-
+        
 });
 
 
+router.post('/listOutPresentations' , async function (req, res){
+    let UserId = req.body.userId;
+    
+    let getPresentations = prpSql.getPresentations;
+    getPresentations.values = [UserId];
+    
+
+    
+    try{
+       let getAll = await db.any(getPresentations);
+        
+        console.log(getAll);
+        
+        res.status(200).json({
+             loadPres: getAll
+            }).end();
+        
+    }catch(err){
+        res.status(500).json({
+            error: err
+        });
+    }
+});
 
 module.exports = router;

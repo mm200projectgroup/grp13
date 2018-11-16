@@ -42,9 +42,9 @@ function createPresentation(array) {
         }
         else if (array[i].template === 0) {
             slideContent = `
-                <input class="title" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength="14" onchange="updateSlide()">
+                <input class="mainTitle" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength="14" onchange="updateSlide()">
                 <br>
-                <textarea class="undertitle" id="text${i}" placeholder="Text" onfocus="activeTextArea(event)">${array[i].text}</textarea> 
+                <textarea onchange="updateSlide()" class="undertitle" id="text${i}" placeholder="Undertitle">${array[i].text}</textarea> 
             `;
         }
         else if (array[i].template === 2) {
@@ -59,7 +59,7 @@ function createPresentation(array) {
         slideDiv.className = "mySlides" + " editMode";
         slideDiv.id = "slide" + i;
         canvas.appendChild(slideDiv);
-        document.getElementById("slide" + i).style.backgroundColor = `${array[i].bakgrunnColor}`;
+        document.getElementById("slide" + i).style.background = `${array[i].bakgrunnColor}`;
 
     }
 
@@ -186,9 +186,9 @@ function activeTextArea(evt) {
     textArea.onchange = function () {
         updateSlide();
     }
-
-
 }
+
+
 
 
 
@@ -199,6 +199,7 @@ function updateSlide() {
     let title = document.getElementById(`title${i}`);
     let text = document.getElementById(`text${i}`);
     let color = document.getElementById("pickcolor");
+
 
     //UpdateTitle
     if(title){
@@ -222,7 +223,7 @@ function updateSlide() {
     //UpdateBackgroundColor
     if(color){
         let newColor = document.getElementById("pickcolor").value;
-        document.getElementById(currentSlideID).style.backgroundColor = newColor;
+        document.getElementById(currentSlideID).style.background = newColor;
         presentation[i].bakgrunnColor = newColor;
     }
     
@@ -330,9 +331,9 @@ function changeTemplate(template) {
 
         case 0:
             slideContent.innerHTML = `
-                <input class="title" id="title${num}" placeholder="Title" value="${presentation[num].title}" maxlength="14" onchange="updateSlide()">
+                <input class="mainTitle" id="title${num}" placeholder="Title" value="${presentation[num].title}" maxlength="14" onchange="updateSlide()">
                 <br>
-                <textarea class="undertitle" id="text${num}" placeholder="Text" onfocus="activeTextArea(event)">${presentation[num].text}</textarea> 
+                <textarea class="undertitle" id="text${num}" placeholder="Text" onchange="updateSlide()">${presentation[num].text}</textarea> 
             `;
             break;
         case 1:
