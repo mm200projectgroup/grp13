@@ -55,7 +55,7 @@ async function loggInn() {
 
         if (json.username) {
             console.log("yay");
-
+            
             localStorage.setItem("logindata", JSON.stringify(json));
             let token = JSON.parse(localStorage.getItem("logindata")).token;
 
@@ -68,7 +68,7 @@ async function loggInn() {
             document.getElementById('userSettingsForm').style.display = 'block'
             };
 
-
+            getAllPresentaionToUser();
         } else {
             console.log("ops");
             outputLogIn1.innerHTML = json.mld;
@@ -288,6 +288,7 @@ async function saveNewPresentation() {
         localStorage.setItem("presentationid", JSON.stringify(res.presId));
 
         let presdata = JSON.parse(localStorage.getItem('presentation'));
+        getAllPresentaionToUser();
         
     }
 }
@@ -299,14 +300,16 @@ async function updatePresentation(){
     let token = JSON.parse(localStorage.getItem("logindata")).token;
     let userId = JSON.parse(localStorage.getItem("logindata")).userId;
     let title = document.getElementById("presentationTitle")
-    let slides = {
+    /*let slides = {
         "slides": presentation
-    }
+    }*/
+    
+    //let slides = presentation;
     
     
     let data = {
         presentationTitle: title.value,
-        presentationData: slides,
+        presentationData: presentation,
         token: token,
         userId: userId,
         presId: presId
@@ -320,7 +323,6 @@ getAllPresentaionToUser();
 async function getAllPresentaionToUser(){
     let userId = JSON.parse(localStorage.getItem("logindata")).userId;
     let token = JSON.parse(localStorage.getItem("logindata")).token;
-    console.log(userId);
     let data = {
         userId: userId,
         token: token
@@ -330,14 +332,13 @@ async function getAllPresentaionToUser(){
     let res = await sendData("/app/presentation/listOutPresentations/", data);
     
     let listDiv = document.getElementById("loadedPresentation");
-    console.log(res);
+
     
     if(res.status =200){
         localStorage.setItem("loadedPresentation", JSON.stringify(res.loadPres));
         
-        
         for(let i = 0; i < res.loadPres.length; i++){
-        listDiv.innerHTML += `<p>${res.loadPres[i].titel}</p>`;   
+        listDiv.innerHTML += `<p onclick="openPresentation(${i})" >${res.loadPres[i].titel}</p>`;   
         }
         
     }

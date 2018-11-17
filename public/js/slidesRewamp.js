@@ -2,7 +2,7 @@ let addNewSlide = document.getElementById("addNewSlide");
 let fullscreenBtn = document.getElementById("fullscreenBtn");
 
 
-createPresentation(presentation);
+createPresentation(presentation.slides);
 
 
 
@@ -21,9 +21,9 @@ addNewSlide.onclick = function () {
     let color = document.getElementById("pickcolor");
     color.value = "#FFFFFF"
 
-    presentation.push(newSlide);
-    createPresentation(presentation);
-    currentSlide(presentation.length);
+    presentation.slides.push(newSlide);
+    createPresentation(presentation.slides);
+    currentSlide(presentation.slides.length);
 
 }
 
@@ -147,7 +147,7 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = "block";
 
 
-    document.getElementById("templates").selectedIndex = presentation[slideIndex - 1].template;
+    document.getElementById("templates").selectedIndex = presentation.slides[slideIndex - 1].template;
 
     preview[slideIndex - 1].className += " selected";
 
@@ -156,9 +156,10 @@ function showSlides(n) {
 
 
     let activeSlide = slides[slideIndex - 1].id
+    console.log(activeSlide)
     localStorage.setItem('currentSlide', activeSlide);
 
-    color.value = presentation[slideIndex - 1].bakgrunnColor;
+    color.value = presentation.slides[slideIndex - 1].bakgrunnColor;
 
 
 
@@ -211,13 +212,13 @@ function updateSlide() {
     //UpdateTitle
     if (title) {
         let newTitle = document.getElementById(`title${i}`).value;
-        presentation[i].title = newTitle;
+        presentation.slides[i].title = newTitle;
     }
 
     //UpdateText
     if (text) {
         let newText = document.getElementById(`text${i}`).value;
-        presentation[i].text = newText;
+        presentation.slides[i].text = newText;
     }
 
 
@@ -225,17 +226,17 @@ function updateSlide() {
     let newStyle = activeInput.style.cssText;
     document.getElementById(currentSlideID).style.cssText = newStyle;
 
-    presentation[i].style = newStyle;
+    presentation.slides[i].style = newStyle;
 
     //UpdateBackgroundColor
     if (color) {
         let newColor = document.getElementById("pickcolor").value;
         document.getElementById(currentSlideID).style.background = newColor;
-        presentation[i].bakgrunnColor = newColor;
+        presentation.slides[i].bakgrunnColor = newColor;
     }
 
 
-    presentation[i].media.forEach(e => {
+    presentation.slides[i].media.forEach(e => {
         document.getElementById(`imgCont${i}`).appendChild(e);
         e.focus();
     });
@@ -409,7 +410,8 @@ function openPresentation(index){
 
     presentation = openPres[index].slides
     console.log(presentation)
-   // createPresentation(openPres[index].slides);
+    createPresentation(presentation.slides);
+    currentSlide(1);
     
 }
 

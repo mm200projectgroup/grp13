@@ -219,7 +219,7 @@
     </div>
 
     <script>
-        let presentation = [{
+        let presentation = {"slides":[{
             title: "",
             text: "",
             bakgrunnColor: "#FFFFFF",
@@ -230,7 +230,7 @@
             template:0
 
 
-        }];
+        }]};
 
 
 
@@ -265,7 +265,6 @@
                 setHeaderView("signedIn", header);
                 let user = document.getElementById("user");
                 let username = JSON.parse(localStorage.getItem("logindata")).username;
-                console.log(username);
                 user.innerHTML = username;
                 user.onclick = function changePassword() {
                     document.getElementById('userSettingsForm').style.display = 'block'
@@ -305,7 +304,7 @@
     <script src="js/bcrypt.js"></script>
     <script src="js/editingTools.js"></script>
     <script src="js/javascript.js"></script>
-    <script src="js/slides.js"></script>
+    <script src="js/slidesRewamp.js"></script>
 
 
 
