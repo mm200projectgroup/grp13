@@ -21,7 +21,7 @@ body {
 
 #header {
     grid-area: header;
-    background: #008ae6;
+    background: #688ED9;
 
 }
 /*HEADER---------------------*/
@@ -78,43 +78,16 @@ body {
 
 
 .editMode {
-    width: 60vw;
-    height: 30vw;
-    margin-top: 2vw;
-    margin-bottom: 2vw;
-    margin-left: 15%;
-    margin-right: 15%;
+    width: 70vw;
+    height: 35vw;
+    margin-top: 3vw;
+    margin-bottom: 1vw;
+    margin-left: 10%;
+    margin-right: 10%;
 
 }
 
 
-.fullscreen{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;  
-}
-
-
-.fullscreen textarea{
-font-size: 80px;
-
-
-}
-
-.fullscreen input{
-font-size: 110px;
-
-}
-
-#fullscreenBtn {
-    position:absolute;
-    bottom: 25%;
-    right: 0;
-    z-index: 1;
-}
 
 
 
@@ -173,7 +146,7 @@ h3 {
 .undertitle {
     background-color: transparent;
     text-align: center;
-    font-size: 2vw;
+    font-size: 3vw;
     width: 100%;
     height: auto;
     margin-top: 2%;
@@ -182,6 +155,61 @@ h3 {
 }
 
 /*----------------^Text^------------------*/
+
+/*-----Notes and fullscreen buttons------*/
+#toggleNotes{
+    color: black;
+    border: 0px;
+    background-color: white;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    padding: 12px 20px;
+}
+
+
+#fullscreenBtn {
+    
+    color: black;
+    border: 0px;
+    background-color: white;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    padding: 13px 26px;
+    z-index: 10;
+}
+
+/*------^Notes and fullscreen buttons^----*/
+
+.fullscreen{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;  
+}
+
+
+.fullscreen textarea{
+font-size: 3vw;
+
+
+}
+
+.fullscreen input{
+font-size: 7vw;
+
+}
+
+
+
+
 
 
 /*Footer ------------------------------- */
@@ -201,10 +229,12 @@ h3 {
     height: 100px;
     width: 150px;
     margin: 30px;
+   
 
 }
 
 .deleteSlide {
+    width: 10%;
     color: #000;
     font-size: 30px;
     font-weight: bold;
@@ -229,6 +259,16 @@ h3 {
     font-size: 15px;
     padding-left: 40%;
     
+     
+}
+
+.selected .previewTitle {
+    font-size: 30px;
+    /*position: absolute;*/
+    padding-left:;
+    padding-top: 1px
+   
+     
 }
 
 /*-------Next-&-previous-buttons--------*/
@@ -274,9 +314,12 @@ h3 {
     transition: 0.6s ease;
     width: 30px;
     height: 30px;
-    position: relative;
-    top:35px;
-    left:5px;
+    position: absolute;
+    margin-right: 5%;
+    margin-top: 3%;
+    
+    
+ 
 }
 #addNewSlide:hover,
 #addNewSlide:hover {
@@ -317,24 +360,40 @@ h3 {
 
 .menu {
     grid-area: menu;
-    background: #008ae6;
+    background: #688ED9;
 }
 
 #textMenu {
-    background: #b3e0ff;
-    padding-left: 30px;
-    padding-top: 30px;
-}
-
-#imageMenu {
-    background: #80ccff;
+    color: white;
+    background: #1F2B4C;
     padding-left: 30px;
     padding-top: 30px;
     padding-bottom: 30px;
+}
 
+#imageMenu {
+    color: white;
+    background: #2C3D6B;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 
+#backgroundMenu{
+    background: #3E4575;
+    color: white;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#notesAndFullscreen{
+    position: absolute;
+    bottom: 2%;
+    margin-left: 2%
+    
+}
 
 
 
@@ -358,7 +417,7 @@ h3 {
     font-variant: small-caps;
 }
 
-#butU,
+#butAa,
 #butI,
 #butB {
     font-size: 14px;
@@ -369,6 +428,17 @@ h3 {
     background-color: lightgrey;
     align-content: center;
     margin-bottom: 20px;
+}
+
+
+option {
+    font-size: 14px;
+}
+
+#fontList {
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px;
 }
 
 

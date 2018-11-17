@@ -181,26 +181,32 @@
                 <option value="sepia(100%)">Sepia</option>
             </select>
         </div>
-        <div id="colorPicker">
+        
+        <div id="backgroundMenu">
+            <h3>Background</h3>
             <label for="pickcolor">Color</label>
             <input type="color" id="pickcolor" value="#fdffff" onchange="updateSlide();" />
         </div>
-            <br>
-            <button onclick="toggleNotes(event)">Toggle notes</button>
-            <br>
+           <div id="templatesMenu">
             <label for="templates">Templates</label>
             <select id="templates" onchange="changeTemplate(parseInt(this.value))">
                 <option value="0">Title</option>
                 <option value="1">Default</option>
                 <option value="2">Media</option>
             </select>
-        
+        </div>
+        <div id="notesAndFullscreen">
+        <button id="fullscreenBtn">FullScreen</button>
+        <br>
+        <button id="toggleNotes" onclick="toggleNotes(event)">Toggle notes</button>
+        </div>
 
 
 
     </div>
+    
     <div id="canvas"></div>
-    <button id="fullscreenBtn">FullScreen</button>
+     
     <a class="prev" onclick="plusSlides(-1)" style="z-index: 2">&#10094;</a>
     <a class="next" onclick="plusSlides(1)" style="z-index: 2">&#10095;</a>
     <div class="footer" id="footer">
@@ -216,7 +222,7 @@
         let presentation = [{
             title: "",
             text: "",
-            bakgrunnColor: "",
+            bakgrunnColor: "#FFFFFF",
             titleColor: "",
             style: "",
             media: [],

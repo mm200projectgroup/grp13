@@ -11,9 +11,9 @@ addNewSlide.onclick = function () {
     let newSlide = {
         title: "",
         text: "",
-        bakgrunnColor: "",
-        titleColor:"",
-        textColor:"",
+        bakgrunnColor: "#FFFFFF",
+        titleColor: "",
+        textColor: "",
         media: [],
         notes: "",
         template: 1
@@ -39,15 +39,13 @@ function createPresentation(array) {
             <br>
             <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${array[i].text}</textarea> 
         `;
-        }
-        else if (array[i].template === 0) {
+        } else if (array[i].template === 0) {
             slideContent = `
                 <input class="mainTitle" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength="14" onchange="updateSlide()">
                 <br>
                 <textarea onchange="updateSlide()" class="undertitle" id="text${i}" placeholder="Undertitle">${array[i].text}</textarea> 
             `;
-        }
-        else if (array[i].template === 2) {
+        } else if (array[i].template === 2) {
             slideContent = `
             <input class="title" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateSlide()" style="color:">
             <div class="slideImg" id="imgCont${i}"></div>
@@ -88,7 +86,7 @@ function createPresentation(array) {
 
 
 document.onkeyup = function (event) {
-    if(document.activeElement.nodeName === "INPUT" ||document.activeElement.nodeName === "TEXTAREA"){
+    if (document.activeElement.nodeName === "INPUT" || document.activeElement.nodeName === "TEXTAREA") {
         return;
     }
     let x = event.which || event.keyCode || event.code || event.keyIdentifier;
@@ -118,7 +116,7 @@ function currentSlide(n) {
 //Selecting the preview
 function selectPreview(evt) {
     let target = evt.currentTarget.id;
-    let index = getCurrentIndex(target)+1
+    let index = getCurrentIndex(target) + 1
     currentSlide(index);
 }
 
@@ -128,7 +126,8 @@ function showSlides(n) {
     let slides = document.getElementsByClassName("mySlides");
     let preview = document.getElementsByClassName("myPreview");
     let deleteSlideBtn = document.getElementsByClassName("deleteSlide");
-    
+    let color = document.getElementById("pickcolor");
+
     if (n > slides.length) {
         slideIndex = 1
     }
@@ -143,25 +142,30 @@ function showSlides(n) {
         deleteSlideBtn[i].style.display = "none";
     }
     slides[slideIndex - 1].style.display = "block";
-    
+
+
     document.getElementById("templates").selectedIndex = presentation[slideIndex - 1].template;
-    
+
     preview[slideIndex - 1].className += " selected";
-    
+
     deleteSlideBtn[slideIndex - 1].style.display = "block";
 
-    
-    
+
+
     let activeSlide = slides[slideIndex - 1].id
     localStorage.setItem('currentSlide', activeSlide);
-    
-     updateNotes(slideIndex -1);
+
+    color.value = presentation[slideIndex - 1].bakgrunnColor;
+
+
+
+    updateNotes(slideIndex - 1);
 
 }
 
 
 //Find the index of current target
-function getCurrentIndex(target){
+function getCurrentIndex(target) {
     let getNr = target.match(/\d+/g).map(Number);
     return parseInt(getNr);
 }
@@ -170,14 +174,14 @@ function getCurrentIndex(target){
 
 function activeTextArea(evt) {
     let target = evt.currentTarget;
-    let index = getCurrentIndex(target.id)+1
+    let index = getCurrentIndex(target.id) + 1
     let textArea = document.getElementById(target.id);
     if (textArea.value === '') {
         textArea.value += '• ';
     }
 
     textArea.onkeyup = function (event) {
-        let x = event.which || event.keyCode;
+        let x = event.which || event.keyCode || event.code || event.keyIdentifier;
         if (x == 13) {
             textArea.value += '• ';
         }
@@ -202,33 +206,33 @@ function updateSlide() {
 
 
     //UpdateTitle
-    if(title){
+    if (title) {
         let newTitle = document.getElementById(`title${i}`).value;
         presentation[i].title = newTitle;
     }
 
     //UpdateText
-    if(text){
+    if (text) {
         let newText = document.getElementById(`text${i}`).value;
         presentation[i].text = newText;
     }
-    
-        
+
+
     //UpdateSTYLE---------------
     let newStyle = activeInput.style.cssText;
     document.getElementById(currentSlideID).style.cssText = newStyle;
-    
+
     presentation[i].style = newStyle;
 
     //UpdateBackgroundColor
-    if(color){
+    if (color) {
         let newColor = document.getElementById("pickcolor").value;
         document.getElementById(currentSlideID).style.background = newColor;
         presentation[i].bakgrunnColor = newColor;
     }
-    
-    
-        presentation[i].media.forEach(e => {
+
+
+    presentation[i].media.forEach(e => {
         document.getElementById(`imgCont${i}`).appendChild(e);
         e.focus();
     });
@@ -238,10 +242,10 @@ function updateSlide() {
 
 }
 
-function deleteSlide(i){
+function deleteSlide(i) {
     presentation.splice(i, 1);
     createPresentation(presentation);
-    
+
 }
 
 
@@ -258,7 +262,6 @@ fullscreenBtn.onclick = function () {
     let slides = document.getElementsByClassName("mySlides");
     //Ser om current slide er i editMode
     let check = document.getElementById(currentSlideID).classList.contains("editMode");
-
     //SLår på fullscreen
     if (check) {
         for (i = 0; i < slides.length; i++) {
@@ -273,6 +276,8 @@ fullscreenBtn.onclick = function () {
         } else if (elem.msRequestFullscreen) { /* IE/Edge */
             elem.msRequestFullscreen();
         }
+        
+        
         //Slå av fullscreen
     } else {
         for (i = 0; i < slides.length; i++) {
@@ -294,6 +299,41 @@ fullscreenBtn.onclick = function () {
 }
 
 
+document.onkeydown = function (event) {
+    let elem = document.documentElement;
+    let currentSlideID = localStorage.getItem('currentSlide');
+    let slides = document.getElementsByClassName("mySlides");
+    //Ser om current slide er i fullscreen
+    let check = document.getElementById(currentSlideID).classList.contains("fullscreen");
+
+    let x = event.which || event.keyCode || event.code || event.keyIdentifier;
+    if (x == 27) {
+        if (check) {
+            for (i = 0; i < slides.length; i++) {
+                slides[i].className = slides[i].className.replace(" fullscreen", " editMode");
+            }
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { /* Firefox */
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE/Edge */
+                document.msExitFullscreen();
+            }
+
+
+        }
+    }
+
+
+
+}
+
+
+
+
+
 
 //------------------------------------------------
 //-----------SHOW/HIDE PRESENTER NOTES---------------------------------
@@ -312,7 +352,7 @@ function saveNotes() {
 function updateNotes(n) {
     let notes = document.getElementById("notes");
     notes.value = "";
-    if(presentation[n]){
+    if (presentation[n]) {
         notes.value = presentation[n].notes;
     }
 }
@@ -351,4 +391,3 @@ function changeTemplate(template) {
             break;
     }
 }
-
