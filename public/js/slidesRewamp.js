@@ -29,7 +29,7 @@ addNewSlide.onclick = function () {
 
 
 function createPresentation(array) {
-    console.log(array);
+   // console.log(array);
     let i;
     let canvas = document.getElementById("canvas");
     canvas.innerHTML = "";
@@ -242,20 +242,15 @@ function updateSlide() {
     });
 
 
- 
+    console.log(presentation);
 
 }
 
 function deleteSlide(i) {
-    presentation.splice(i, 1);
-    createPresentation(presentation);
+    presentation.slides.splice(i, 1);
+    createPresentation(presentation.slides);
 
 }
-
-
-
-
-
 
 
 
@@ -396,20 +391,15 @@ function changeTemplate(template) {
     }
 }
 
-
+console.log(presentation)
 //--------------OPEN PRESENTATION-------------------------
 function openPresentation(index){
     //Henter presentationene fra local storage
     let openPres = JSON.parse(localStorage.getItem("loadedPresentation"))
-    
-   //whiper ut current array
-    for (var i = presentation.length; i > 0; i--) {
-        presentation.pop();
-        }
-    
-
+    document.getElementById("presentationTitle").value = openPres[index].titel;
+    localStorage.setItem("presentationid", openPres[index].presentationid);
+    delete presentation.slides;
     presentation = openPres[index].slides
-    console.log(presentation)
     createPresentation(presentation.slides);
     currentSlide(1);
     

@@ -269,14 +269,12 @@ async function saveNewPresentation() {
     let token = JSON.parse(localStorage.getItem("logindata")).token;
     let userId = JSON.parse(localStorage.getItem("logindata")).userId;
     let title = document.getElementById("presentationTitle")
-    let slides = {
-        "slides": presentation
-    }
+
 
 
     let data = {
         presentationTitle: title.value,
-        presentationData: slides,
+        presentationData: presentation,
         token: token,
         userId: userId
     };
