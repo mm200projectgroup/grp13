@@ -17,55 +17,40 @@ router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
 
-    let query = prpSql.findUser;
-    query.values = [username, username];
-
-    try {
-
-        let datarows = await db.any(query);
-        if (datarows.length === 0) {
-            res.status(401).json({
-                mld: "Feil brukernavn eller passord"
-            });
-        }
-
-        /*let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);*/
-        let nameCheck = datarows.find(nameCheck => {
-            return username === nameCheck.username || username ===nameCheck.email;
+    let check = await validateUser(username, password);
+    if(check){
+        let payload = {
+            username: username
+        };
+        let tok = jwt.sign(payload, secret, {
+            expiresIn: "12h"
         });
 
-        
-        if (nameCheck) {
-            let payload = {
-                username: nameCheck.username
-            };
-            let tok = jwt.sign(payload, secret, {
-                expiresIn: "12h"
-            });
-
-            res.status(200).json({
-                username: nameCheck.username,
-                userId: nameCheck.id,
-                token: tok
-            });
-
-        } else {
-            res.status(401).json({
-                mld: "Feil brukernavn eller passord"
-            });
-
-        }
-
-    } catch (err) {
-        res.status(500).json({
-            error: err
-        }); //something went wrong!
+        res.status(200).json({
+            username: username,
+            token: tok,
+            userId: check
+        });
     }
+    else {
+        res.status(401).json({
+            mld: "Feil brukernavn eller passord",
+            status: "401"
+        });
 
-
+    }
 });
 
-
+//Validate user. Login kan være passord eller epost
+async function validateUser (login, password){
+    let hashQuery = prpSql.getHash;
+    hashQuery.values = [login];
+    let req = await db.one(hashQuery);
+    let hash = req.hash;
+    if(await bcrypt.compare(password, hash)){
+        return req.id;
+    }
+}
 
 
 
@@ -73,10 +58,11 @@ router.post("/register/", async function (req, res) {
     let userEmail = req.body.email;
     let username = req.body.username;
     let password = req.body.password;
-    let role = req.body.role;
+    let hash = bcrypt.hashSync(password, 10);
+    console.log(userEmail, username, hash);
 
     let queryCreateUser = prpSql.createUser;
-    queryCreateUser.values = [userEmail, username, password, role];
+    queryCreateUser.values = [userEmail, username, hash];
 
     let queryFindUser = prpSql.findUser;
     queryFindUser.values = [username, userEmail];
@@ -112,16 +98,17 @@ router.post("/register/", async function (req, res) {
                 username: username,
                 userId: createUser.id,
                 token: tok
-            });
+            }).end();
 
             }
 
 
 
     } catch (err) {
+        console.log(err);
         res.status(500).json({
-            error: err
-        }); //something went wrong!     
+            mld: err
+        }).end(); //something went wrong!
     }
 
 });

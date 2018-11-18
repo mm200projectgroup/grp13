@@ -364,27 +364,27 @@ function updateNotes(n) {
 function changeTemplate(template) {
     let slide = localStorage.getItem("currentSlide");
     let num = slide.slice(5);
-    presentation[num].template = template;
+    presentation.slides[num].template = template;
     let slideContent = document.getElementById(slide);
     switch (template) {
 
         case 0:
             slideContent.innerHTML = `
-                <input class="mainTitle" id="title${num}" placeholder="Title" value="${presentation[num].title}" maxlength="14" onchange="updateSlide()">
+                <input class="mainTitle" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength="14" onchange="updateSlide()">
                 <br>
-                <textarea class="undertitle" id="text${num}" placeholder="Text" onchange="updateSlide()">${presentation[num].text}</textarea> 
+                <textarea class="undertitle" id="text${num}" placeholder="Text" onchange="updateSlide()">${presentation.slides[num].text}</textarea> 
             `;
             break;
         case 1:
             slideContent.innerHTML = `
-            <input class="title" id="title${num}" placeholder="Title" value="${presentation[num].title}" maxlength= "14" onchange="updateSlide()" style="color:">
+            <input class="title" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="color:">
             <br>
-            <textarea class="text" id="text${num}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation[num].text}</textarea> 
+            <textarea class="text" id="text${num}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation.slides[num].text}</textarea> 
         `;
             break;
         case 2:
             slideContent.innerHTML = `
-            <input class="title" id="title${num}" placeholder="Title" value="${presentation[num].title}" maxlength= "14" onchange="updateSlide()" style="color:">
+            <input class="title" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="color:">
             <div class="slideImg" id="imgCont${num}"></div>
             `;
             break;

@@ -48,7 +48,7 @@
             </div>
 
             <div class="container">
-                <label for="username"><b>Username</b></label>
+                <label for="username"><b>Username or email</b></label>
                 <br>
                 <input type="text" id="loggInnUsername" placeholder="username" name="username">
                 <br>
@@ -118,6 +118,7 @@
         </div>
         <input id="presentationTitle" placeholder="Presentation Title..">
         <h3 id="user"></h3>
+        <button class="formButtons" onclick="logOut()">Log out</button>
     </template>
 
     <template id="notSignedIn">
@@ -301,7 +302,6 @@
             }
         }
     </script>
-    <script src="js/bcrypt.js"></script>
     <script src="js/editingTools.js"></script>
     <script src="js/javascript.js"></script>
     <script src="js/slidesRewamp.js"></script>

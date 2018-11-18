@@ -31,7 +31,12 @@ function imgResizer() {
         let slideId = localStorage.getItem("currentSlide");
         let index = getCurrentIndex(slideId);
         let presObject = document.getElementById("imgCont"+index);
-
+        
+        if(presentation.slides[index].template !== 2){
+            window.alert("You can only add images to the 'media' template. Sorry!");
+            return;
+        }
+        
         //Denne åpner et prompt vindu hvor du legger inn bildelinken
         let input = prompt("skriv inn lenke til bilde");
 
@@ -46,7 +51,7 @@ function imgResizer() {
 
             //media = linken til bilde
 
-            presentation[index].media.push(imgObj);
+            presentation.slides[index].media.push(imgObj);
 
             updateSlide();
         } else {

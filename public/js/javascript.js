@@ -1,5 +1,5 @@
 let STATUS;
-let ROLE = 1;
+
 
 
 
@@ -39,25 +39,19 @@ function getData(endpoint) {
 
 
 async function loggInn() {
-
+    let login = loggInnUsername.value;
+    let password = loggInnpassword.value;
     try {
-        let hash = await getHash(loggInnUsername.value);
-        console.log(hash);
-        if (!bcrypt.compareSync(loggInnpassword.value, hash.hash)) {
-            outputLogIn1.innerHTML = "Feil brukernavn eller passord";
-            return;
-        }
         let data = {
-            username: loggInnUsername.value,
-            password: hash
+            username: login,
+            password: password
         };
         let json = await sendData("/app/users/login", data);
-
+        console.log(typeof json, json);
         if (json.username) {
             console.log("yay");
-            
+
             localStorage.setItem("logindata", JSON.stringify(json));
-            let token = JSON.parse(localStorage.getItem("logindata")).token;
 
             logInForm.style.display = "none";
             setHeaderView("signedIn", header);
@@ -65,16 +59,17 @@ async function loggInn() {
             let user = document.getElementById("user");
             user.innerHTML = json.username;
             user.onclick = function changePassword() {
-            document.getElementById('userSettingsForm').style.display = 'block'
+                document.getElementById('userSettingsForm').style.display = 'block'
             };
-
             getAllPresentaionToUser();
+
         } else {
             console.log("ops");
             outputLogIn1.innerHTML = json.mld;
         }
 
-    } catch (e) {
+    }
+    catch (e) {
         console.log(e);
     }
 
@@ -83,49 +78,31 @@ async function loggInn() {
 
 
 
-function register() {
+async function register() {
 
-    let hash = bcrypt.hashSync(regPassword.value, 10);
 
     let data = {
         username: regUsername.value,
-        password: hash,
+        password: regPassword.value,
         email: regEmail.value,
-        role: ROLE
     };
 
-    sendData("/app/users/register", data)
-        .then(json => {
-            if (STATUS == 200) {
-                console.log("yay");
+    let response = await sendData("/app/users/register", data);
+    console.log(response);
+    if(STATUS == 200){
+        localStorage.setItem("logindata", JSON.stringify(response));
 
-                localStorage.setItem("logindata", JSON.stringify(json));
+        signUpForm.style.display = "none";
+        setHeaderView("signedIn", header);
 
-                signUpForm.style.display = "none";
-                setHeaderView("signedIn", header);
-
-                let user = document.getElementById("user");
-                user.innerHTML = json.username;
-                user.onclick = function changePassword() {
-                    document.getElementById('userSettingsForm').style.display = 'block'
-                };
-
-
-
-            } else {
-                outputSignUp1.innerHTML = json.mld;
-            }
-
-
-        })
-        .catch(error => {
-            outputSignUp1.style.color = "red";
-            outputSignUp1.innerHTML = "error";
-            console.log(error);
-        });
-
-
-
+        let user = document.getElementById("user");
+        user.innerHTML = response.username;
+        user.onclick = function changePassword() {
+            document.getElementById('userSettingsForm').style.display = 'block';
+        };
+    }else {
+        outputSignUp1.innerHTML = response.mld;
+    }
 }
 
 //EDIT USER--------------------------

@@ -51,9 +51,9 @@ router.post('/changeLogin/email', async function (request, res) {
 });
 
 router.post('/changeLogin/password', async function (request, res) {
-   let hash = request.body.password;
+    let password = request.body.password;
+    let hash = bcrypt.hashSync(password);
    let username = request.body.username;
-
    let passwordQuery = prpSql.editPassword;
    passwordQuery.values = [hash, username];
    db.none(passwordQuery);
@@ -68,7 +68,7 @@ router.delete("/changeLogin/:username", async function (req, res) {
     let username = req.params['username'];
 
     let deleteQuery = prpSql.deleteUser;
-    deleteQuery.values = [username, ""];
+    deleteQuery.values = [username];
     db.none(deleteQuery);
     res.status(200).end();
 });
