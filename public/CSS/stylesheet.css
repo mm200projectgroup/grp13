@@ -162,24 +162,22 @@ display: flex;
 }
 
 .mediaDiv {
- 
     overflow:hidden;
-    height: 70%;
-    width: 35vw;
+    height: 26vw;
+    max-width: 35vw;
     margin-left: 1%;
 }
 
-.imgCont{
-    width: 26vw;
-   
+.mediaTextDiv{ 
 
 }
 
 .mediaText{
-   padding-left: 1%;
+    padding-left: 30%;
     background-color: transparent;
     border-style: hidden;
     font-size: 2.5vw;
+    height: 100%;
 }
 
 

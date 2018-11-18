@@ -113,6 +113,7 @@
                 <br>
                 <br>
                 <button onclick="updateSlide()">Add</button>
+                <p id="wrongFileType"></p>
             </div>
         </div>
     </div>
@@ -174,7 +175,7 @@
             <br>
             <!--//Skalering-->
             <p>Scale image</p>
-            <input id="imgSlider" type="range" min="10" max="1000" step="1">
+            <input id="imgSlider" type="range" min="10" max="50" step="1">
             <br>
 
             <!--//Div som bilder blir lagt inn i-->
@@ -270,7 +271,7 @@
                 let username = JSON.parse(localStorage.getItem("logindata")).username;
                 user.innerHTML = username;
                 user.onclick = function changePassword() {
-                    document.getElementById('userSettingsForm').style.display = 'block'
+                document.getElementById('userSettingsForm').style.display = 'block'
                 };
             }
 

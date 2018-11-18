@@ -87,7 +87,31 @@ imgResizer();
 
 
 */
+let imgSlider = document.getElementById("imgSlider")
+imgSlider.addEventListener("input", resizeImg);
+let sliderValue;
+function resizeImg(e){
+    let currentSlideID = localStorage.getItem('currentSlide');
+    let i = getCurrentIndex(currentSlideID);
+    
+    let image = document.getElementById("mediaImg"+i);
+    sliderValue = e.target.value;
+    image.style.width = sliderValue+"vw";
 
+}
+
+imgSlider.onmouseup = function(){
+    let currentSlideID = localStorage.getItem('currentSlide');
+    let i = getCurrentIndex(currentSlideID);
+    
+    presentation.slides[i].imgWidth = sliderValue;
+    console.log(presentation)
+}
+
+
+function checkURL(url) {
+    return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+}
 
 /*-Tekst-settings-------------------------------------- */
 

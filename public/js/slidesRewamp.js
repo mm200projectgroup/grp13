@@ -6,11 +6,12 @@
                 titleColor: "",
                 style: "",
                 media: "./Media/palceholderMedia.png",
+                imgWidth: "26",
                 notes: "",
                 template: 2
 
 
-        }]
+            }]
         };
 
 
@@ -30,6 +31,7 @@
             titleColor: "",
             textColor: "",
             media: "./Media/palceholderMedia.png",
+            imgWidth: "26",
             notes: "",
             template: 1
         };
@@ -69,10 +71,12 @@
                     slideContent = `
             <input class="title" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateSlide()" style="color:">
             <div class="mediaContent">
-            <div class="mediaDiv">
-            <img class="imgCont" src=${array[i].media}>
-            </div>
-            <textarea class="mediaText" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${array[i].text}</textarea>
+                <div class="mediaDiv">
+                    <img class="imgCont" id="mediaImg${i}" src=${array[i].media} style="width:${array[i].imgWidth}vw">
+                </div>
+                <div class="mediaTextDiv">
+                    <textarea class="mediaText" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${array[i].text}</textarea>
+                </div>
             </div>
             `;
                 }
@@ -247,9 +251,8 @@
             //UpdateSTYLE---------------
             let newStyle = activeInput.style.cssText;
             document.getElementById(currentSlideID).style.cssText = newStyle;
-
             presentation.slides[i].style = newStyle;
-
+                                      
             //UpdateBackgroundColor
             if (color) {
                 let newColor = document.getElementById("pickcolor").value;
@@ -258,10 +261,13 @@
             }
             
             
-            if (image){
+            if (checkURL(image.value)){
                 let newImg = image.value;
+                document.getElementById("mediaImg").src = newImg;
                 presentation.slides[i].media = newImg;
                 
+            }else{
+                document.getElementById("wrongFileType").innerHTML = "Not and imagelink";
             }
             /*
                 presentation.slides[i].media.forEach(e => {
@@ -272,7 +278,7 @@
 
             console.log(presentation);
             
-            createPresentation(presentation.slides);
+            
 
         }
 
@@ -417,7 +423,7 @@
             <input class="title" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="color:">
             <div class="mediaContent">
             <div class="mediaDiv">
-            <img class="imgCont" src=${presentation.slides[num].media}>
+            <img class="imgCont" id="mediaImg${num}" src=${presentation.slides[num].media} style="width:${presentation.slides[num].imgWidth}vw">
             </div>
             <textarea class="mediaText" id="text${num}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation.slides[num].text}</textarea>
             </div>
