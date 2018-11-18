@@ -415,7 +415,12 @@
                 case 2:
                     slideContent.innerHTML = `
             <input class="title" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="color:">
-            <div class="slideImg" id="imgCont${num}"></div>
+            <div class="mediaContent">
+            <div class="mediaDiv">
+            <img class="imgCont" src=${presentation.slides[num].media}>
+            </div>
+            <textarea class="mediaText" id="text${num}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation.slides[num].text}</textarea>
+            </div>
             `;
                     break;
             }
