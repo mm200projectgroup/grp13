@@ -1,4 +1,4 @@
-//Denne funksjonen setter størrelse
+/*//Denne funksjonen setter størrelse
 //let imgResizer = 
 function imgResizer() {
 
@@ -86,7 +86,7 @@ function imgResizer() {
 imgResizer();
 
 
-
+*/
 
 
 /*-Tekst-settings-------------------------------------- */

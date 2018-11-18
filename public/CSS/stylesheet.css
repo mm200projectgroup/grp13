@@ -66,18 +66,21 @@ body {
 
 /*Slide-and-canvas---------------------*/
 #canvas {
+    
     grid-area: canvas;
 }
 
 
 
 .mySlides{
+    
     background-color: white;
     
 }
 
 
 .editMode {
+    
     width: 70vw;
     height: 35vw;
     margin-top: 3vw;
@@ -117,19 +120,18 @@ h3 {
     border-style: hidden;
     margin-top: 5%;
     margin-left: 5%;
-    font-size: 40px
+    font-size: 2.5vw;
 }
 
 
 .title {
     background-color: transparent;
     border-style: hidden;
-    font-size: 60px;
-    width: 50%;
+    font-size: 5vw;
+    width: 100%;
     height: auto;
     margin-top: 2%;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-bottom: 1%;
     text-align: center;
 }
 
@@ -153,6 +155,34 @@ h3 {
     text-align: center;
     border: none;
 }
+
+
+.mediaContent{
+display: flex;
+}
+
+.mediaDiv {
+ 
+    overflow:hidden;
+    height: 70%;
+    width: 35vw;
+    margin-left: 1%;
+}
+
+.imgCont{
+    width: 26vw;
+   
+
+}
+
+.mediaText{
+   padding-left: 1%;
+    background-color: transparent;
+    border-style: hidden;
+    font-size: 2.5vw;
+}
+
+
 
 /*----------------^Text^------------------*/
 
@@ -197,14 +227,20 @@ h3 {
 
 
 .fullscreen textarea{
-font-size: 3vw;
+font-size: 3.5vw;
 
 
 }
 
 .fullscreen input{
 font-size: 7vw;
+}
 
+.fullscreen .slideImg{
+    height: 78%;
+    width: 50vw;
+    background-repeat: no-repeat;
+    background-size: 50vw;
 }
 
 

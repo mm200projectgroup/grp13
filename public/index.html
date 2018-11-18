@@ -8,6 +8,7 @@
 </head>
 
 <body onclick="selectActive()">
+    
     <!-- /// Ny pass eller brukernavn -->
     <div id="userSettingsForm" class="modal">
         <div class="modal-content animate">
@@ -97,14 +98,26 @@
                 <span onclick="document.getElementById('openPres').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h2 class="modulHeader">Open presentation</h2>
             </div>
-
-            <div id="loadedPresentation" class="container">
-                
-                <button>Open</button>
-
+            <div id="loadedPresentation" class="container"></div>
+        </div>
+    </div>
+    <div id="addImageUrl" class="modal">
+        <div class="modal-content">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('addImageUrl').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <h2 class="modulHeader">Enter URL:</h2>
+            </div>
+            <div class="container">
+                <label for="imgUrl">Image URL:</label>
+                <input id="imgUrl" placeholder="image url...">
+                <br>
+                <br>
+                <button onclick="updateSlide()">Add</button>
             </div>
         </div>
     </div>
+    
+ 
 
     <div id="header"></div>
 
@@ -157,7 +170,7 @@
         <div id="imageMenu">
             <h3>Image Editing</h3>
             <!--//Legg til et bilde-->
-            <button id="addImg">Add image</button>
+            <button id="addImg" onclick="document.getElementById('addImageUrl').style.display='block'" >Add image</button>
             <br>
             <!--//Skalering-->
             <p>Scale image</p>
@@ -220,18 +233,7 @@
     </div>
 
     <script>
-        let presentation = {"slides":[{
-            title: "",
-            text: "",
-            bakgrunnColor: "#FFFFFF",
-            titleColor: "",
-            style: "",
-            media: [],
-            notes:"",
-            template:0
 
-
-        }]};
 
 
 
@@ -288,6 +290,7 @@
         let logInForm = document.getElementById('logInForm');
         let signUpForm = document.getElementById('signUpForm');
         let openPres = document.getElementById('openPres');
+        let addImgUrl = document.getElementById('addImageUrl');
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
@@ -299,6 +302,9 @@
             }
             if (event.target == openPres) {
                 openPres.style.display = "none";
+            }
+            if (event.target == addImgUrl) {
+                addImgUrl.style.display = "none";
             }
         }
     </script>
