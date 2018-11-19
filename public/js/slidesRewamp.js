@@ -7,10 +7,10 @@
                 textStyle: "",
                 media: "./Media/palceholderMedia.png",
                 imgWidth: "26",
+                imgFilter:"",
+                av: "",
                 notes: "",
-                template: 2
-
-
+                template: 3
             }]
         };
 
@@ -26,20 +26,22 @@
 
 
         addNewSlide.onclick = function () {
-        let newSlide = {
-            title: "",
-            text: "",
-            bakgrunnColor: "#FFFFFF",
-            titleStyle: "",
-            textStyle: "",
-            media: "./Media/palceholderMedia.png",
-            imgWidth: "26",
-            notes: "",
-            template: 1
-        };
+            let newSlide = {
+                title: "",
+                text: "",
+                bakgrunnColor: "#FFFFFF",
+                titleStyle: "",
+                textStyle: "",
+                media: "./Media/palceholderMedia.png",
+                imgWidth: "26",
+                imgFilter:"",
+                av: "",
+                notes: "",
+                template: 1
+            };
 
-            
-            
+
+
             let color = document.getElementById("pickcolor");
             color.value = "#FFFFFF"
 
@@ -51,7 +53,7 @@
 
 
         function createPresentation(array) {
-            // console.log(array);
+            //console.log(array);
             let i;
             let canvas = document.getElementById("canvas");
             canvas.innerHTML = "";
@@ -75,7 +77,19 @@
             <input class="title" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateSlide()" style="${array[i].titleStyle}">
             <div class="mediaContent">
                 <div class="mediaDiv">
-                    <img class="imgCont" id="mediaImg${i}" src=${array[i].media} style="width:${array[i].imgWidth}vw">
+                    <img class="imgCont" id="mediaImg${i}" src=${array[i].media} style="width:${array[i].imgWidth}vw; filter:${array[i].imgFilter}">
+                </div>
+                <div class="mediaTextDiv">
+                    <textarea class="mediaText" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)" style="${array[i].textStyle}">${array[i].text}</textarea>
+                </div>
+            </div>
+            `;
+                }else if (array[i].template === 3) {
+                    slideContent = `
+                <input class="title" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateSlide()" style="${array[i].titleStyle}">
+                <div class="mediaContent">
+                <div id="mediaDiv${i}" class="mediaDiv">
+                ${array[i].av} 
                 </div>
                 <div class="mediaTextDiv">
                     <textarea class="mediaText" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)" style="${array[i].textStyle}">${array[i].text}</textarea>
@@ -83,6 +97,7 @@
             </div>
             `;
                 }
+
 
 
                 slideDiv.innerHTML = slideContent;
@@ -184,9 +199,9 @@
 
 
             let activeSlide = slides[slideIndex - 1].id
-            console.log(activeSlide)
+            console.log(activeSlide);
             localStorage.setItem('currentSlide', activeSlide);
-
+            
             color.value = presentation.slides[slideIndex - 1].bakgrunnColor;
 
 
@@ -236,7 +251,8 @@
             let text = document.getElementById(`text${i}`);
             let color = document.getElementById("pickcolor");
             let image = document.getElementById("imgUrl");
-            console.log(i);
+            let av = document.getElementById("avUrl");
+           
 
             //UpdateTitle
             if (title) {
@@ -251,42 +267,43 @@
             }
 
 
-    //UpdateSTYLE---------------
-    let newStyle = ACTIVEINPUT.style.cssText;
-    if(ACTIVEINPUT.nodeName === "INPUT"){
-        presentation.slides[i].titleStyle = newStyle;
-        console.log(presentation.slides[i]);
-    }
-    if(ACTIVEINPUT.nodeName === "TEXTAREA"){
-        presentation.slides[i].textStyle = newStyle;
-    }
-                                      
+            //UpdateSTYLE---------------
+            let newStyle = ACTIVEINPUT.style.cssText;
+            if (ACTIVEINPUT.nodeName === "INPUT") {
+                presentation.slides[i].titleStyle = newStyle;
+                console.log(presentation.slides[i]);
+            }
+            if (ACTIVEINPUT.nodeName === "TEXTAREA") {
+                presentation.slides[i].textStyle = newStyle;
+            }
+
             //UpdateBackgroundColor
             if (color) {
                 let newColor = document.getElementById("pickcolor").value;
                 document.getElementById(currentSlideID).style.background = newColor;
                 presentation.slides[i].bakgrunnColor = newColor;
             }
-            
-            
-            if (checkURL(image.value)){
+
+
+            if (checkURL(image.value)) {
                 let newImg = image.value;
                 document.getElementById(`mediaImg${i}`).src = newImg;
                 presentation.slides[i].media = newImg;
-                
-            }else{
+
+            } else {
                 document.getElementById("wrongFileType").innerHTML = "Not an imagelink";
             }
-            /*
-                presentation.slides[i].media.forEach(e => {
-                    document.getElementById(`imgCont${i}`).appendChild(e);
-                    e.focus();
-                });
-            */
+           
+                
+                let newVA = document.getElementById("avUrl").value;
+                document.getElementById(`mediaDiv${i}`).innerHTML = newVA;
+                presentation.slides[i].av = newVA;
+            
+    
 
             console.log(presentation);
-            
-            
+
+
 
         }
 
@@ -421,9 +438,9 @@
                     break;
                 case 1:
                     slideContent.innerHTML = `
-            <input class="title" data-lpignore="true" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="${presentation.slides[num].titleStyle}">
-            <br>
-            <textarea class="text" id="text${num}" placeholder ="Text.." style="${presentation.slides[num].textStyle}" onfocus="activeTextArea(event)">${presentation.slides[num].text}</textarea> 
+                <input class="title" data-lpignore="true" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="${presentation.slides[num].titleStyle}">
+                <br>
+                <textarea class="text" id="text${num}" placeholder ="Text.." style="${presentation.slides[num].textStyle}" onfocus="activeTextArea(event)">${presentation.slides[num].text}</textarea> 
         `;
                     break;
                 case 2:
@@ -431,10 +448,10 @@
             <input class="title" id="title${num}" data-lpignore="true" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="${presentation.slides[num].titleStyle}">
             <div class="mediaContent">
                 <div class="mediaDiv">
-                    <img class="imgCont" id="mediaImg${i}" src=${presentation.slides[num].media} style="width:${presentation.slides[num].imgWidth}vw">
+                    <img class="imgCont" id="mediaImg${num}" src=${presentation.slides[num].media} style="width:${presentation.slides[num].imgWidth}vw; filter:${array[i].imgFilter}">
                 </div>
                 <div class="mediaTextDiv">
-                    <textarea class="mediaText" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)" style="${presentation.slides[num].textStyle}">${presentation.slides[num].text}</textarea>
+                    <textarea class="mediaText" id="text${num}" placeholder ="Text.." onfocus="activeTextArea(event)" style="${presentation.slides[num].textStyle}">${presentation.slides[num].text}</textarea>
                 </div>
             </div>
             `;

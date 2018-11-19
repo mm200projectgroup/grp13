@@ -21,17 +21,21 @@ body {
 
 #header {
     grid-area: header;
-    background: #688ED9;
-
+    background: #008ae6;
 }
-/*HEADER---------------------*/
 
 .dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
+    float: left;
+    color: black;
+    border: 0px;
+    display: inline-block;
+    background-color: white;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    padding: 12px 12px;
 }
 
 .dropdown {
@@ -40,6 +44,9 @@ body {
 }
 
 .dropdown-content {
+    margin-top: 50px;
+    margin-left: 8px;
+    font-size: 14px;
     display: none;
     position: absolute;
     background-color: #f1f1f1;
@@ -53,47 +60,122 @@ body {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    font-size: 14px;
 }
 
 
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {background-color: lightblue;}
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {background-color: lightblue;}
+
+
+
+
+#toggleNotes,
+#fullscreenBtn{
+    color: black;
+    border: 0px;
+    background-color: white;
+    margin-bottom: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    padding: 8px 20px;
+    
+}
+
+
 
 
 
 /*Slide-and-canvas---------------------*/
 #canvas {
-    
     grid-area: canvas;
 }
 
-
-
 .mySlides{
-    
     background-color: white;
-    
 }
 
 
 .editMode {
-    
     width: 70vw;
     height: 35vw;
     margin-top: 3vw;
     margin-bottom: 1vw;
     margin-left: 10%;
     margin-right: 10%;
+}
 
+
+.fullscreen{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;  
+}
+
+
+.fullscreen textarea{
+font-size: 3.5vw;
+
+
+}
+
+.fullscreen input{
+font-size: 7vw;
+}
+
+.fullscreen .slideImg{
+    height: 78%;
+    width: 50vw;
+    background-repeat: no-repeat;
+    background-size: 50vw;
 }
 
 
 
 
+.mediaContent{
+display: flex;
+}
 
+.mediaDiv {
+    overflow:hidden;
+    height: 26vw;
+    max-width: 35vw;
+    margin-left: 1%;
+}
+
+.mediaTextDiv{ 
+
+}
+
+.mediaText{
+    margin-left: 30%;
+    background-color: transparent;
+    border-style: hidden;
+    font-size: 2.5vw;
+    height: 100%;
+}
+
+
+
+.deleteSlide {
+    cursor: pointer;
+    color: red;
+    padding-left: 5px;
+}
+
+.iFrameClass{
+    width: 35vw;
+    height: 25vw;;
+}
 
 
 
@@ -108,6 +190,7 @@ p {
 
 
 h3 {
+    color: Black;
     font-size: 18px;
     padding-bottom: 10px;
 
@@ -157,95 +240,7 @@ h3 {
 }
 
 
-.mediaContent{
-display: flex;
-}
-
-.mediaDiv {
-    overflow:hidden;
-    height: 26vw;
-    max-width: 35vw;
-    margin-left: 1%;
-}
-
-
-
-.mediaText{
-    margin-left: 30%;
-    background-color: transparent;
-    border-style: hidden;
-    font-size: 2.5vw;
-    height: 100%;
-}
-
-iframe{
-    width: 35vw;
-    height: 25vw;;
-}
-
-
 /*----------------^Text^------------------*/
-
-/*-----Notes and fullscreen buttons------*/
-#toggleNotes{
-    color: black;
-    border: 0px;
-    background-color: white;
-    margin: 8px;
-    font-family: sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    user-select: none;
-    padding: 12px 20px;
-}
-
-
-#fullscreenBtn {
-    
-    color: black;
-    border: 0px;
-    background-color: white;
-    margin: 8px;
-    font-family: sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    user-select: none;
-    padding: 13px 26px;
-    z-index: 10;
-}
-
-/*------^Notes and fullscreen buttons^----*/
-
-.fullscreen{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;  
-}
-
-
-.fullscreen textarea{
-font-size: 3.5vw;
-
-
-}
-
-.fullscreen input{
-font-size: 7vw;
-}
-
-.fullscreen .slideImg{
-    height: 78%;
-    width: 50vw;
-    background-repeat: no-repeat;
-    background-size: 50vw;
-}
-
-
-
-
 
 
 /*Footer ------------------------------- */
@@ -259,67 +254,54 @@ font-size: 7vw;
     overflow-y: hidden;
 }
 
+.previewTitle {
+    font-size: 30px;
+    margin-left: 45%;
+    margin-top: 5%;
+    font-family: sans-serif;
+    
+}
+
 .myPreview {
     display:inline-block;
     background-color: white;
-    height: 100px;
-    width: 150px;
+    border: 2px solid white;
+    width: 200px;
+    height: 120px;
     margin: 30px;
-   
-
-}
-
-.deleteSlide {
-    width: 10%;
-    color: #000;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.deleteSlide:hover,
-.deleteSlide:focus {
-    color: red;
-    cursor: pointer;
+    
 }
 
 .selected{
-    border: 2px solid blue;
-    background-color: white;
-    height: 100px;
-    width: 150px;
-    margin: 30px;
-    margin-top: 20px;
-
+    border: 2px solid #008ae6;
 }
 
-.previewTitle {
-    font-size: 15px;
-    padding-left: 40%;
-    
-     
+
+/*-Scrollbar---- */
+::-webkit-scrollbar {
+    width: 14px;
 }
 
-.selected .previewTitle {
-    font-size: 30px;
-    /*position: absolute;*/
-    padding-left:;
-    padding-top: 1px
-   
-     
+::-webkit-scrollbar-track {
+    background: gray; 
 }
+ 
+::-webkit-scrollbar-thumb {
+    background: lightgray; 
+}
+
+
 
 /*-------Next-&-previous-buttons--------*/
 .prev,
 .next {
-    display: inline-block;
     cursor: pointer;
     position: absolute;
-    height:150px;
+    height:180px;
     width: auto;
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 55px;
-    bottom: 0;
+    padding-top: 75px;
     color: white;
     font-weight: bold;
     font-size: 18px;
@@ -330,6 +312,7 @@ font-size: 7vw;
 .next {
     right: 0;
     border-radius: 3px 0 0 3px;
+    
 }
 
 
@@ -344,99 +327,98 @@ font-size: 7vw;
 }
 /*------------^Next-and-prev-buttons^------------*/
 
-/*--Footer-Pluss-tegn--------------------*/
-#addNewSlide{
-    cursor: pointer;
-    background-color: darkgray;
-    transition: 0.6s ease;
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    margin-right: 5%;
-    margin-top: 3%;
-    
-    
- 
-}
-#addNewSlide:hover,
-#addNewSlide:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-#addNewSlide:after {
-    background-color: #FFFFFF;
-    width: 20px;
-    height: 4px;
-    border-radius: 1px;
-    -webkit-border-radius: 1px;
-    -moz-border-radius: 1px;
-    position: absolute;
-    top:13px;
-    left: 5px;
-    content:"";
-}
-#addNewSlide:before {
-    background-color: #FFFFFF;
-    width: 4px;
-    height: 20px;
-    border-radius: 1px;
-    -webkit-border-radius: 1px;
-    -moz-border-radius: 1px;
-    position: absolute;
-    top:5px;
-    left: 13px;
-    content:"";
-}
-
-.footer div{
-    display: inline-block;
-}
-
-/*-------------^Footer-Stuff^-------------*/
 
 /*Editing-Menu---------------------------*/
 
 .menu {
     grid-area: menu;
-    background: #688ED9;
+    background: #b3e0ff;
+    outline-color: #b3e0ff;
 }
 
 #textMenu {
-    color: white;
-    background: #1F2B4C;
+    background: #1aa3ff;
     padding-left: 30px;
     padding-top: 30px;
     padding-bottom: 30px;
 }
 
 #imageMenu {
-    color: white;
-    background: #2C3D6B;
+    background: #4db8ff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+}
+
+#colorPicker {
+    background: #80ccff;
     padding-left: 30px;
     padding-top: 30px;
     padding-bottom: 30px;
 }
 
-
-#backgroundMenu{
-    background: #3E4575;
-    color: white;
+#ppSettings {
+    background: #1aa3ff;
     padding-left: 30px;
     padding-top: 30px;
     padding-bottom: 30px;
-}
-
-#notesAndFullscreen{
-    position: absolute;
-    bottom: 2%;
-    margin-left: 2%
     
 }
 
+#notesAndFullscreen {
+    background: darkgray;
+    padding-left: 30px;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    
+}
+/*
+#otherSettings {
+    background: #1aa3ff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}*/
+/*----AUDIO------------------------------*/
+
+#audioMenu {
+    background: #80ccff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}
+
+#addAudio {
+    cursor: pointer;
+    font-size: 14px;
+    height: 30px;
+    width: 100px;
+    align-content: center;
+}
+
+/*-------VIDEO----------------------*/
+
+#videoMenu {
+    background: #80ccff;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}
+
+#addVideo {
+    cursor: pointer;
+    font-size: 14px;
+    height: 30px;
+    width: 100px;
+    align-content: center;
+}
 
 
-
-
-/*------Buttons-for-TEXT-editing---------*/
+/*------TEXT-editing-Buttons--------*/
 
 #butB {
     cursor: pointer;
@@ -448,7 +430,7 @@ font-size: 7vw;
     font-style: italic;
 }
 
-#butU {
+#butAa {
     cursor: pointer;
     /*text-decoration: underline;*/
     font-variant: small-caps;
@@ -466,7 +448,6 @@ font-size: 7vw;
     align-content: center;
     margin-bottom: 20px;
 }
-
 
 option {
     font-size: 14px;
@@ -498,7 +479,114 @@ option[value]{
     font-size: 14px;
 }
 
+/*--Template---------------------------------*/
+
+
+#butTem1,
+#butTem2,
+#butTem3{
+    font-size: 14px;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    margin-right: 5px;
+    border: 1px solid #000000;
+    background-color: lightgrey;
+    align-content: center;
+    margin-bottom: 20px;
+}
+
+#templates {
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px;
+}
+
+
+
 /*------------------^Editing-menu^--------------*/
+
+
+/*--Footer-Pluss-tegn--------------------*/
+#addNewSlide{
+    cursor: pointer;
+    background-color: darkgray;
+    transition: 0.6s ease;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    margin-bottom: 40px;
+    top:35px;
+    left:5px;
+}
+
+#addNewSlide:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+#addNewSlide:after {
+    background-color: #FFFFFF;
+    width: 20px;
+    height: 4px;
+    border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    position: absolute;
+    top:13px;
+    left: 5px;
+    content:"";
+}
+
+#addNewSlide:before {
+    background-color: #FFFFFF;
+    width: 4px;
+    height: 20px;
+    border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    position: absolute;
+    top:5px;
+    left: 13px;
+    content:"";
+}
+
+.footer div{
+    display: inline-block;
+}
+
+/*-------------^Footer-Stuff^-------------*/
+
+
+/*-----Notes and fullscreen buttons------*/
+#toggleNotes{
+    color: black;
+    border: 0px;
+    background-color: white;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    padding: 12px 20px;
+}
+
+
+#fullscreenBtn {
+    
+    color: black;
+    border: 0px;
+    background-color: white;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    padding: 13px 26px;
+    z-index: 10;
+}
+
+/*------^Notes and fullscreen buttons^----*/
+
 
 /*User-Pop-up-windows---------------------------*/
 
@@ -507,10 +595,15 @@ option[value]{
 }
 
 #user {
-    text-align: right;
-    padding: 20px 20px;
-    color: white;
+    margin-right: 10%;
+    margin-top: 8px;
+    display: flex;
+    background-color: pink;
+    font-family: sans-serif;
     font-size: 14px;
+    user-select: none;
+    padding: 10px 80px;
+    
 }
 
 input[type=text],
@@ -528,11 +621,12 @@ input[type=password] {
 }
 
 #signInBtn,
-#loginBtn {
+#loginBtn,
+#logOutBtn{
     float: right;
     color: black;
     border: 0px;
-    display: inline-block;
+    display: flex;
     background-color: white;
     margin: 8px;
     font-family: sans-serif;
@@ -544,10 +638,28 @@ input[type=password] {
 
 }
 
+#presentationTitle {
+    margin-left: 30%;
+    margin-top: 8px;
+    display: flex;
+    background-color: white;
+    font-family: sans-serif;
+    font-size: 14px;
+    user-select: none;
+    padding: 10px 80px;
+}
+
+#masterDiv {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+}
+
+
 .formButtons {
     color: white;
     border: 0px;
-    display: inline-block;
+    display: flex;
     background-color: #008ae6;
     margin: 8px;
     font-family: sans-serif;

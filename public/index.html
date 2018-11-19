@@ -117,6 +117,21 @@
             </div>
         </div>
     </div>
+    <div id="addVAUrl" class="modal">
+        <div class="modal-content">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('addVAUrl').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <h2 class="modulHeader">Enter URL:</h2>
+            </div>
+            <div class="container">
+                <label for="avUrl">Audio/Video URL:</label>
+                <input id="avUrl" placeholder="Audio/Video url...">
+                <br>
+                <br>
+                <button onclick="updateSlide()">Add</button>
+            </div>
+        </div>
+    </div>
     
  
 
@@ -196,7 +211,11 @@
                 <option value="sepia(100%)">Sepia</option>
             </select>
         </div>
-        
+        <div id="av">
+        <h3>Audio/Video</h3>
+            <button id="addAV" onclick="document.getElementById('addVAUrl').style.display='block'">Add Audo/Video</button>
+            <br>
+        </div>
         <div id="backgroundMenu">
             <h3>Background</h3>
             <label for="pickcolor">Color</label>
@@ -292,7 +311,7 @@
         let signUpForm = document.getElementById('signUpForm');
         let openPres = document.getElementById('openPres');
         let addImgUrl = document.getElementById('addImageUrl');
-
+        let addVAUrl = document.getElementById('addVAUrl');
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == logInForm) {
@@ -306,6 +325,9 @@
             }
             if (event.target == addImgUrl) {
                 addImgUrl.style.display = "none";
+            }
+            if (event.target == addVAUrl) {
+                addVAUrl.style.display = "none";
             }
         }
     </script>
