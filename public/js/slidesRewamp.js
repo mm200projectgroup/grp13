@@ -3,8 +3,8 @@
                 title: "",
                 text: "",
                 bakgrunnColor: "#FFFFFF",
-                titleColor: "",
-                style: "",
+                titleStyle: "",
+                textStyle: "",
                 media: "./Media/palceholderMedia.png",
                 imgWidth: "26",
                 notes: "",
@@ -24,19 +24,22 @@
 
 
 
+
+        addNewSlide.onclick = function () {
         let newSlide = {
             title: "",
             text: "",
             bakgrunnColor: "#FFFFFF",
-            titleColor: "",
-            textColor: "",
+            titleStyle: "",
+            textStyle: "",
             media: "./Media/palceholderMedia.png",
             imgWidth: "26",
             notes: "",
             template: 1
         };
 
-        addNewSlide.onclick = function () {
+            
+            
             let color = document.getElementById("pickcolor");
             color.value = "#FFFFFF"
 
@@ -57,25 +60,25 @@
                 let slideContent;
                 if (array[i].template === 1) {
                     slideContent = `
-            <input class="title" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateSlide()" style="color:">
+            <input class="title" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateSlide()" style="${array[i].titleStyle}">
             <br>
-            <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${array[i].text}</textarea> 
+            <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)" style="${array[i].textStyle}">${array[i].text}</textarea> 
             `;
                 } else if (array[i].template === 0) {
                     slideContent = `
-            <input class="mainTitle" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength="14" onchange="updateSlide()">
-            <br>
-            <textarea onchange="updateSlide()" class="undertitle" id="text${i}" placeholder="Undertitle">${array[i].text}</textarea> 
+                <input class="mainTitle" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength="14" style="${array[i].titleStyle}" onchange="updateSlide()">
+                <br>
+                <textarea onchange="updateSlide()" class="undertitle" id="text${i}" placeholder="Undertitle" style="${array[i].textStyle}">${array[i].text}</textarea>
             `;
                 } else if (array[i].template === 2) {
                     slideContent = `
-            <input class="title" id="title${i}" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateSlide()" style="color:">
+            <input class="title" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateSlide()" style="${array[i].titleStyle}">
             <div class="mediaContent">
                 <div class="mediaDiv">
                     <img class="imgCont" id="mediaImg${i}" src=${array[i].media} style="width:${array[i].imgWidth}vw">
                 </div>
                 <div class="mediaTextDiv">
-                    <textarea class="mediaText" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)">${array[i].text}</textarea>
+                    <textarea class="mediaText" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)" style="${array[i].textStyle}">${array[i].text}</textarea>
                 </div>
             </div>
             `;
@@ -233,7 +236,7 @@
             let text = document.getElementById(`text${i}`);
             let color = document.getElementById("pickcolor");
             let image = document.getElementById("imgUrl");
-
+            console.log(i);
 
             //UpdateTitle
             if (title) {
@@ -248,10 +251,15 @@
             }
 
 
-            //UpdateSTYLE---------------
-            let newStyle = activeInput.style.cssText;
-            document.getElementById(currentSlideID).style.cssText = newStyle;
-            presentation.slides[i].style = newStyle;
+    //UpdateSTYLE---------------
+    let newStyle = ACTIVEINPUT.style.cssText;
+    if(ACTIVEINPUT.nodeName === "INPUT"){
+        presentation.slides[i].titleStyle = newStyle;
+        console.log(presentation.slides[i]);
+    }
+    if(ACTIVEINPUT.nodeName === "TEXTAREA"){
+        presentation.slides[i].textStyle = newStyle;
+    }
                                       
             //UpdateBackgroundColor
             if (color) {
@@ -263,11 +271,11 @@
             
             if (checkURL(image.value)){
                 let newImg = image.value;
-                document.getElementById("mediaImg").src = newImg;
+                document.getElementById(`mediaImg${i}`).src = newImg;
                 presentation.slides[i].media = newImg;
                 
             }else{
-                document.getElementById("wrongFileType").innerHTML = "Not and imagelink";
+                document.getElementById("wrongFileType").innerHTML = "Not an imagelink";
             }
             /*
                 presentation.slides[i].media.forEach(e => {
@@ -406,26 +414,28 @@
 
                 case 0:
                     slideContent.innerHTML = `
-                <input class="mainTitle" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength="14" onchange="updateSlide()">
+                <input class="mainTitle" style="${presentation.slides[num].titleStyle}" data-lpignore="true" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength="14" onchange="updateSlide()">
                 <br>
-                <textarea class="undertitle" id="text${num}" placeholder="Text" onchange="updateSlide()">${presentation.slides[num].text}</textarea> 
+                <textarea class="undertitle" id="text${num}" style="${presentation.slides[num].textStyle}" placeholder="Text" onchange="updateSlide()">${presentation.slides[num].text}</textarea> 
             `;
                     break;
                 case 1:
                     slideContent.innerHTML = `
-            <input class="title" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="color:">
+            <input class="title" data-lpignore="true" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="${presentation.slides[num].titleStyle}">
             <br>
-            <textarea class="text" id="text${num}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation.slides[num].text}</textarea> 
+            <textarea class="text" id="text${num}" placeholder ="Text.." style="${presentation.slides[num].textStyle}" onfocus="activeTextArea(event)">${presentation.slides[num].text}</textarea> 
         `;
                     break;
                 case 2:
                     slideContent.innerHTML = `
-            <input class="title" id="title${num}" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="color:">
+            <input class="title" id="title${num}" data-lpignore="true" placeholder="Title" value="${presentation.slides[num].title}" maxlength= "14" onchange="updateSlide()" style="${presentation.slides[num].titleStyle}">
             <div class="mediaContent">
-            <div class="mediaDiv">
-            <img class="imgCont" id="mediaImg${num}" src=${presentation.slides[num].media} style="width:${presentation.slides[num].imgWidth}vw">
-            </div>
-            <textarea class="mediaText" id="text${num}" placeholder ="Text.." onfocus="activeTextArea(event)">${presentation.slides[num].text}</textarea>
+                <div class="mediaDiv">
+                    <img class="imgCont" id="mediaImg${i}" src=${presentation.slides[num].media} style="width:${presentation.slides[num].imgWidth}vw">
+                </div>
+                <div class="mediaTextDiv">
+                    <textarea class="mediaText" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)" style="${presentation.slides[num].textStyle}">${presentation.slides[num].text}</textarea>
+                </div>
             </div>
             `;
                     break;

@@ -113,42 +113,43 @@ function checkURL(url) {
     return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
 }
 
-/*-Tekst-settings-------------------------------------- */
 
+/*-Tekst-settings-------------------------------------- */
+let ACTIVEINPUT;
 function selectActive() {    
     let activeWindow = document.activeElement;
     if (activeWindow.tagName == "INPUT" || activeWindow.tagName == "TEXTAREA") {
-        activeInput = activeWindow;
+        ACTIVEINPUT = activeWindow;
         
     }
 }
 
 
 function toBold() {
-    if (activeInput.style.fontWeight == 700) {
-        activeInput.style.fontWeight = 100;
+    if (ACTIVEINPUT.style.fontWeight == 700) {
+        ACTIVEINPUT.style.fontWeight = 100;
     } else {
-        activeInput.style.fontWeight = 700;
+        ACTIVEINPUT.style.fontWeight = 700;
     }
     
     updateSlide();
 }
 
 function toItalic() {
-    if (activeInput.style.fontStyle == "italic") {
-        activeInput.style.fontStyle = "normal";
+    if (ACTIVEINPUT.style.fontStyle == "italic") {
+        ACTIVEINPUT.style.fontStyle = "normal";
     } else {
-        activeInput.style.fontStyle = "italic";
+        ACTIVEINPUT.style.fontStyle = "italic";
     }
     
     updateSlide();
 }
 
 function toSmallCaps() {
-    if (activeInput.style.fontVariant == "small-caps") {
-        activeInput.style.fontVariant = "normal";
+    if (ACTIVEINPUT.style.fontVariant == "small-caps") {
+        ACTIVEINPUT.style.fontVariant = "normal";
     } else {
-        activeInput.style.fontVariant = "small-caps";
+        ACTIVEINPUT.style.fontVariant = "small-caps";
     }
     
     updateSlide();
@@ -157,7 +158,7 @@ function toSmallCaps() {
 
 function changeFont(selectTag) {
     let fontSelect = selectTag.options[selectTag.selectedIndex].text;
-    activeInput.style.fontFamily = fontSelect;
+    ACTIVEINPUT.style.fontFamily = fontSelect;
     
     updateSlide();
 }
