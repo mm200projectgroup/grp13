@@ -107,10 +107,15 @@ p {
 }
 
 
+
 h3 {
     font-size: 18px;
     padding-bottom: 10px;
 
+}
+
+label{
+    font-size: 1vw;
 }
 
 .text{
@@ -426,10 +431,15 @@ font-size: 7vw;
 }
 
 #notesAndFullscreen{
-    position: absolute;
-    bottom: 2%;
-    margin-left: 2%
+    background: #3E4575;
+    color: white;
+
+
     
+}
+
+#timeInput{
+    width: 25%;
 }
 
 

@@ -1,4 +1,3 @@
-
 let imgSlider = document.getElementById("imgSlider");
 let filter = document.getElementById("filter");
 imgSlider.addEventListener("input", resizeImg);
@@ -58,7 +57,7 @@ function toBold() {
         ACTIVEINPUT.style.fontWeight = 700;
     }
     
-    updateSlide();
+    updateText();
 }
 
 function toItalic() {
@@ -68,7 +67,7 @@ function toItalic() {
         ACTIVEINPUT.style.fontStyle = "italic";
     }
     
-    updateSlide();
+    updateText();
 }
 
 function toSmallCaps() {
@@ -78,7 +77,7 @@ function toSmallCaps() {
         ACTIVEINPUT.style.fontVariant = "small-caps";
     }
     
-    updateSlide();
+    updateText();
 }
 
 
@@ -86,7 +85,7 @@ function changeFont(selectTag) {
     let fontSelect = selectTag.options[selectTag.selectedIndex].text;
     ACTIVEINPUT.style.fontFamily = fontSelect;
     
-    updateSlide();
+    updateText();
 }
 
 /*
@@ -95,7 +94,5 @@ function changeColor(color){
     let currentSlideID = localStorage.getItem('currentSlide');
      document.getElementById(currentSlideID).style.backgroundColor=color; 
     updateBackground(currentSlideID, color);
-
-
     
 }*/

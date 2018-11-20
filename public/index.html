@@ -112,8 +112,10 @@
                 <input id="imgUrl" placeholder="image url...">
                 <br>
                 <br>
-                <button onclick="updateSlide()">Add</button>
+                <button onclick="updateImage()">Add</button>
+                <input id="backgroundCheck" type="checkbox" name="background" value="background"> Set as background
                 <p id="wrongFileType"></p>
+                
             </div>
         </div>
     </div>
@@ -121,14 +123,14 @@
         <div class="modal-content">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('addVAUrl').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <h2 class="modulHeader">Enter URL:</h2>
+                <h2 class="modulHeader">Enter embed link:</h2>
             </div>
             <div class="container">
-                <label for="avUrl">Audio/Video URL:</label>
-                <input id="avUrl" placeholder="Audio/Video url...">
+                <label for="avUrl">Embed link:</label>
+                <input id="avUrl" placeholder="Embed link...">
                 <br>
                 <br>
-                <button onclick="updateSlide()">Add</button>
+                <button onclick="updateEmbed()">Add</button>
             </div>
         </div>
     </div>
@@ -212,33 +214,37 @@
             </select>
         </div>
         <div id="av">
-        <h3>Audio/Video</h3>
-            <button id="addAV" onclick="document.getElementById('addVAUrl').style.display='block'">Add Audo/Video</button>
+        <h3>Embed</h3>
+            <button id="addAV" onclick="document.getElementById('addVAUrl').style.display='block'">Add embed link</button>
             <br>
         </div>
         <div id="backgroundMenu">
             <h3>Background</h3>
             <label for="pickcolor">Color</label>
-            <input type="color" id="pickcolor" value="#fdffff" onchange="updateSlide();" />
+            <input type="color" id="pickcolor" value="#fdffff" onchange="updateBackground();" />
         </div>
            <div id="templatesMenu">
-            <label for="templates">Templates</label>
+            <p>Templates</p>
             <select id="templates" onchange="changeTemplate(parseInt(this.value))">
                 <option value="0">Title</option>
                 <option value="1">Default</option>
-                <option value="2">Media</option>
+                <option value="2">Image</option>
+                <option value="3">Embed</option>
             </select>
         </div>
         <div id="notesAndFullscreen">
-        <button id="fullscreenBtn">FullScreen</button>
+        <h3>Start presentasjon</h3>
+        <button id="fullscreenBtn">Start</button>
+        <label>Auto</label>
+        <input id="autoCheck" type="checkbox" name="autoCheck" value="autoCheck">
+        <input id="timeInput" type="number" min="0" disabled>
         <br>
         <button id="toggleNotes" onclick="toggleNotes(event)">Toggle notes</button>
         </div>
 
 
 
-    </div>
-    
+    </div>  
     <div id="canvas"></div>
      
     <a class="prev" onclick="plusSlides(-1)" style="z-index: 2">&#10094;</a>
@@ -253,38 +259,23 @@
     </div>
 
     <script>
-
-
-
-
-
-
         let loggInnUsername = document.getElementById("loggInnUsername");
         let loggInnpassword = document.getElementById("loggInnpassword");
-
         let regUsername = document.getElementById("regUsername");
         let regPassword = document.getElementById("regpassword");
         let regEmail = document.getElementById("regEmail");
-
         let loginBtn = document.getElementById("loginBtn");
         let signInBtn = document.getElementById("signInBtn");
-
         let outputLogIn1 = document.getElementById("outputLogIn");
         let outputSignUp1 = document.getElementById("outputSignUp");
-
         //Change header template
         let header = document.getElementById("header");
         //username shown
-
-
-
-
         window.onload = function() {
             localStorage.removeItem('presentationid');
             if (localStorage.logindata == null) {
                 setHeaderView("notSignedIn", header);
             } else {
-
                 setHeaderView("signedIn", header);
                 let user = document.getElementById("user");
                 let username = JSON.parse(localStorage.getItem("logindata")).username;
@@ -293,19 +284,13 @@
                 document.getElementById('userSettingsForm').style.display = 'block'
                 };
             }
-
         }
-
-
-
         function setHeaderView(id) {
             header.innerHTML = "";
             let temp = document.getElementById(id);
             let clone = temp.content.cloneNode(true);
             header.appendChild(clone);
-
         }
-
         // Get the modal
         let logInForm = document.getElementById('logInForm');
         let signUpForm = document.getElementById('signUpForm');
