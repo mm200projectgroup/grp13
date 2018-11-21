@@ -149,7 +149,7 @@
         </div>
         <input id="presentationTitle" placeholder="Presentation Title..">
         <h3 id="user"></h3>
-        <button class="formButtons" onclick="logOut()">Log out</button>
+        <button id = "logOutBtn" class="formButtons" onclick="logOut()">Log out</button>
     </template>
 
     <template id="notSignedIn">
@@ -187,18 +187,13 @@
         </div>
         <div id="imageMenu">
             <h3>Image Editing</h3>
-            <!--//Legg til et bilde-->
             <button id="addImg" onclick="document.getElementById('addImageUrl').style.display='block'" >Add image</button>
             <br>
-            <!--//Skalering-->
             <p>Scale image</p>
             <input id="imgSlider" type="range" min="10" max="50" step="1">
             <br>
-
-            <!--//Div som bilder blir lagt inn i-->
-            <!-- <div id="presObj" style=" border-style: solid;"></div> -->
+    
             <p>Select filter</p>
-            <!--//Sette inn filter-->
             <select id="filter">
                 <option value="none">None</option>
                 <option value="blur(5px)">Blur</option>
@@ -213,17 +208,23 @@
                 <option value="sepia(100%)">Sepia</option>
             </select>
         </div>
+            
+    
         <div id="av">
-        <h3>Embed</h3>
-            <button id="addAV" onclick="document.getElementById('addVAUrl').style.display='block'">Add embed link</button>
+        <h3>Video or audio</h3>
+            <p>Add embed link</p>
+            <button id="addAV" onclick="document.getElementById('addVAUrl').style.display='block'">Add link</button>
             <br>
         </div>
+        
         <div id="backgroundMenu">
-            <h3>Background</h3>
-            <label for="pickcolor">Color</label>
+
+            <h3>Presentation style</h3>
+            <p for="pickcolor">Background color</p>
             <input type="color" id="pickcolor" value="#fdffff" onchange="updateBackground();" />
         </div>
-           <div id="templatesMenu">
+        
+        <div id="templatesMenu">
             <p>Templates</p>
             <select id="templates" onchange="changeTemplate(parseInt(this.value))">
                 <option value="0">Title</option>
@@ -231,27 +232,38 @@
                 <option value="2">Image</option>
                 <option value="3">Embed</option>
             </select>
+            
+            <div>
+            <p>Themes</p>
+                <p>-placeholder-</p>
+            </div>
         </div>
-        <div id="notesAndFullscreen">
-        <h3>Start presentasjon</h3>
-        <button id="fullscreenBtn">Start</button>
+        
+        </div>
+
+  
+    <div id="canvas"></div>
+     
+    <div id = "footerMenu">
+        
+        <button id="toggleNotes" onclick="toggleNotes(event)">Toggle notes</button>
+        <label>Start presentation</label>
+        <button id="fullscreenBtn" >Start</button>
         <label>Auto</label>
         <input id="autoCheck" type="checkbox" name="autoCheck" value="autoCheck">
         <input id="timeInput" type="number" min="0" disabled>
-        <br>
-        <button id="toggleNotes" onclick="toggleNotes(event)">Toggle notes</button>
+        
+        
+    <!--
+    <div id="notesAndFullscreen"></div>
+    <div id="presentationSet"></div> -->
+        
         </div>
-
-
-
-    </div>  
-    <div id="canvas"></div>
-     
-    <a class="prev" onclick="plusSlides(-1)" style="z-index: 2">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)" style="z-index: 2">&#10095;</a>
     <div class="footer" id="footer">
         <div id="preview"></div>
         <div id="addNewSlide" style="z-index: 0"></div>
+        <a class="prev" onclick="plusSlides(-1)" style="z-index: 2">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)" style="z-index: 2">&#10095;</a>
     </div>
 
     <div id="slideNotes" class="footer" style="z-index: -1">
