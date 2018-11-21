@@ -134,6 +134,19 @@
             </div>
         </div>
     </div>
+    <div id="import" class="modal">
+        <div class="modal-content">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('import').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <h2 class="modulHeader">Import:</h2>
+            </div>
+            <div class="container">
+		      <input id="file" type="file">
+		      <button id="import" onclick="ImportFile()">Import File</button>
+            </div>
+        </div>
+    </div>
+    
     
  
 
@@ -145,6 +158,9 @@
             <div class="dropdown-content">
                 <a onclick="savePresentation()">Save</a>
                 <a onclick=" document.getElementById('openPres').style.display = 'block'">Open</a>
+                <a id="export" onclick="exportFile()">Export File</a>
+                <a onclick=" document.getElementById('import').style.display = 'block'">Import</a>
+                <a onclick="sharePresentation()">Share</a>
             </div>
         </div>
         <input id="presentationTitle" placeholder="Presentation Title..">
@@ -164,6 +180,7 @@
             <button id="butB" onclick="toBold()">B</button>
             <button id="butI" onclick="toItalic()">I</button>
             <button id="butAa" onclick="toSmallCaps()">Aa</button>
+            <input type="color" id="butC" value="#000000" onchange="changeColor(event)">
 
 
             <p>Select font</p>
@@ -235,11 +252,16 @@
             
             <div>
             <p>Themes</p>
-                <p>-placeholder-</p>
+                <select id ="themes" onchange="changeTheme()">
+                <option>None</option>
+                <option value="cute">Cute</option>
+                <option>Dark</option>
+                <option>Light</option>
+                </select>
             </div>
         </div>
-        
-        </div>
+
+    </div>
 
   
     <div id="canvas"></div>
@@ -309,6 +331,7 @@
         let openPres = document.getElementById('openPres');
         let addImgUrl = document.getElementById('addImageUrl');
         let addVAUrl = document.getElementById('addVAUrl');
+        let importer = document.getElementById('import');
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == logInForm) {
@@ -325,6 +348,9 @@
             }
             if (event.target == addVAUrl) {
                 addVAUrl.style.display = "none";
+            }
+            if (event.target == importer) {
+                importer.style.display = "none";
             }
         }
     </script>

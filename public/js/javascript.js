@@ -244,7 +244,7 @@ async function saveNewPresentation() {
 
 
     let token = JSON.parse(localStorage.getItem("logindata")).token;
-    let userId = JSON.parse(localStorage.getItem("logindata")).userId;
+     let userId = JSON.parse(localStorage.getItem("logindata")).userId.toString();
     let title = document.getElementById("presentationTitle")
 
 
@@ -273,7 +273,7 @@ async function saveNewPresentation() {
 async function updatePresentation(){
     let presId = JSON.parse(localStorage.getItem("presentationid"));
     let token = JSON.parse(localStorage.getItem("logindata")).token;
-    let userId = JSON.parse(localStorage.getItem("logindata")).userId;
+    let userId = JSON.parse(localStorage.getItem("logindata")).userId.toString();
     let title = document.getElementById("presentationTitle")
     /*let slides = {
         "slides": presentation
@@ -319,5 +319,30 @@ async function getAllPresentaionToUser(){
     }
     
       
+}
+
+
+
+///TODO: Forløpig må du lagre og deretter laste for å kunne dele presentasjon. Fix this!!!
+///TODO: Ikke tillat å dele to ganger med samme presentasjon
+async function sharePresentation() {
+    let user = window.prompt("Enter username or email of the recipient.");
+    let token = JSON.parse(localStorage.getItem("logindata")).token;
+    if(!user){
+        return;
+    }
+
+
+
+    let data = {
+        login: user,
+        presID: localStorage.getItem("presentationid"),
+        token:token
+    };
+
+    let response = await sendData('/app/presentation/sharePresentation/', data);
+    if(STATUS == 200){
+        window.alert("success");
+    }
 }
 

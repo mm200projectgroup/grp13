@@ -4,49 +4,59 @@ imgSlider.addEventListener("input", resizeImg);
 let sliderValue;
 
 
-function resizeImg(e){
+function resizeImg(e) {
     let currentSlideID = localStorage.getItem('currentSlide');
     let i = getCurrentIndex(currentSlideID);
-    
-    let image = document.getElementById("mediaImg"+i);
+
+    let image = document.getElementById("mediaImg" + i);
     sliderValue = e.target.value;
-    image.style.width = sliderValue+"vw";
+    image.style.width = sliderValue + "vw";
 }
 
 
-imgSlider.onmouseup = function(){
+imgSlider.onmouseup = function () {
     let currentSlideID = localStorage.getItem('currentSlide');
     let i = getCurrentIndex(currentSlideID);
-    
+
     presentation.slides[i].imgWidth = sliderValue;
 }
 
 
-filter.onchange = function(){
+filter.onchange = function () {
     let currentSlideID = localStorage.getItem('currentSlide');
     let i = getCurrentIndex(currentSlideID);
-    let image = document.getElementById("mediaImg"+i);
+    let image = document.getElementById("mediaImg" + i);
     let filterVal = filter.value
-    
+
     image.style.filter = filterVal;
     presentation.slides[i].imgFilter = filterVal;
-    
-    console.log(presentation.slides) 
+
+    console.log(presentation.slides)
 }
 
 function checkURL(url) {
-    return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    return (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
 }
 
 
 /*-Tekst-settings-------------------------------------- */
 let ACTIVEINPUT;
-function selectActive() {    
+
+function selectActive() {
     let activeWindow = document.activeElement;
-    if (activeWindow.tagName == "INPUT" || activeWindow.tagName == "TEXTAREA") {
+    if (activeWindow.tagName === "INPUT" || activeWindow.tagName === "TEXTAREA") {
+        if (activeWindow.type === "color") {
+            return;
+        }
         ACTIVEINPUT = activeWindow;
-        
     }
+
+}
+
+function changeColor(e) {
+    ACTIVEINPUT.style.color = e.target.value;
+
+    updateText();
 }
 
 
@@ -56,7 +66,7 @@ function toBold() {
     } else {
         ACTIVEINPUT.style.fontWeight = 700;
     }
-    
+
     updateText();
 }
 
@@ -66,7 +76,7 @@ function toItalic() {
     } else {
         ACTIVEINPUT.style.fontStyle = "italic";
     }
-    
+
     updateText();
 }
 
@@ -76,7 +86,7 @@ function toSmallCaps() {
     } else {
         ACTIVEINPUT.style.fontVariant = "small-caps";
     }
-    
+
     updateText();
 }
 
@@ -84,9 +94,13 @@ function toSmallCaps() {
 function changeFont(selectTag) {
     let fontSelect = selectTag.options[selectTag.selectedIndex].text;
     ACTIVEINPUT.style.fontFamily = fontSelect;
-    
+
     updateText();
 }
+
+
+
+
 
 /*
 function changeColor(color){
@@ -96,3 +110,63 @@ function changeColor(color){
     updateBackground(currentSlideID, color);
     
 }*/
+
+//Change theme//
+
+function changeTheme() {
+
+    let theme = document.getElementById("themes").value;
+    
+    let none = {
+        bakgrunnColor: "#FFFFFF",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+    let cuteFrontPage = {
+        bakgrunnColor: "url(./Media/cuteFrontPage.jpg)",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+    let cuteDefault = {
+        bakgrunnColor: "url(./Media/cuteDefault.jpg",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+    let cuteMedia = {
+        bakgrunnColor: "url(./Media/cuteMedia.jpg",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+    if (theme == "cute") {
+
+        for (let i = 0; i < presentation.slides.length; i++) {
+
+            if (presentation.slides[i].template == 0){
+                    presentation.slides[i].bakgrunnColor = cuteFrontPage.bakgrunnColor;
+                    
+
+            }
+            
+            else if (presentation.slides[i].template == 1){
+                    presentation.slides[i].bakgrunnColor = cuteDefault.bakgrunnColor;
+                    
+
+            }
+            
+            else if (presentation.slides[i].template == 2||3){
+                    presentation.slides[i].bakgrunnColor = cuteMedia.bakgrunnColor;
+                    
+
+            }
+        }
+        createPresentation(presentation.slides);
+        currentSlide(1);
+    }
+
+ 
+
+}

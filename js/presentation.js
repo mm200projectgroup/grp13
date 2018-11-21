@@ -43,7 +43,8 @@ router.post('/savePresentation', async function (req, res){
     
     let title = req.body.presentationTitle;
     let presentation = req.body.presentationData;
-    let userId = req.body.userId;
+    let userId = req.body.userId.toString();
+    userId = userId + ",";
     
     let savePresentationQuery = prpSql.newPresentation;
     savePresentationQuery.values = [title, presentation, userId];
@@ -100,10 +101,10 @@ router.post('/updatePresentation', async function (req, res){
 
 
 router.post('/listOutPresentations' , async function (req, res){
-    let UserId = req.body.userId;
-    
-    let getPresentations = prpSql.getPresentations;
-    getPresentations.values = [UserId];
+    let UserId = req.body.userId.toString();
+    UserId = UserId + ",";
+    let getPresentations = `SELECT * FROM public."presentation" WHERE "ownerid" LIKE '%${UserId}%'`;
+    //getPresentations.values = [UserId];
     
 
     
@@ -117,10 +118,37 @@ router.post('/listOutPresentations' , async function (req, res){
             }).end();
         
     }catch(err){
+        console.log(err);
         res.status(500).json({
             error: err
         });
     }
 });
+
+router.post('/sharePresentation', async function (req, res) {
+    try {
+        let login = req.body.login;
+        let presentation = req.body.presID;
+        console.log(login, presentation);
+
+        //hent id til login
+        let getID = prpSql.getHash;
+        getID.values = [login];
+        let info = await db.one(getID);
+        let userID = info.id.toString();
+        userID = userID + ",";
+        console.log(userID, typeof userID);
+        //kjør update sql
+        let shareQuery = prpSql.sharePresentation;
+        shareQuery.values = [userID, presentation];
+        db.none(shareQuery);
+        res.status(200).end();
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).end();
+    }
+});
+
 
 module.exports = router;

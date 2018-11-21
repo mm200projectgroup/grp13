@@ -10,7 +10,7 @@
          imgFilter: "",
          av: "",
          notes: "",
-         template: 3
+         template: 0
             }]
  };
 
@@ -45,11 +45,12 @@ let autoCheck = document.getElementById("autoCheck");
 
      let color = document.getElementById("pickcolor");
      color.value = "#FFFFFF"
-
+     
      presentation.slides.push(newSlide);
      createPresentation(presentation.slides);
      currentSlide(presentation.slides.length);
-
+     
+     
  }
 
 
@@ -106,6 +107,8 @@ let autoCheck = document.getElementById("autoCheck");
          slideDiv.id = "slide" + i;
          canvas.appendChild(slideDiv);
          document.getElementById("slide" + i).style.background = `${array[i].bakgrunnColor}`;
+          document.getElementById("slide" + i).style.backgroundSize = `cover`;
+         
 
      }
 
@@ -128,6 +131,8 @@ let autoCheck = document.getElementById("autoCheck");
          preview.appendChild(div);
 
      }
+     
+     
 
  }
 
@@ -545,7 +550,8 @@ function autoPresentation(){
 
  }
 
- console.log(presentation)
+
+ 
  //--------------OPEN PRESENTATION-------------------------
  function openPresentation(index) {
      //Henter presentationene fra local storage
@@ -558,3 +564,47 @@ function autoPresentation(){
      currentSlide(1);
 
  }
+
+
+
+    //------------------EXPORT-------------------------------------------
+        function exportFile() {
+		//Her exporteres innholdet i presentation til pcen som en json fil		
+		let presObject = (JSON.stringify(presentation));
+		let download = document.createElement('tempElement');
+		let presentationTitle = document.getElementById("presentationTitle").value;
+        
+		download.setAttribute('download', presentationTitle + '.json');
+       
+		download.setAttribute('href', 'data:text;charset=utf-8,' + presObject);
+            
+		document.body.appendChild(download);
+		download.click();
+		document.body.removeChild(download);
+        };
+	//--------------------IMPORT-----------------------------
+	function ImportFile() {
+		
+		var files = document.getElementById("file").files;
+		console.log(files);
+		
+		 if (files.length <= 0) {
+    	return false;
+  		}
+		
+		
+	let filereader = new FileReader();
+		
+  filereader.onload = function(e) { 
+    let result = JSON.parse(e.target.result);
+	  delete presentation.slides;
+	  presentation = result;
+	  	console.log(presentation);
+	 	createPresentation(presentation.slides);
+	  
+  }
+  
+   filereader.readAsText(files.item(0))
+
+	
+	}

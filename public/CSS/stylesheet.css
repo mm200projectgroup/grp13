@@ -75,8 +75,6 @@ body {
 
 
 
-
-
 /*Slide-and-canvas---------------------*/
 #canvas {
     grid-area: canvas;
@@ -84,16 +82,16 @@ body {
 
 .mySlides{
     background-color: white;
+   
 }
 
-
 .editMode {
-    width: 65vw;
-    height: 30vw;
+    width: 58vw;
+    height: 32vw;
+    background-size: 100%;
     margin-top: 2vw;
-    margin-bottom: 1vw;
     margin-left: 10%;
-    margin-right: 10%;
+    margin-bottom: 30px;
 }
 
 
@@ -409,7 +407,7 @@ h3 {
     grid-area: menu;
     /*background: #b3e0ff;*/
     outline-color: #b3e0ff;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 #textMenu {

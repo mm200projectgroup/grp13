@@ -32,6 +32,8 @@ prpSql.updatePresentation = new PrpSt('updatePresentation','UPDATE public."prese
 
 prpSql.getPresentations = new PrpSt('getPresentations','SELECT * FROM public."presentation" WHERE "ownerid" = $1');
 
+prpSql.sharePresentation = new PrpSt('sharePresentation', 'UPDATE public."presentation" SET "ownerid" = CONCAT("ownerid", $1::text) WHERE "presentationid" = $2');
+
 //export module
 module.exports.db = db; //db connection
 module.exports.prpSql = prpSql; //prepared sql statements
