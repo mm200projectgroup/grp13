@@ -1,0 +1,191 @@
+/*--MOBILE-DEVICES-CSS-------------------------*/
+@media screen and (orientation:portrait) {
+    
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 14pt;
+}
+
+body {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 40px 60vw 70vw 60vw;
+
+    grid-template-areas:
+        "header"
+        "canvas"
+        "menu"
+        "footer"
+}
+    
+h3{
+    color:Black;
+    font-size: 14px;
+        
+    }
+
+#header {
+    width: 100%;
+    height: 40px;;
+    grid-area: header;
+    background: #008ae6;
+}
+    
+#signInBtn,
+#loginBtn,
+#logOutBtn{
+    float: right;
+    color: black;
+    border: 0px;
+    display: flex;
+    background-color: white;
+    margin: 4px;
+    font-family: sans-serif;
+    font-size: 12px;
+    user-select: none;
+    padding: 7px 15px;
+
+}
+
+
+/*-----------------------------------Canvas and slide*/
+
+#canvas {
+    width: 100%;
+    grid-area: canvas;
+}
+    
+.mySlides{
+    width: 100%;
+}
+    
+.editMode {
+    width: auto;
+    height: 50vw;
+    margin:10px;
+}
+    
+.mediaText{
+    margin-left: 30%;
+    background-color: transparent;
+    border-style: hidden;
+    font-size: 2.5vw;
+    height: 100%;
+}
+    
+.mediaDiv {
+    height: 30vw;
+    max-width: 35vw;
+    margin-left: 1%;
+}
+    
+.mediaContent{
+    margin-top: 5vw;
+    justify-content: center;
+}
+    
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+    font-size: 18;
+}
+
+/*-------------------------------------Editing-menu*/
+
+    
+.menu{
+    overflow: scroll;
+    overflow-y:hidden;
+    grid-gap: 20px;
+    background: lightblue;
+    }
+
+div.menu {
+    width: auto;
+    padding:8px;
+    }
+
+#textMenu,
+#colorPicker,
+#imageMenu,
+#ppSettings,
+#notesAndFullscreen{
+    
+    display: table-cell;
+    justify-content: center;
+    padding: 15px;
+    padding-left: 30px;
+    background: lightblue;
+    border-color: gray;
+}
+
+::-webkit-scrollbar {
+    width: auto;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: darkgray; 
+}
+::-webkit-scrollbar-thumb {
+    background: gray; 
+}
+    
+
+
+
+#butB {
+    font-weight: bold;
+}
+#butI {
+    font-style: italic;
+}
+#butAa {
+    font-variant: small-caps;
+}
+
+#butAa,
+#butI,
+#butB {
+    font-size: 12px;
+    height: 25px;
+    width: 25px;
+    margin-right: 2px;
+    border: 1px solid #000000;
+    background-color: lightgrey;
+    align-content: center;
+    margin-bottom: 10px;
+}   
+
+/*-------------------------------------------Footer*/
+
+
+} /*-<ikke slett den lawl god damn it Alexa*/
+/*--LANDSCAPE-MODE--------------------------------------*/
+/*------------------------------------------------------*/
+/*---------------------------------------LANDSCAPE-MODE-*/
+
+@media only screen and (orientation: landscape) {
+    
+* {
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+
+body {
+    height: 100vh;
+    display: grid;
+    background-color: lightgrey;
+    grid-template-columns: 250px 1fr ;
+    grid-template-rows: 60px 1fr 150px;
+
+    grid-template-areas:
+        "canvas";
+}
+
+   
+}
