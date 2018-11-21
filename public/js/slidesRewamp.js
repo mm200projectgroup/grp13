@@ -571,7 +571,7 @@ function autoPresentation(){
         function exportFile() {
 		//Her exporteres innholdet i presentation til pcen som en json fil		
 		let presObject = (JSON.stringify(presentation));
-		let download = document.createElement('tempElement');
+		let download = document.createElement('a');
 		let presentationTitle = document.getElementById("presentationTitle").value;
         
 		download.setAttribute('download', presentationTitle + '.json');
