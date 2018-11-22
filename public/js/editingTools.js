@@ -113,8 +113,8 @@ function changeColor(color){
 
 //Change theme//
 
-function changeTheme() {
-
+function changeTheme(newSlideTheme) {
+ 
     let theme = document.getElementById("themes").value;
     
     let none = {
@@ -140,33 +140,72 @@ function changeTheme() {
         titleStyle: "",
         textStyle: "",
     }
+    
+    //-dark-theme//
+    let darkFrontPage = {
+        bakgrunnColor: "url(./Media/darkFrontPage.jpg)",
+        titleStyle: "",
+        textStyle: "",
+    }
 
+    let darkDefault = {
+        bakgrunnColor: "url(./Media/darkDefault.jpg",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+    let darkMedia = {
+        bakgrunnColor: "url(./Media/darkMedia.jpg",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+   
     if (theme == "cute") {
 
         for (let i = 0; i < presentation.slides.length; i++) {
 
             if (presentation.slides[i].template == 0){
-                    presentation.slides[i].bakgrunnColor = cuteFrontPage.bakgrunnColor;
-                    
-
+                    presentation.slides[i].bakgrunnColor = cuteFrontPage.bakgrunnColor;     
             }
             
             else if (presentation.slides[i].template == 1){
-                    presentation.slides[i].bakgrunnColor = cuteDefault.bakgrunnColor;
-                    
-
+                    presentation.slides[i].bakgrunnColor = cuteDefault.bakgrunnColor;        
             }
             
             else if (presentation.slides[i].template == 2||3){
                     presentation.slides[i].bakgrunnColor = cuteMedia.bakgrunnColor;
                     
+            }
+        }        
+    }
+    
+     if (theme == "Dark") {
+
+        for (let i = 0; i < presentation.slides.length; i++) {
+
+            if (presentation.slides[i].template == 0){
+                    presentation.slides[i].bakgrunnColor = darkFrontPage.bakgrunnColor;
+
+
+            }
+
+            else if (presentation.slides[i].template == 1){
+                    presentation.slides[i].bakgrunnColor = darkDefault.bakgrunnColor;
+
+
+            }
+
+            else if (presentation.slides[i].template == 2||3){
+                    presentation.slides[i].bakgrunnColor = darkMedia.bakgrunnColor;
+
 
             }
         }
-        createPresentation(presentation.slides);
-        currentSlide(1);
-    }
-
- 
+     }
+    
+createPresentation(presentation.slides);
+currentSlide(1);
+return newSlideTheme;
 
 }

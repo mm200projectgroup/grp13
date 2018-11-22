@@ -306,12 +306,12 @@ async function getAllPresentaionToUser(){
         
     let res = await sendData("/app/presentation/listOutPresentations/", data);
     
-    let listDiv = document.getElementById("loadedPresentation");
+    let listDiv = document.getElementById("loadedPrivetPresentation");
 
     
     if(res.status =200){
         localStorage.setItem("loadedPresentation", JSON.stringify(res.loadPres));
-        
+        listDiv.innerHTML = "";
         for(let i = 0; i < res.loadPres.length; i++){
         listDiv.innerHTML += `<p onclick="openPresentation(${i})" >${res.loadPres[i].titel}</p>`;   
         }

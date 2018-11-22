@@ -23,6 +23,7 @@ body {
 #header {
     grid-area: header;
     background: #008ae6;
+    display: flex;
 }
 
 .dropbtn {

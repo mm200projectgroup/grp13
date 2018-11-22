@@ -41,13 +41,14 @@ let autoCheck = document.getElementById("autoCheck");
          template: 1
      };
 
-
+     
 
      let color = document.getElementById("pickcolor");
      color.value = "#FFFFFF"
      
      presentation.slides.push(newSlide);
      createPresentation(presentation.slides);
+     changeTheme(newSlide)
      currentSlide(presentation.slides.length);
      
      
@@ -282,37 +283,8 @@ let autoCheck = document.getElementById("autoCheck");
      if (ACTIVEINPUT.nodeName === "TEXTAREA") {
          presentation.slides[i].textStyle = newStyle;
      }
-/*
-     //UpdateBackgroundColor
-     if (color) {
-         let newColor = document.getElementById("pickcolor").value;
-         document.getElementById(currentSlideID).style.background = newColor;
-         presentation.slides[i].bakgrunnColor = newColor;
-     }*/
 
-/*
-     if (checkURL(image.value) && image) {
-         let newImg = image.value;
-         if (backgroundCheck.checked == false) {
-             document.getElementById(`mediaImg${i}`).src = newImg;
-             presentation.slides[i].media = newImg;
-         } else {
-             document.getElementById(currentSlideID).style.background = "url(" + newImg + ")"
-             presentation.slides[i].bakgrunnColor = "url(" + newImg + ")";
-         }
-     } else {
-         document.getElementById("wrongFileType").innerHTML = "Not an imagelink";
-     }
-*/
-     /*
-      if(av){
-          let newVA = document.getElementById("avUrl").value;
-          document.getElementById(`mediaDiv${i}`).innerHTML = newVA;
-          presentation.slides[i].av = newVA;
-      
-          }*/
 
-     console.log(presentation);
 
 
 
@@ -501,6 +473,7 @@ function autoPresentation(){
  //----------UPDATE TEMPLATE------------
  //0 = Title, 1 = Default, 2 = Media
  function changeTemplate(template) {
+     
      let slide = localStorage.getItem("currentSlide");
      let num = slide.slice(5);
      presentation.slides[num].template = template;
@@ -547,64 +520,8 @@ function autoPresentation(){
             </div>`;
              break;
      }
+     
+     changeTheme()
 
  }
 
-
- 
- //--------------OPEN PRESENTATION-------------------------
- function openPresentation(index) {
-     //Henter presentationene fra local storage
-     let openPres = JSON.parse(localStorage.getItem("loadedPresentation"))
-     document.getElementById("presentationTitle").value = openPres[index].titel;
-     localStorage.setItem("presentationid", openPres[index].presentationid);
-     delete presentation.slides;
-     presentation = openPres[index].slides
-     createPresentation(presentation.slides);
-     currentSlide(1);
-
- }
-
-
-
-    //------------------EXPORT-------------------------------------------
-        function exportFile() {
-		//Her exporteres innholdet i presentation til pcen som en json fil		
-		let presObject = (JSON.stringify(presentation));
-		let download = document.createElement('a');
-		let presentationTitle = document.getElementById("presentationTitle").value;
-        
-		download.setAttribute('download', presentationTitle + '.json');
-       
-		download.setAttribute('href', 'data:text;charset=utf-8,' + presObject);
-            
-		document.body.appendChild(download);
-		download.click();
-		document.body.removeChild(download);
-        };
-	//--------------------IMPORT-----------------------------
-	function ImportFile() {
-		
-		var files = document.getElementById("file").files;
-		console.log(files);
-		
-		 if (files.length <= 0) {
-    	return false;
-  		}
-		
-		
-	let filereader = new FileReader();
-		
-  filereader.onload = function(e) { 
-    let result = JSON.parse(e.target.result);
-	  delete presentation.slides;
-	  presentation = result;
-	  	console.log(presentation);
-	 	createPresentation(presentation.slides);
-	  
-  }
-  
-   filereader.readAsText(files.item(0))
-
-	
-	}

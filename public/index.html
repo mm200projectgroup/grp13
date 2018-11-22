@@ -5,6 +5,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
+    <!--Mobil stuff
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/> -->
+    <link rel="stylesheet" type="text/css" href="CSS/mobileStylesheet.css" media="only screen and (max-device-width: 850px)"  />
 </head>
 
 <body onclick="selectActive()">
@@ -98,8 +101,17 @@
                 <span onclick="document.getElementById('openPres').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h2 class="modulHeader">Open presentation</h2>
             </div>
-            <div id="loadedPresentation" class="container"></div>
+            <div id="loadedPrivetPresentation" class="container"></div>
         </div>
+    </div>
+    <div id="sharePres" class="modal">
+        <div class="modal-content">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('sharePres').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <h2 class="modulHeader">Share presentation</h2>
+            </div>
+
+            </div>
     </div>
     <div id="addImageUrl" class="modal">
         <div class="modal-content">
@@ -159,7 +171,9 @@
                 <a onclick="savePresentation()">Save</a>
                 <a onclick=" document.getElementById('openPres').style.display = 'block'">Open</a>
                 <a id="export" onclick="exportFile()">Export File</a>
+                <a id="exportNotes" onclick="exportPresenterNotes()">Export notes</a>
                 <a onclick=" document.getElementById('import').style.display = 'block'">Import</a>
+                <a onclick=" document.getElementById('sharePres').style.display = 'block'">Share</a>
                 <a onclick="sharePresentation()">Share</a>
             </div>
         </div>
@@ -332,6 +346,7 @@
         let addImgUrl = document.getElementById('addImageUrl');
         let addVAUrl = document.getElementById('addVAUrl');
         let importer = document.getElementById('import');
+        let sharePres = document.getElementById('sharePres');
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == logInForm) {
@@ -352,11 +367,16 @@
             if (event.target == importer) {
                 importer.style.display = "none";
             }
+            if (event.target == sharePres) {
+                sharePres.style.display = "none";
+            }
         }
     </script>
+    <script src="js/file.js"></script>
     <script src="js/editingTools.js"></script>
     <script src="js/javascript.js"></script>
     <script src="js/slidesRewamp.js"></script>
+    
 
 
 
