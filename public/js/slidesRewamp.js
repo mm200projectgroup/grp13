@@ -484,14 +484,14 @@ function autoPresentation(){
 
  function saveNotes() {
      let id = localStorage.getItem("currentSlide").slice(5);
-     presentation[id].notes = document.getElementById("notes").value;
+     presentation.slides[id].notes = document.getElementById("notes").value;
  }
 
  function updateNotes(n) {
      let notes = document.getElementById("notes");
      notes.value = "";
-     if (presentation[n]) {
-         notes.value = presentation[n].notes;
+     if (presentation.slides[n]) {
+         notes.value = presentation.slides[n].notes;
      }
  }
 
