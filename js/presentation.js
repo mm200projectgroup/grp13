@@ -111,7 +111,7 @@ router.post('/listOutPresentations' , async function (req, res){
     try{
        let getAll = await db.any(getPresentations);
         
-        console.log(getAll);
+
         
         res.status(200).json({
              loadPres: getAll
@@ -143,6 +143,64 @@ router.post('/sharePresentation', async function (req, res) {
         shareQuery.values = [userID, presentation];
         db.none(shareQuery);
         res.status(200).end();
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).end();
+    }
+});
+
+router.post('/makePublic', async function (req, res) {
+    try {
+        let userID = req.body.userID.toString();
+        let presID = req.body.presID;
+        userID = userID + ",";
+        let getPresentations = `SELECT * FROM public."presentation" WHERE "ownerid" LIKE '%${userID}%'`;
+
+        let presentations = await db.any(getPresentations);
+        
+        let check = false;
+        presentations.forEach(function (element) {
+            if (element.presentationid == presID) {
+                check = true;
+            }
+        });
+        
+    
+        
+        if (check) {
+            let publicQuery = prpSql.makePublic;
+            publicQuery.values = [parseInt(presID)];
+            db.none(publicQuery);
+            res.status(200).json({
+             feedback: "Presentation is now public"
+            })end();
+        }
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).end();
+    }
+});
+
+router.post('/deletePresentation', async function (req, res) {
+    let presID = req.body.presID;
+    let userID = req.body.userID;
+
+    let getPresentation = `SELECT * FROM public."presentation" WHERE "presentation" = '%${presID}%'`;
+    let presentation = db.any(getPresentation);
+
+
+    //Hent bruker
+    //Se om bruker har tilgang, eller om det er public
+    //Sett owner ID til null
+});
+
+router.get('/listPublic', async function (req, res) {
+    try{
+        let getPublicRequest = prpSql.getPublic;
+        let presList = await db.any(getPublicRequest);
+        res.json(presList).status(200).end();
     }
     catch (e) {
         console.log(e);

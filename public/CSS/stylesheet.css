@@ -441,6 +441,13 @@ h3 {
     
 }
 
+#themes {
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px;
+
+}
+
 /*----AUDIO-AND-VIDEO-------------------*/
 
 #audioMenu {

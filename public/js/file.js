@@ -1,4 +1,22 @@
- //--------------OPEN PRESENTATION-------------------------
+let shareWith = document.getElementById("shareWith");
+let shareButton = document.getElementById("shareButton");
+
+function shareOption(value){
+    if (value == "privet"){
+        document.getElementById("shareWith").disabled =false;
+        shareButton.setAttribute('onclick','sharePresentation()')
+        
+    }else{
+        document.getElementById("shareWith").disabled =true;
+        shareButton.setAttribute('onclick','sharePublicPresentation()')
+    }
+}
+
+
+
+
+
+//--------------OPEN PRESENTATION-------------------------
  function openPresentation(index) {
      //Henter presentationene fra local storage
      let openPres = JSON.parse(localStorage.getItem("loadedPresentation"))

@@ -22,6 +22,7 @@ let autoCheck = document.getElementById("autoCheck");
 
 
  createPresentation(presentation.slides);
+ let ACTIVEINPUT = document.getElementById("title0");
 
 
 
@@ -351,9 +352,6 @@ autoCheck.onchange = function(){
     }else{
         document.getElementById("timeInput").disabled =true;
     }
-    
-
-
 }
 
 let interval

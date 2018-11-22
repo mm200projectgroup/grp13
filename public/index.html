@@ -7,11 +7,11 @@
     <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
     <!--Mobil stuff
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/> -->
-    <link rel="stylesheet" type="text/css" href="CSS/mobileStylesheet.css" media="only screen and (max-device-width: 850px)"  />
+    <link rel="stylesheet" type="text/css" href="CSS/mobileStylesheet.css" media="only screen and (max-device-width: 850px)" />
 </head>
 
 <body onclick="selectActive()">
-    
+
     <!-- /// Ny pass eller brukernavn -->
     <div id="userSettingsForm" class="modal">
         <div class="modal-content animate">
@@ -110,8 +110,16 @@
                 <span onclick="document.getElementById('sharePres').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h2 class="modulHeader">Share presentation</h2>
             </div>
-
+            <div id="loadedPrivetPresentation" class="container">
+                <p>Enter username or email of the recipient:</p>
+                <input id="shareWith" placeholder="Username or email">
+                <br>
+                    <input type="radio" name="sharetype" value="privet" onclick="shareOption(this.value)" checked="checked"> Privet<br>
+                    <input type="radio" name="sharetype" value="Public" onclick="shareOption(this.value)"> Public<br>
+                <br>
+                <button id="shareButton" onclick="sharePresentation()">Share</button>
             </div>
+        </div>
     </div>
     <div id="addImageUrl" class="modal">
         <div class="modal-content">
@@ -127,7 +135,7 @@
                 <button onclick="updateImage()">Add</button>
                 <input id="backgroundCheck" type="checkbox" name="background" value="background"> Set as background
                 <p id="wrongFileType"></p>
-                
+
             </div>
         </div>
     </div>
@@ -153,14 +161,14 @@
                 <h2 class="modulHeader">Import:</h2>
             </div>
             <div class="container">
-		      <input id="file" type="file">
-		      <button id="import" onclick="ImportFile()">Import File</button>
+                <input id="file" type="file">
+                <button id="import" onclick="ImportFile()">Import File</button>
             </div>
         </div>
     </div>
-    
-    
- 
+
+
+
 
     <div id="header"></div>
 
@@ -179,7 +187,7 @@
         </div>
         <input id="presentationTitle" placeholder="Presentation Title..">
         <h3 id="user"></h3>
-        <button id = "logOutBtn" class="formButtons" onclick="logOut()">Log out</button>
+        <button id="logOutBtn" class="formButtons" onclick="logOut()">Log out</button>
     </template>
 
     <template id="notSignedIn">
@@ -194,7 +202,7 @@
             <button id="butB" onclick="toBold()">B</button>
             <button id="butI" onclick="toItalic()">I</button>
             <button id="butAa" onclick="toSmallCaps()">Aa</button>
-            <input type="color" id="butC" value="#000000" onchange="changeColor(event)">
+
 
 
             <p>Select font</p>
@@ -213,17 +221,17 @@
                 <option>Courier New</option>
                 <option>Lucida Console</option>
             </select>
-
+            <input type="color" id="butC" value="#000000" onchange="changeColor(event)">
 
         </div>
         <div id="imageMenu">
             <h3>Image Editing</h3>
-            <button id="addImg" onclick="document.getElementById('addImageUrl').style.display='block'" >Add image</button>
+            <button id="addImg" onclick="document.getElementById('addImageUrl').style.display='block'">Add image</button>
             <br>
             <p>Scale image</p>
             <input id="imgSlider" type="range" min="10" max="50" step="1">
             <br>
-    
+
             <p>Select filter</p>
             <select id="filter">
                 <option value="none">None</option>
@@ -239,22 +247,22 @@
                 <option value="sepia(100%)">Sepia</option>
             </select>
         </div>
-            
-    
+
+
         <div id="av">
-        <h3>Video or audio</h3>
+            <h3>Video or audio</h3>
             <p>Add embed link</p>
             <button id="addAV" onclick="document.getElementById('addVAUrl').style.display='block'">Add link</button>
             <br>
         </div>
-        
+
         <div id="backgroundMenu">
 
             <h3>Presentation style</h3>
             <p for="pickcolor">Background color</p>
             <input type="color" id="pickcolor" value="#fdffff" onchange="updateBackground();" />
         </div>
-        
+
         <div id="templatesMenu">
             <p>Templates</p>
             <select id="templates" onchange="changeTemplate(parseInt(this.value))">
@@ -263,43 +271,43 @@
                 <option value="2">Image</option>
                 <option value="3">Embed</option>
             </select>
-            
+
             <div>
-            <p>Themes</p>
-                <select id ="themes" onchange="changeTheme()">
-                <option>None</option>
-                <option value="cute">Cute</option>
-                <option>Dark</option>
-                <option>Light</option>
+                <p>Themes</p>
+                <select id="themes" onchange="changeTheme()">
+                    <option>None</option>
+                    <option value="cute">Cute</option>
+                    <option>Dark</option>
+                    <option>Light</option>
                 </select>
             </div>
         </div>
 
     </div>
 
-  
+
     <div id="canvas"></div>
-     
-    <div id = "footerMenu">
-        
+
+    <div id="footerMenu">
+
         <button id="toggleNotes" onclick="toggleNotes(event)">Toggle notes</button>
         <label>Start presentation</label>
-        <button id="fullscreenBtn" >Start</button>
+        <button id="fullscreenBtn">Start</button>
         <label>Auto</label>
         <input id="autoCheck" type="checkbox" name="autoCheck" value="autoCheck">
         <input id="timeInput" type="number" min="0" disabled>
-        
-        
-    <!--
+
+
+        <!--
     <div id="notesAndFullscreen"></div>
     <div id="presentationSet"></div> -->
-        
-        </div>
+
+    </div>
     <div class="footer" id="footer">
         <div id="preview"></div>
         <div id="addNewSlide" style="z-index: 0"></div>
         <a class="prev" onclick="plusSlides(-1)" style="z-index: 2">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)" style="z-index: 2">&#10095;</a>
+        <a class="next" onclick="plusSlides(1)" style="z-index: 2">&#10095;</a>
     </div>
 
     <div id="slideNotes" class="footer" style="z-index: -1">
@@ -329,10 +337,11 @@
                 let username = JSON.parse(localStorage.getItem("logindata")).username;
                 user.innerHTML = username;
                 user.onclick = function changePassword() {
-                document.getElementById('userSettingsForm').style.display = 'block'
+                    document.getElementById('userSettingsForm').style.display = 'block'
                 };
             }
         }
+
         function setHeaderView(id) {
             header.innerHTML = "";
             let temp = document.getElementById(id);
@@ -376,7 +385,7 @@
     <script src="js/editingTools.js"></script>
     <script src="js/javascript.js"></script>
     <script src="js/slidesRewamp.js"></script>
-    
+
 
 
 

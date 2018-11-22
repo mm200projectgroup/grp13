@@ -314,11 +314,8 @@ async function getAllPresentaionToUser(){
         listDiv.innerHTML = "";
         for(let i = 0; i < res.loadPres.length; i++){
         listDiv.innerHTML += `<p onclick="openPresentation(${i})" >${res.loadPres[i].titel}</p>`;   
-        }
-        
+        }   
     }
-    
-      
 }
 
 
@@ -326,7 +323,7 @@ async function getAllPresentaionToUser(){
 ///TODO: Forløpig må du lagre og deretter laste for å kunne dele presentasjon. Fix this!!!
 ///TODO: Ikke tillat å dele to ganger med samme presentasjon
 async function sharePresentation() {
-    let user = window.prompt("Enter username or email of the recipient.");
+    let user = document.getElementById("shareWith").value;
     let token = JSON.parse(localStorage.getItem("logindata")).token;
     if(!user){
         return;
@@ -345,4 +342,25 @@ async function sharePresentation() {
         window.alert("success");
     }
 }
+
+
+async function sharePublicPresentation(){
+    let userId = JSON.parse(localStorage.getItem("logindata")).userId;
+    let token = JSON.parse(localStorage.getItem("logindata")).token;
+
+
+    let data = {
+        userID: userId,
+        presID: localStorage.getItem("presentationid"),
+        token:token
+    };
+    
+    console.log(data);
+    
+    let response = await sendData('/app/presentation/makePublic/', data);
+    if(STATUS == 200){
+        window.alert("success");
+    }
+}
+    
 

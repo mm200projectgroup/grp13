@@ -40,7 +40,6 @@ function checkURL(url) {
 
 
 /*-Tekst-settings-------------------------------------- */
-let ACTIVEINPUT;
 
 function selectActive() {
     let activeWindow = document.activeElement;
