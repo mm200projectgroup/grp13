@@ -198,16 +198,20 @@ router.post('/deletePresentation', async function (req, res) {
     let presID = req.body.presID;
     let userID = req.body.userID;
 
-    let getPresentation = `SELECT * FROM public."presentation" WHERE "presentation" = '%${presID}%'`;
-    let presentation = db.one(getPresentation);
-
+    let getPresentation = `SELECT * FROM public."presentation" WHERE "presentationid" = ${presID}`;
+    let presentation  = await db.one(getPresentation);
     let owners = presentation.ownerid.split(",");
+    
     owners.forEach(function (element) {
+        
         if (element == userID) {
+            
             let deleteQuery = prpSql.deletePresentation;
             deleteQuery.values = presID;
             db.none(deleteQuery);
-            res.status(200).end();
+            res.status(200).json({
+             feedback: "Presentation deleted"
+            }).end();
         }
     });
 });

@@ -311,17 +311,13 @@ async function saveNewPresentation() {
 }
 */
 //------------------------------------------------
-
+/*
 async function updatePresentation() {
     let presId = JSON.parse(localStorage.getItem("presentationid"));
     let token = JSON.parse(localStorage.getItem("logindata")).token;
     let userId = JSON.parse(localStorage.getItem("logindata")).userId.toString();
     let title = document.getElementById("presentationTitle")
-    /*let slides = {
-        "slides": presentation
-    }*/
 
-    //let slides = presentation;
 
 
     let data = {
@@ -334,6 +330,27 @@ async function updatePresentation() {
 
 
     let res = await sendData("/app/presentation/updatePresentation/", data);
+}
+*/
+
+async function deletePresentation(presID, lsIndex){
+    
+    let token = JSON.parse(localStorage.getItem("logindata")).token;
+    let userId = JSON.parse(localStorage.getItem("logindata")).userId.toString();
+    
+    
+    let data = {
+        token: token,
+        presID: presID,
+        userID: userId
+    };
+    
+     let res = await sendData("/app/presentation/deletePresentation/", data);
+     
+    if (STATUS == 200){
+        
+    }
+    
 }
 
 getAllPresentaionToUser();
@@ -353,11 +370,16 @@ async function getAllPresentaionToUser() {
 
     if (res.status = 200) {
         localStorage.setItem("loadedPresentation", JSON.stringify(res.loadPres));
+        
 
 
         listDiv.innerHTML = "";
+        
         for (let i = 0; i < res.loadPres.length; i++) {
-            listDiv.innerHTML += `<p class="loadedPres" id="${JSON.parse(localStorage.getItem("loadedPresentation"))[i].presentationid}" onclick="openPresentation(${i})">${res.loadPres[i].titel}</p>`;
+            
+            let presID = JSON.parse(localStorage.getItem("loadedPresentation"))[i].presentationid;
+            
+            listDiv.innerHTML += `<div class="loadedPres"><p  id="${presID}" onclick="openPresentation(${i})">${res.loadPres[i].titel}</p><span onclick="deletePresentation(${presID}, ${i})" class="deleteSlide">&times;</span></div>`;
         }
     }
 }
@@ -380,7 +402,10 @@ async function getAllPublicPresentation() {
         
         listDiv.innerHTML = "";
         for (let i = 0; i < res.loadPublicPres.length; i++) {
-            listDiv.innerHTML += `<p class="loadedPres" onclick="openPublicPresentation(${i})">${res.loadPublicPres[i].titel}</p>`;
+            listDiv.innerHTML += `
+            <div class="loadedPres">
+            <p onclick="openPublicPresentation(${i})">${res.loadPublicPres[i].titel}</p>
+            </div>`;
         }
 
     }

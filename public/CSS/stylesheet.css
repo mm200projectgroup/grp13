@@ -438,18 +438,39 @@ h3 {
 
 
 .loadedPres{
-    font-size: 1.5vw
+    width: 100%; 
     
-}.loadedPres:hover{
+    
+       
+}
+
+.loadedPres p{
+    padding-left: 2%;
+    font-size: 1.5vw;
+    text-align:justify;
+    width: 100%
+    
+}
+
+.loadedPres span{
+    padding-top: 2%;
+    position: 100%;
+    color: black;
+}
+.loadedPres span:hover{
+    padding-top: 2%;
+    position: 100%;
+    color: red;
+}
+
+.loadedPres:hover{
     background-color: lightgray;
     color: white;
     
 }
 
-
-/* Create an active/current tablink class */
-.tab button.active {
-    background-color: #ccc;
+.loadedPres{
+    display: flex;    
 }
 
 
