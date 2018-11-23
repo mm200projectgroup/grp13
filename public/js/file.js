@@ -29,6 +29,23 @@ function shareOption(value){
 
  }
 
+function openPublicPresentation(index){
+    let openPres = JSON.parse(localStorage.getItem("loadedPublicPresentation"));
+    
+     document.getElementById("presentationTitle").value = openPres[index].titel;
+    
+     localStorage.setItem("presentationid", openPres[index].presentationid);
+    
+     delete presentation.slides;
+    
+     presentation = openPres[index].slides;
+    
+     createPresentation(presentation.slides);
+     currentSlide(1);
+    
+    
+}
+
 
 
  //------------------EXPORT-------------------------------------------

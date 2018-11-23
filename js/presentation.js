@@ -21,7 +21,7 @@ router.use(function (req, res, next) {
         res.status(403).json({
             msg: "No token received"
         }); //send
-        console.log("no token recived")
+        console.log("no token recived");
         return; //quit
     } else {
         try {
@@ -30,7 +30,7 @@ router.use(function (req, res, next) {
             res.status(403).json({
                 msg: "The token is not valid!"
             }); //send
-            console.log("he token is not valid!")
+            console.log("he token is not valid!");
             return; //quit
         }
     }
@@ -38,39 +38,49 @@ router.use(function (req, res, next) {
     next(); //we have a valid token - go to the requested endpoint
 });
 
+router.post('/savePresentation', async function (req, res) {
 
-router.post('/savePresentation', async function (req, res){
-    
     let title = req.body.presentationTitle;
     let presentation = req.body.presentationData;
     let userId = req.body.userId.toString();
     userId = userId + ",";
-    
-    let savePresentationQuery = prpSql.newPresentation;
-    savePresentationQuery.values = [title, presentation, userId];
-    
-    try{
-       let newPres = await db.any(savePresentationQuery);
+    let presID;
+    if (req.body.presId) {
+        presID = req.body.presId;
+    }
+    console.log(presID);
+    try {
+        if(presID){
+            let updatePresentationQuery = prpSql.updatePresentation;
+            updatePresentationQuery.values = [title, presentation, presID];
+            console.log(updatePresentationQuery);
+            let updated = await db.any(updatePresentationQuery);
 
-        
-        res.status(200).json({
+            res.status(200).json({
+                pres: updated
+            }).end();
+        }
+        else {
+            let savePresentationQuery = prpSql.newPresentation;
+            savePresentationQuery.values = [title, presentation, userId];
+
+            let newPres = await db.any(savePresentationQuery);
+
+            res.status(200).json({
                 presId: newPres[0].presentationid
             }).end();
-        
-        
-        
-
-    } catch(err){
+        }
+    } catch (err) {
         res.status(500).json({
             error: err
-        });
+        }).end();
     }
-    
 
 
 });
 
 
+/*
 
 router.post('/updatePresentation', async function (req, res){
     
@@ -99,7 +109,7 @@ router.post('/updatePresentation', async function (req, res){
         
 });
 
-
+*/
 router.post('/listOutPresentations' , async function (req, res){
     let UserId = req.body.userId.toString();
     UserId = UserId + ",";
@@ -172,9 +182,10 @@ router.post('/makePublic', async function (req, res) {
             let publicQuery = prpSql.makePublic;
             publicQuery.values = [parseInt(presID)];
             db.none(publicQuery);
+            
             res.status(200).json({
              feedback: "Presentation is now public"
-            })end();
+            }).end();
         }
     }
     catch(e){
@@ -188,19 +199,28 @@ router.post('/deletePresentation', async function (req, res) {
     let userID = req.body.userID;
 
     let getPresentation = `SELECT * FROM public."presentation" WHERE "presentation" = '%${presID}%'`;
-    let presentation = db.any(getPresentation);
+    let presentation = db.one(getPresentation);
 
-
-    //Hent bruker
-    //Se om bruker har tilgang, eller om det er public
-    //Sett owner ID til null
+    let owners = presentation.ownerid.split(",");
+    owners.forEach(function (element) {
+        if (element == userID) {
+            let deleteQuery = prpSql.deletePresentation;
+            deleteQuery.values = presID;
+            db.none(deleteQuery);
+            res.status(200).end();
+        }
+    });
 });
 
-router.get('/listPublic', async function (req, res) {
+
+router.post('/listPublic', async function (req, res) {
     try{
         let getPublicRequest = prpSql.getPublic;
         let presList = await db.any(getPublicRequest);
-        res.json(presList).status(200).end();
+        
+        res.status(200).json({
+             loadPublicPres: presList
+            }).end();
     }
     catch (e) {
         console.log(e);

@@ -36,8 +36,9 @@ prpSql.sharePresentation = new PrpSt('sharePresentation', 'UPDATE public."presen
 
 prpSql.makePublic = new PrpSt('makePublic', `UPDATE public."presentation" SET ownerid = 'public' WHERE "presentationid" = $1`);
 
-prpSql.getPublic = new PrpSt('getPublic', 'SELECT * FROM public."presentation" WHERE "ownerid" = public');
+prpSql.getPublic = new PrpSt('getPublic', `SELECT * FROM public."presentation" WHERE "ownerid" = 'public'`);
 
+prpSql.deletePresentation = new PrpSt('deletePresentation', 'UPDATE public."presentation" SET "ownerid" = NULL WHERE "presentationid" = $1');
 //export module
 module.exports.db = db; //db connection
 module.exports.prpSql = prpSql; //prepared sql statements

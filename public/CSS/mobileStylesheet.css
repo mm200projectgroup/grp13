@@ -2,35 +2,66 @@
 @media screen and (orientation:portrait) {
     
 * {
+    margin: 0px;
     box-sizing: border-box;
     font-family: sans-serif;
-    font-size: 14pt;
+    font-size: 18pt;
 }
 
 body {
-    width: 100%;
     display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 40px 60vw 70vw 60vw;
+    grid-template-columns: 1fr;
+    grid-template-rows: 15vh 1fr 50vh 8vh 180px;
 
     grid-template-areas:
         "header"
         "canvas"
         "menu"
+        "footerMenu"
         "footer"
 }
     
 h3{
-    color:Black;
-    font-size: 14px;
+    color:black;
+    font-size: 20px;
         
+    }
+    
+p {
+        font-size: 18px;
     }
 
 #header {
-    width: 100%;
-    height: 40px;;
+    height: 60px;
     grid-area: header;
     background: #008ae6;
+}
+    
+#presentationTitle {
+    padding: 5px 40px;
+    font-family: sans-serif;
+    display: block;
+    font-size: 18px;
+    border: none;
+    color: white;
+    background: transparent;
+}
+#presentationTitle::placeholder{
+    color: lightgray;
+}
+    
+#user {
+    justify-content: center;
+    background-color: transparent;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    user-select: none;
+    padding: 10px 30px;
+    color: white;
+    margin-top: 11px;  
+    margin-bottom: 6px;
+    cursor: pointer;
 }
     
 #signInBtn,
@@ -39,32 +70,43 @@ h3{
     float: right;
     color: black;
     border: 0px;
-    display: flex;
     background-color: white;
     margin: 4px;
     font-family: sans-serif;
-    font-size: 12px;
+    font-size: 18px;
     user-select: none;
-    padding: 7px 15px;
+    padding: 7px 20px;
 
 }
 
-
+.formButtons {
+    color: white;
+    border: 0px;
+    background-color: #008ae6;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 18pt;
+    cursor: pointer;
+    user-select: none;
+    padding: 14px 20px;
+    transition: transform 0.2s;
+}
 /*-----------------------------------Canvas and slide*/
 
 #canvas {
-    width: 100%;
     grid-area: canvas;
 }
     
 .mySlides{
-    width: 100%;
 }
     
 .editMode {
-    width: auto;
-    height: 50vw;
-    margin:10px;
+    width: 158vw;
+    height: 88vw;
+    background-size: 100%;
+    margin-top: 2vw;
+    margin-left: 2%;
+    margin-bottom: 20px;
 }
     
 .mediaText{
@@ -94,32 +136,35 @@ h3{
 }
 
 /*-------------------------------------Editing-menu*/
+#themes {
+    cursor: pointer;
+    font-size: 18px;
+    width: 100px;
 
+}
     
 .menu{
+    grid-area: menu;
+    height: 320px;
     overflow: scroll;
-    overflow-y:hidden;
-    grid-gap: 20px;
+    overflow-y: hidden;
+    display: inline-block;
     background: lightblue;
-    }
 
-div.menu {
-    width: auto;
-    padding:8px;
     }
 
 #textMenu,
 #colorPicker,
 #imageMenu,
 #ppSettings,
-#notesAndFullscreen{
-    
+#notesAndFullscreen,
+#av,
+#templatesMenu,
+#backgroundMenu{
+
     display: table-cell;
-    justify-content: center;
-    padding: 15px;
-    padding-left: 30px;
     background: lightblue;
-    border-color: gray;
+    
 }
 
 ::-webkit-scrollbar {
@@ -149,43 +194,177 @@ div.menu {
 #butAa,
 #butI,
 #butB {
-    font-size: 12px;
-    height: 25px;
-    width: 25px;
+    font-size: 18px;
+    height: 30px;
+    width: 30px;
     margin-right: 2px;
     border: 1px solid #000000;
     background-color: lightgrey;
     align-content: center;
     margin-bottom: 10px;
 }   
+/*-Add-AV---------------------------------------*/
+#av {
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+#addAV {
+    cursor: pointer;
+    font-size: 18px;
+    height: 30px;
+    width: 100px;
+    align-content: center;
+}
+/*--Template-and-background---------------------*/
+
+#templatesMenu {
+    background: lightblue;
+    padding-left: 30px;
+    padding-bottom: 10px; 
+    padding-bottom: 30px;
+}
+
+#backgroundMenu {
+    background: lightblue;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+#butTem1,
+#butTem2,
+#butTem3{
+    font-size: 18px;
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    margin-right: 5px;
+    border: 1px solid #000000;
+    background-color: lightgrey;
+    align-content: center;
+    margin-bottom: 20px;
+}
+
+#templates {
+    cursor: pointer;
+    font-size: 18px;
+    width: 100px;
+}
+    
+    /-Themes-------------------------------------/
+
+#themes {
+    cursor: pointer;
+    font-size: 18px;
+    width: 100px;
+
+}
+/*-Presentation-settings-----------------------*/
+
+label {
+    font-size: 18px;
+}
+
+
+#timeInput {
+    height: 25px;
+    width: 50px;
+    font-size: 18px;
+}
 
 /*-------------------------------------------Footer*/
 
+  #footerMenu {
+    grid-area: footerMenu;
+    background: pink;
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+      
+}
 
+.footer{
+        display:inline-block;
+        grid-area: footer;
+        background: gray;
+        white-space:nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+.footer div{
+    display: inline-block;
+}
+
+/*-------Next-&-previous-buttons--------*/
+
+.prev,
+.next {
+    visibility: hidden;
+    display: inline-block;
+    height:180px;
+    width: auto;
+    padding-left: 5;
+    padding-right: 5px;
+    padding-top: 75px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+.next {
+    visibility: hidden;
+    float: right;
+    border-radius: 3px 0 0 3px;   
+}
+
+
+.prev {
+    visibility: hidden;
+    float: right;
+    border-radius: 3px 0 0 3px;
+}
+
+/*------------^Next-and-prev-buttons^------------*/
+
+/*----------------------------------------Pop-up-vindu*/
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 80%;
+}
+    
 } /*-<ikke slett den lawl god damn it Alexa*/
 /*--LANDSCAPE-MODE--------------------------------------*/
 /*------------------------------------------------------*/
 /*---------------------------------------LANDSCAPE-MODE-*/
 
 @media only screen and (orientation: landscape) {
-    
-* {
-    margin: 0px;
-    box-sizing: border-box;
-    font-family: sans-serif;
+ 
+.fullscreen{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;  
 }
-
-
-body {
-    height: 100vh;
-    display: grid;
-    background-color: lightgrey;
-    grid-template-columns: 250px 1fr ;
-    grid-template-rows: 60px 1fr 150px;
-
-    grid-template-areas:
-        "canvas";
-}
-
-   
 }

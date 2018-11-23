@@ -100,8 +100,20 @@
             <div class="imgcontainer">
                 <span onclick="document.getElementById('openPres').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h2 class="modulHeader">Open presentation</h2>
+                <div class="tab">
+                <button class="tablinks" onclick="presentationLists(event, 'Private') ">Private</button>
+                    
+                <button class="tablinks" onclick="presentationLists(event, 'Public')">Public</button>
+                </div>
             </div>
-            <div id="loadedPrivetPresentation" class="container"></div>
+            <div id="Private" class="tabcontent" style="display:block">
+                <h3 style="text-align: center">Private</h3>
+                <div id="loadedPrivetPresentation" class="container"></div>
+            </div>
+            <div id="Public" class="tabcontent">
+                <h3 style="text-align: center">Public</h3>
+                <div id="loadedPublicPresentation" class="container"></div>
+            </div>
         </div>
     </div>
     <div id="sharePres" class="modal">
@@ -114,8 +126,8 @@
                 <p>Enter username or email of the recipient:</p>
                 <input id="shareWith" placeholder="Username or email">
                 <br>
-                    <input type="radio" name="sharetype" value="privet" onclick="shareOption(this.value)" checked="checked"> Privet<br>
-                    <input type="radio" name="sharetype" value="Public" onclick="shareOption(this.value)"> Public<br>
+                <input type="radio" name="sharetype" value="privet" onclick="shareOption(this.value)" checked="checked"> Privet<br>
+                <input type="radio" name="sharetype" value="Public" onclick="shareOption(this.value)"> Public<br>
                 <br>
                 <button id="shareButton" onclick="sharePresentation()">Share</button>
             </div>
@@ -326,6 +338,7 @@
         let outputSignUp1 = document.getElementById("outputSignUp");
         //Change header template
         let header = document.getElementById("header");
+        
         //username shown
         window.onload = function() {
             localStorage.removeItem('presentationid');
@@ -336,7 +349,7 @@
                 let user = document.getElementById("user");
                 let username = JSON.parse(localStorage.getItem("logindata")).username;
                 user.innerHTML = username;
-                user.onclick = function changePassword() {
+                user.onclick = function(){
                     document.getElementById('userSettingsForm').style.display = 'block'
                 };
             }
@@ -379,6 +392,16 @@
             if (event.target == sharePres) {
                 sharePres.style.display = "none";
             }
+        }
+
+        function presentationLists(evt, tabName) {
+            var i, tabcontent;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+        
         }
     </script>
     <script src="js/file.js"></script>
