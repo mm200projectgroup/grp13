@@ -152,7 +152,10 @@ router.post('/sharePresentation', async function (req, res) {
         let shareQuery = prpSql.sharePresentation;
         shareQuery.values = [userID, presentation];
         db.none(shareQuery);
-        res.status(200).end();
+        
+        res.status(200).json({
+             feedback: "Success!"
+            }).end();
     }
     catch (e) {
         console.log(e);

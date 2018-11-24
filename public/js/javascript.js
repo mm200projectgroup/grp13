@@ -261,8 +261,9 @@ async function savePresentation() {
 
     if (res.presId) {
         localStorage.setItem("presentationid", JSON.stringify(res.presId));
-
+        
         let presdata = JSON.parse(localStorage.getItem('presentation'));
+        window.alert("Success!");
         getAllPresentaionToUser();
         
     }
@@ -450,7 +451,7 @@ async function sharePresentation() {
 
     let response = await sendData('/app/presentation/sharePresentation/', data);
     if (STATUS == 200) {
-        window.alert("success");
+        window.alert(response.feedback);
     }
 }
 
