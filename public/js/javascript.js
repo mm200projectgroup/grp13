@@ -158,11 +158,10 @@ async function changePassword() {
     }
 
     let newPassword = document.getElementById("newPassword").value;
-    let hash = bcrypt.hashSync(newPassword, 10);
     let user = JSON.parse(localStorage.getItem("logindata")).username;
     let output = document.getElementById("userSettingsOutput");
     let data = {
-        password: hash,
+        password: newPassword,
         username: user
     };
 
