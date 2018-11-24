@@ -179,7 +179,7 @@ function changeTheme(newSlideTheme) {
         }        
     }
     
-     if (theme == "Dark") {
+     if (theme == "dark") {
 
         for (let i = 0; i < presentation.slides.length; i++) {
 
@@ -202,6 +202,50 @@ function changeTheme(newSlideTheme) {
             }
         }
      }
+    
+    let lightFrontPage = {
+        bakgrunnColor: "url(./Media/lightFrontPage.jpg)",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+    let lightDefault = {
+        bakgrunnColor: "url(./Media/lightDefault.jpg",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+    let lightMedia = {
+        bakgrunnColor: "url(./Media/lightMedia.jpg",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+    if (theme == "light") {
+
+        for (let i = 0; i < presentation.slides.length; i++) {
+
+            if (presentation.slides[i].template == 0){
+                    presentation.slides[i].bakgrunnColor = lightFrontPage.bakgrunnColor;
+
+
+            }
+
+            else if (presentation.slides[i].template == 1){
+                    presentation.slides[i].bakgrunnColor = lightDefault.bakgrunnColor;
+
+
+            }
+
+            else if (presentation.slides[i].template == 2||3){
+                    presentation.slides[i].bakgrunnColor = lightMedia.bakgrunnColor;
+
+
+            }
+        }
+        createPresentation(presentation.slides);
+        currentSlide(1);
+    }
     
 createPresentation(presentation.slides);
 currentSlide(1);

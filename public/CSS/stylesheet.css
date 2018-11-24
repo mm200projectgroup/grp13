@@ -12,7 +12,7 @@ body {
     overflow: auto;
     background-color: lightgrey;
     grid-template-columns: 250px 1fr ;
-    grid-template-rows: 60px 1fr 4vw 10vw;
+    grid-template-rows: 60px 1fr 60px 180px;
 
     grid-template-areas:
         "menu header "
@@ -136,7 +136,7 @@ display: flex;
     overflow:hidden;
     height: 20vw;
     max-width: 30vw;
-    margin-left: 1%;
+    margin-left: 6%;
 }
 
 .mediaTextDiv{ 
@@ -271,6 +271,7 @@ h3 {
 /*Footer ------------------------------- */
 
 #footerMenu {
+    height: 65px;
     display: inline-block;
     grid-area: footerMenu;
     background: pink;
@@ -615,7 +616,7 @@ option[value]{
     padding-top: 30px;
     padding-bottom: 30px;
 }
-#addAV {
+#addAV { 
     cursor: pointer;
     font-size: 14px;
     height: 30px;
@@ -657,7 +658,7 @@ option[value]{
     width: 100px;
 }
 
-/-Themes-------------------------------------/
+/*-Themes-------------------------------------*/
 
 #themes {
     cursor: pointer;
@@ -710,6 +711,21 @@ label {
 
 /*User-Pop-up-windows---------------------------*/
 
+.checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
 .modulHeader {
     font-size: 25px;
 }
@@ -749,6 +765,21 @@ input[type=password] {
     padding: 12px 20px;
 
 }
+
+#addEmbedLink,
+#addImgLink {
+    color: white;
+    border: 0px;
+    background-color: #008ae6;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 14pt;
+    cursor: pointer;
+    user-select: none;
+    padding: 14px 20px;
+    transition: transform 0.2s;
+}
+
 
 
 #presentationTitle {

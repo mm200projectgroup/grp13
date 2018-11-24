@@ -472,5 +472,8 @@ async function sharePublicPresentation() {
     let response = await sendData('/app/presentation/makePublic/', data);
     if (STATUS == 200) {
         window.alert("success");
+        
+    getAllPublicPresentation();
+        
     }
 }

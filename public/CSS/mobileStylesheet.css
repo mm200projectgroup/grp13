@@ -1,370 +1,432 @@
 /*--MOBILE-DEVICES-CSS-------------------------*/
 @media screen and (orientation:portrait) {
-    
-* {
-    margin: 0px;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    font-size: 18pt;
-}
 
-body {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 15vh 1fr 50vh 8vh 180px;
-
-    grid-template-areas:
-        "header"
-        "canvas"
-        "menu"
-        "footerMenu"
-        "footer"
-}
-    
-h3{
-    color:black;
-    font-size: 20px;
-        
+    * {
+        margin: 0px;
+        box-sizing: border-box;
+        font-family: sans-serif;
+        font-size: 18pt;
     }
-    
-p {
+
+    body {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 15vh 1fr 50vh 8vh 230px;
+
+        grid-template-areas:
+            "header"
+            "canvas"
+            "menu"
+            "footerMenu"
+            "footer"
+    }
+
+    h3 {
+        color: black;
+        font-size: 20px;
+
+    }
+
+    p {
         font-size: 18px;
     }
 
-#header {
-    height: 60px;
-    grid-area: header;
-    background: #008ae6;
-}
-    
-#presentationTitle {
-    padding: 5px 40px;
-    font-family: sans-serif;
-    display: block;
-    font-size: 18px;
-    border: none;
-    color: white;
-    background: transparent;
-}
-#presentationTitle::placeholder{
-    color: lightgray;
-}
-    
-#user {
-    justify-content: center;
-    background-color: transparent;
-    font-family: sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    user-select: none;
-    padding: 10px 30px;
-    color: white;
-    margin-top: 11px;  
-    margin-bottom: 6px;
-    cursor: pointer;
-}
-    
-#signInBtn,
-#loginBtn,
-#logOutBtn{
-    float: right;
-    color: black;
-    border: 0px;
-    background-color: white;
-    margin: 4px;
-    font-family: sans-serif;
-    font-size: 18px;
-    user-select: none;
-    padding: 7px 20px;
+    .text {
+        width: 90%;
+        height: 40%;
+        background-color: transparent;
+        border-style: hidden;
+        margin-top: 5%;
+        margin-left: 5%;
+        font-size: 5.5vw;
+    }
 
-}
+    .title {
+        background-color: transparent;
+        border-style: hidden;
+        font-size: 8vw;
+        width: 100%;
+        height: auto;
+        margin-top: 10%;
+        margin-bottom: 1%;
+        text-align: center;
+    }
 
-.formButtons {
-    color: white;
-    border: 0px;
-    background-color: #008ae6;
-    margin: 8px;
-    font-family: sans-serif;
-    font-size: 18pt;
-    cursor: pointer;
-    user-select: none;
-    padding: 14px 20px;
-    transition: transform 0.2s;
-}
-/*-----------------------------------Canvas and slide*/
+    .mainTitle {
+        background-color: transparent;
+        border-style: hidden;
+        font-size: 8vw;
+        width: 100%;
+        height: auto;
+        margin-top: 15%;
+        text-align: center;
+    }
 
-#canvas {
-    grid-area: canvas;
-}
-    
-.mySlides{
-}
-    
-.editMode {
-    width: 158vw;
-    height: 88vw;
-    background-size: 100%;
-    margin-top: 2vw;
-    margin-left: 2%;
-    margin-bottom: 20px;
-}
-    
-.mediaText{
-    margin-left: 30%;
-    background-color: transparent;
-    border-style: hidden;
-    font-size: 2.5vw;
-    height: 100%;
-}
-    
-.mediaDiv {
-    height: 30vw;
-    max-width: 35vw;
-    margin-left: 1%;
-}
-    
-.mediaContent{
-    margin-top: 5vw;
-    justify-content: center;
-}
-    
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-    font-size: 18;
-}
+    .undertitle {
+        background-color: transparent;
+        text-align: center;
+        font-size: 6vw;
+        width: 100%;
+        height: auto;
+        margin-top: 2%;
+        text-align: center;
+        border: none;
+    }
 
-/*-------------------------------------Editing-menu*/
-#themes {
-    cursor: pointer;
-    font-size: 18px;
-    width: 100px;
+    .mediaContent {
+        display: flex;
+    }
 
-}
-    
-.menu{
-    grid-area: menu;
-    height: 320px;
-    overflow: scroll;
-    overflow-y: hidden;
-    display: inline-block;
-    background: lightblue;
+    .mediaDiv {
+        overflow: hidden;
+        height: 40vw;
+        max-width: 30vw;
+        margin-left: 1%;
+    }
+
+    .mediaTextDiv {
+        
+    }
+
+    .mediaText {
+        margin-left: 20%;
+        background-color: transparent;
+        border-style: hidden;
+        font-size: 6vw;
+        height: 100%;
+    }
+
+    }
+    #header {
+        height: 60px;
+        width: 100%;
+        grid-area: header;
+        background: #008ae6;
+    }
+
+    #presentationTitle {
+        padding: 5px 40px;
+        font-family: sans-serif;
+        display: block;
+        font-size: 18px;
+        border: none;
+        color: white;
+        background: transparent;
+    }
+
+    #presentationTitle::placeholder {
+        color: lightgray;
+    }
+
+    #user {
+        justify-content: center;
+        background-color: transparent;
+        font-family: sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        user-select: none;
+        padding: 10px 30px;
+        color: white;
+        margin-top: 11px;
+        margin-bottom: 6px;
+        cursor: pointer;
+    }
+
+    #signInBtn,
+    #loginBtn,
+    #logOutBtn {
+        float: right;
+        color: black;
+        border: 0px;
+        background-color: white;
+        margin: 4px;
+        font-family: sans-serif;
+        font-size: 18px;
+        user-select: none;
+        padding: 7px 20px;
 
     }
 
-#textMenu,
-#colorPicker,
-#imageMenu,
-#ppSettings,
-#notesAndFullscreen,
-#av,
-#templatesMenu,
-#backgroundMenu{
+    .formButtons {
+        color: white;
+        border: 0px;
+        background-color: #008ae6;
+        margin: 8px;
+        font-family: sans-serif;
+        font-size: 18pt;
+        cursor: pointer;
+        user-select: none;
+        padding: 14px 20px;
+        transition: transform 0.2s;
+    }
 
-    display: table-cell;
-    background: lightblue;
+    /*-----------------------------------Canvas and slide*/
+
+    #canvas {
+        grid-area: canvas;
+    }
+
+    .mySlides {}
+
+    .editMode {
+        width: 158vw;
+        height: 88vw;
+        background-size: 100%;
+        margin-top: 2vw;
+        margin-left: 2%;
+        margin-bottom: 20px;
+    }
+
+    .mediaText {
+        margin-left: 30%;
+        background-color: transparent;
+        border-style: hidden;
+        font-size: 2.5vw;
+        height: 100%;
+    }
+
+    .mediaDiv {
+        height: 30vw;
+        max-width: 55vw;
+        margin-left: 1%;
+    }
+
+    .mediaContent {
+        margin-top: 5vw;
+        justify-content: center;
+    }
+
+    .imgcontainer {
+        text-align: center;
+        margin: 54px 0 32px 0;
+        position: relative;
+        font-size: 18;
+    }
     
-}
 
-::-webkit-scrollbar {
-    width: auto;
-    height: 8px;
-}
-::-webkit-scrollbar-track {
-    background: darkgray; 
-}
-::-webkit-scrollbar-thumb {
-    background: gray; 
-}
-    
+    /*-------------------------------------Editing-menu*/
+    #themes {
+        cursor: pointer;
+        font-size: 18px;
+        width: 100px;
 
+    }
 
+    .menu {
+        grid-area: menu;
+        height: 320px;
+        overflow: scroll;
+        overflow-y: hidden;
+        display: inline-block;
+        background: lightblue;
 
-#butB {
-    font-weight: bold;
-}
-#butI {
-    font-style: italic;
-}
-#butAa {
-    font-variant: small-caps;
-}
+    }
 
-#butAa,
-#butI,
-#butB {
-    font-size: 18px;
-    height: 30px;
-    width: 30px;
-    margin-right: 2px;
-    border: 1px solid #000000;
-    background-color: lightgrey;
-    align-content: center;
-    margin-bottom: 10px;
-}   
-/*-Add-AV---------------------------------------*/
-#av {
-    padding-left: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-#addAV {
-    cursor: pointer;
-    font-size: 18px;
-    height: 30px;
-    width: 100px;
-    align-content: center;
-}
-/*--Template-and-background---------------------*/
+    #textMenu,
+    #colorPicker,
+    #imageMenu,
+    #ppSettings,
+    #notesAndFullscreen,
+    #av,
+    #templatesMenu,
+    #backgroundMenu {
 
-#templatesMenu {
-    background: lightblue;
-    padding-left: 30px;
-    padding-bottom: 10px; 
-    padding-bottom: 30px;
-}
+        display: table-cell;
+        background: lightblue;
 
-#backgroundMenu {
-    background: lightblue;
-    padding-left: 30px;
-    padding-top: 30px;
-}
+    }
 
-#butTem1,
-#butTem2,
-#butTem3{
-    font-size: 18px;
-    height: 60px;
-    width: 60px;
-    display: inline-block;
-    margin-right: 5px;
-    border: 1px solid #000000;
-    background-color: lightgrey;
-    align-content: center;
-    margin-bottom: 20px;
-}
+    ::-webkit-scrollbar {
+        width: auto;
+        height: 8px;
+    }
 
-#templates {
-    cursor: pointer;
-    font-size: 18px;
-    width: 100px;
-}
-    
-    /-Themes-------------------------------------/
+    ::-webkit-scrollbar-track {
+        background: darkgray;
+    }
 
-#themes {
-    cursor: pointer;
-    font-size: 18px;
-    width: 100px;
-
-}
-/*-Presentation-settings-----------------------*/
-
-label {
-    font-size: 18px;
-}
+    ::-webkit-scrollbar-thumb {
+        background: gray;
+    }
 
 
-#timeInput {
-    height: 25px;
-    width: 50px;
-    font-size: 18px;
-}
 
-/*-------------------------------------------Footer*/
 
-  #footerMenu {
-    grid-area: footerMenu;
-    background: pink;
-    display: inline-block;
-    width: 100%;
-    height: 60px;
-    padding: 10px;
-      
-}
+    #butB {
+        font-weight: bold;
+    }
 
-.footer{
-        display:inline-block;
+    #butI {
+        font-style: italic;
+    }
+
+    #butAa {
+        font-variant: small-caps;
+    }
+
+    #butAa,
+    #butI,
+    #butB {
+        font-size: 18px;
+        height: 30px;
+        width: 30px;
+        margin-right: 2px;
+        border: 1px solid #000000;
+        background-color: lightgrey;
+        align-content: center;
+        margin-bottom: 10px;
+    }
+
+    /*-Add-AV---------------------------------------*/
+    #av {
+        padding-left: 30px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    #addAV {
+        cursor: pointer;
+        font-size: 18px;
+        height: 30px;
+        width: 100px;
+        align-content: center;
+    }
+
+    /*--Template-and-background---------------------*/
+
+    #templatesMenu {
+        background: lightblue;
+        padding-left: 30px;
+        padding-bottom: 10px;
+        padding-bottom: 30px;
+    }
+
+    #backgroundMenu {
+        background: lightblue;
+        padding-left: 30px;
+        padding-top: 30px;
+    }
+
+    #butTem1,
+    #butTem2,
+    #butTem3 {
+        font-size: 18px;
+        height: 60px;
+        width: 60px;
+        display: inline-block;
+        margin-right: 5px;
+        border: 1px solid #000000;
+        background-color: lightgrey;
+        align-content: center;
+        margin-bottom: 20px;
+    }
+
+    #templates {
+        cursor: pointer;
+        font-size: 18px;
+        width: 100px;
+    }
+
+    /-Themes-------------------------------------/ #themes {
+        cursor: pointer;
+        font-size: 18px;
+        width: 100px;
+
+    }
+
+    /*-Presentation-settings-----------------------*/
+
+    label {
+        font-size: 18px;
+    }
+
+
+    #timeInput {
+        height: 25px;
+        width: 50px;
+        font-size: 18px;
+    }
+
+    /*-------------------------------------------Footer*/
+
+    #footerMenu {
+        grid-area: footerMenu;
+        background: pink;
+        display: inline-block;
+        width: 100%;
+        height: 60px;
+        padding: 10px;
+
+    }
+
+    .footer {
+        display: inline-block;
         grid-area: footer;
         background: gray;
-        white-space:nowrap;
+        white-space: nowrap;
         overflow-x: scroll;
         overflow-y: hidden;
     }
-.footer div{
-    display: inline-block;
-}
 
-/*-------Next-&-previous-buttons--------*/
+    .footer div {
+        display: inline-block;
+    }
 
-.prev,
-.next {
-    visibility: hidden;
-    display: inline-block;
-    height:180px;
-    width: auto;
-    padding-left: 5;
-    padding-right: 5px;
-    padding-top: 75px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-}
+    /*-------Next-&-previous-buttons--------*/
 
-.next {
-    visibility: hidden;
-    float: right;
-    border-radius: 3px 0 0 3px;   
-}
+    .prev,
+    .next {
+        visibility: hidden;
+        display: inline-block;
+        height: 180px;
+        width: auto;
+        padding-left: 5;
+        padding-right: 5px;
+        padding-top: 75px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+    }
+
+    .next {
+        visibility: hidden;
+        float: right;
+        border-radius: 3px 0 0 3px;
+    }
 
 
-.prev {
-    visibility: hidden;
-    float: right;
-    border-radius: 3px 0 0 3px;
-}
+    .prev {
+        visibility: hidden;
+        float: right;
+        border-radius: 3px 0 0 3px;
+    }
 
-/*------------^Next-and-prev-buttons^------------*/
+    /*------------^Next-and-prev-buttons^------------*/
 
-/*----------------------------------------Pop-up-vindu*/
-/* The Modal (background) */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-}
+    /*----------------------------------------Pop-up-vindu*/
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
 
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto;
-    border: 1px solid #888;
-    width: 80%;
-}
-    
-} /*-<ikke slett den lawl god damn it Alexa*/
-/*--LANDSCAPE-MODE--------------------------------------*/
-/*------------------------------------------------------*/
-/*---------------------------------------LANDSCAPE-MODE-*/
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        border: 1px solid #888;
+        width: 80%;
+    }
 
-@media only screen and (orientation: landscape) {
- 
-.fullscreen{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;  
-}
-}
+
+}/*-<ikke slett den lawl god damn it Alexa*/

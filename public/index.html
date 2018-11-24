@@ -123,7 +123,7 @@
                 <span onclick="document.getElementById('sharePres').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h2 class="modulHeader">Share presentation</h2>
             </div>
-            <div id="loadedPrivetPresentation" class="container">
+            <div id="shareContainer" class="container">
                 <p>Enter username or email of the recipient:</p>
                 <input id="shareWith" placeholder="Username or email">
                 <br>
@@ -145,8 +145,8 @@
                 <input id="imgUrl" placeholder="image url...">
                 <br>
                 <br>
-                <button onclick="updateImage()">Add</button>
-                <input id="backgroundCheck" type="checkbox" name="background" value="background"> Set as background
+                <button id = "addImgLink" onclick="updateImage()">Add</button>
+                <input id="backgroundCheck" type="checkbox" name="background" value="background">Set as background
                 <p id="wrongFileType"></p>
 
             </div>
@@ -163,7 +163,7 @@
                 <input id="avUrl" placeholder="Embed link...">
                 <br>
                 <br>
-                <button onclick="updateEmbed()">Add</button>
+                <button id = "addEmbedLink" onclick="updateEmbed()">Add</button>
             </div>
         </div>
     </div>
@@ -179,8 +179,6 @@
             </div>
         </div>
     </div>
-
-
 
 
     <div id="header"></div>
@@ -231,6 +229,7 @@
                 <option>Lucida Sans Unicode</option>
                 <option>Tahoma</option>
                 <option>Verdana</option>
+                <option>Comic sans MS</option>
                 <option>Courier New</option>
                 <option>Lucida Console</option>
             </select>
@@ -288,10 +287,10 @@
             <div>
                 <p>Themes</p>
                 <select id="themes" onchange="changeTheme()">
-                    <option>None</option>
+                    <option value ="none">None</option>
                     <option value="cute">Cute</option>
-                    <option>Dark</option>
-                    <option>Light</option>
+                    <option value= "dark">Dark</option>
+                    <option value ="light">Light</option>
                 </select>
             </div>
         </div>
