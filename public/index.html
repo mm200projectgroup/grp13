@@ -102,7 +102,8 @@
                 <h2 class="modulHeader">Open presentation</h2>
                 <div class="tab">
                 <button class="tablinks" onclick="presentationLists(event, 'Private') ">Private</button>
-                    
+                        
+                
                 <button class="tablinks" onclick="presentationLists(event, 'Public')">Public</button>
                 </div>
             </div>
@@ -188,13 +189,13 @@
         <div class="dropdown">
             <button class="dropbtn">Fil</button>
             <div class="dropdown-content">
+                <a onclick="window.open(window.location.href)">New presentation</a> 
                 <a onclick="savePresentation()">Save</a>
                 <a onclick=" document.getElementById('openPres').style.display = 'block'">Open</a>
                 <a id="export" onclick="exportFile()">Export File</a>
                 <a id="exportNotes" onclick="exportPresenterNotes()">Export notes</a>
                 <a onclick=" document.getElementById('import').style.display = 'block'">Import</a>
                 <a onclick=" document.getElementById('sharePres').style.display = 'block'">Share</a>
-                <a onclick="sharePresentation()">Share</a>
             </div>
         </div>
         <input id="presentationTitle" placeholder="Presentation Title..">
@@ -339,21 +340,38 @@
         //Change header template
         let header = document.getElementById("header");
         
-        //username shown
-        window.onload = function() {
+//username shown
+        window.onload = async function() {
             localStorage.removeItem('presentationid');
             if (localStorage.logindata == null) {
                 setHeaderView("notSignedIn", header);
-            } else {
-                setHeaderView("signedIn", header);
-                let user = document.getElementById("user");
-                let username = JSON.parse(localStorage.getItem("logindata")).username;
-                user.innerHTML = username;
-                user.onclick = function(){
-                    document.getElementById('userSettingsForm').style.display = 'block'
-                };
             }
-        }
+            else {
+                console.log("checking token");
+                let data = {token: JSON.parse(localStorage.getItem("logindata")).token};
+                console.log(data);
+                let response = await sendData('app/users/checkToken/', data);
+                console.log(response.status);
+                if(response.status === "OK"){
+                    console.log("token ok");
+                    setHeaderView("signedIn", header);
+                    let user = document.getElementById("user");
+                    let username = JSON.parse(localStorage.getItem("logindata")).username;
+                    user.innerHTML = username;
+                    user.onclick = function(){
+                        document.getElementById('userSettingsForm').style.display = 'block'
+                    };
+                    getAllPresentaionToUser();
+                    getAllPublicPresentation()
+                }
+                else{
+                    console.log("clearing");
+                    logOut();
+                    localStorage.clear();
+                    setHeaderView("notSignedIn", header);
+                }
+            }
+        };
 
         function setHeaderView(id) {
             header.innerHTML = "";

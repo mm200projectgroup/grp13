@@ -349,11 +349,29 @@ async function deletePresentation(presID, lsIndex){
      
     if (STATUS == 200){
         
+        let listDiv = document.getElementById("loadedPrivetPresentation");
+        let presentations = JSON.parse(localStorage.getItem("loadedPresentation"));
+        presentations.splice(lsIndex, 1);
+        
+
+        
+        listDiv.innerHTML = "";
+        
+        for (let i = 0; i < presentations.length; i++) {
+            
+            listDiv.innerHTML += `<div class="loadedPres"><p id="${presentations[i].presentationid}" onclick="openPresentation(${i})">${presentations[i].titel}</p><span onclick="deletePresentation(${presentations[i].presentationid}, ${i})" class="deleteSlide">&times;</span></div>`;
+        }
+        
+        
+        localStorage.setItem("loadedPresentation", JSON.stringify(presentations));
+        
+
     }
     
 }
 
-getAllPresentaionToUser();
+
+
 async function getAllPresentaionToUser() {
     let userId = JSON.parse(localStorage.getItem("logindata")).userId;
     let token = JSON.parse(localStorage.getItem("logindata")).token;
@@ -384,11 +402,11 @@ async function getAllPresentaionToUser() {
     }
 }
 
-getAllPublicPresentation()
+
 async function getAllPublicPresentation() {
 
     let token = JSON.parse(localStorage.getItem("logindata")).token;
-
+    
     let data = {
         token: token
     }

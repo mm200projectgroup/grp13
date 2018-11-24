@@ -11,7 +11,25 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET;
 
 
-
+///TODO: Jobb med jwt.verify så den ikke gir error
+router.post('/checkToken/', async function (req, res) {
+    let token = req.body.token;
+    console.log(token);
+    let check;
+    try{
+        check = jwt.verify(token, secret);
+    }
+    catch (e) {
+        console.log(e);
+    }
+    console.log(check);
+    if(check){
+        res.status(200).json({status:"OK"}).end();
+    }
+    else{
+        res.status(403).json({status:"invalid"}).end();
+    }
+});
 
 router.post("/login/", async function (req, res) {
     let username = req.body.username;
