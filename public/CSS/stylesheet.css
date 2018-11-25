@@ -160,6 +160,15 @@ display: flex;
     padding-left: 5px;
 }
 
+
+.deletePres{
+    width: 10%;
+    cursor: pointer;
+    color: red;
+    padding-left: 5px;
+    
+}
+
 .iFrameClass{
     width: 35vw;
     height: 25vw;;

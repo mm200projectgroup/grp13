@@ -143,18 +143,37 @@ function changeTheme(newSlideTheme) {
     //-dark-theme//
     let darkFrontPage = {
         bakgrunnColor: "url(./Media/darkFrontPage.jpg)",
-        titleStyle: "",
-        textStyle: "",
+        titleStyle: "color: rgb(255, 255, 255)",
+        textStyle: "color: rgb(255, 255, 255)",
     }
 
     let darkDefault = {
         bakgrunnColor: "url(./Media/darkDefault.jpg",
-        titleStyle: "",
-        textStyle: "",
+        titleStyle: "color: rgb(255, 255, 255)",
+        textStyle: "color: rgb(255, 255, 255)",
     }
 
     let darkMedia = {
         bakgrunnColor: "url(./Media/darkMedia.jpg",
+        titleStyle: "color: rgb(255, 255, 255)",
+        textStyle: "color: rgb(255, 255, 255)",
+    }
+    
+    
+        let lightFrontPage = {
+        bakgrunnColor: "url(./Media/lightFrontPage.jpg)",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+    let lightDefault = {
+        bakgrunnColor: "url(./Media/lightDefault.jpg",
+        titleStyle: "",
+        textStyle: "",
+    }
+
+    let lightMedia = {
+        bakgrunnColor: "url(./Media/lightMedia.jpg",
         titleStyle: "",
         textStyle: "",
     }
@@ -185,41 +204,31 @@ function changeTheme(newSlideTheme) {
 
             if (presentation.slides[i].template == 0){
                     presentation.slides[i].bakgrunnColor = darkFrontPage.bakgrunnColor;
+                    presentation.slides[i].titleStyle = darkFrontPage.titleStyle;
+                    presentation.slides[i].textStyle = darkFrontPage.titleStyle;
 
 
             }
 
             else if (presentation.slides[i].template == 1){
                     presentation.slides[i].bakgrunnColor = darkDefault.bakgrunnColor;
+                    presentation.slides[i].titleStyle = darkDefault.titleStyle;
+                    presentation.slides[i].textStyle = darkDefault.titleStyle;
 
 
             }
 
             else if (presentation.slides[i].template == 2||3){
                     presentation.slides[i].bakgrunnColor = darkMedia.bakgrunnColor;
+                        presentation.slides[i].titleStyle = darkMedia.titleStyle;
+                    presentation.slides[i].textStyle = darkMedia.titleStyle;
 
 
             }
         }
      }
     
-    let lightFrontPage = {
-        bakgrunnColor: "url(./Media/lightFrontPage.jpg)",
-        titleStyle: "",
-        textStyle: "",
-    }
 
-    let lightDefault = {
-        bakgrunnColor: "url(./Media/lightDefault.jpg",
-        titleStyle: "",
-        textStyle: "",
-    }
-
-    let lightMedia = {
-        bakgrunnColor: "url(./Media/lightMedia.jpg",
-        titleStyle: "",
-        textStyle: "",
-    }
 
     if (theme == "light") {
 
@@ -243,12 +252,41 @@ function changeTheme(newSlideTheme) {
 
             }
         }
-        createPresentation(presentation.slides);
-        currentSlide(1);
+
     }
     
+        
+    if (theme == "none"){
+        
+            for (let i = 0; i < presentation.slides.length; i++) {
+
+            if (presentation.slides[i].template == 0){
+                    presentation.slides[i].bakgrunnColor = none.bakgrunnColor;
+
+
+            }
+
+            else if (presentation.slides[i].template == 1){
+                    presentation.slides[i].bakgrunnColor = none.bakgrunnColor;
+
+
+            }
+
+            else if (presentation.slides[i].template == 2||3){
+                    presentation.slides[i].bakgrunnColor = none.bakgrunnColor;
+
+
+            }
+        }
+        
+        
+        
+        
+    }
+    
+
 createPresentation(presentation.slides);
-currentSlide(1);
+currentSlide(1)
 return newSlideTheme;
 
 }

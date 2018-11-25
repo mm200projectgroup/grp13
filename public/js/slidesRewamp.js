@@ -16,10 +16,10 @@
 
 
 
-let addNewSlide = document.getElementById("addNewSlide");
-let fullscreenBtn = document.getElementById("fullscreenBtn");
-let autoCheck = document.getElementById("autoCheck");
-
+ let addNewSlide = document.getElementById("addNewSlide");
+ let fullscreenBtn = document.getElementById("fullscreenBtn");
+ let autoCheck = document.getElementById("autoCheck");
+ let win2
 
  createPresentation(presentation.slides);
  let ACTIVEINPUT = document.getElementById("title0");
@@ -42,17 +42,17 @@ let autoCheck = document.getElementById("autoCheck");
          template: 1
      };
 
-     
+
 
      let color = document.getElementById("pickcolor");
      color.value = "#FFFFFF"
-     
+
      presentation.slides.push(newSlide);
      createPresentation(presentation.slides);
      changeTheme(newSlide)
      currentSlide(presentation.slides.length);
-     
-     
+
+
  }
 
 
@@ -109,8 +109,8 @@ let autoCheck = document.getElementById("autoCheck");
          slideDiv.id = "slide" + i;
          canvas.appendChild(slideDiv);
          document.getElementById("slide" + i).style.background = `${array[i].bakgrunnColor}`;
-          document.getElementById("slide" + i).style.backgroundSize = `cover`;
-         
+         document.getElementById("slide" + i).style.backgroundSize = `cover`;
+
 
      }
 
@@ -133,8 +133,8 @@ let autoCheck = document.getElementById("autoCheck");
          preview.appendChild(div);
 
      }
-     
-     
+
+
 
  }
 
@@ -146,8 +146,14 @@ let autoCheck = document.getElementById("autoCheck");
      let x = event.which || event.keyCode || event.code || event.keyIdentifier;
      if (x == 37) {
          plusSlides(-1);
+         if(win2){
+             win2.plusSlides(-1)
+         }
      } else if (x == 39) {
          plusSlides(1);
+            if(win2){
+             win2.plusSlides(1)
+         }
      }
  }
 
@@ -165,7 +171,6 @@ let autoCheck = document.getElementById("autoCheck");
      showSlides(slideIndex = n);
 
  }
-
 
  //Selecting the preview
  function selectPreview(evt) {
@@ -262,17 +267,17 @@ let autoCheck = document.getElementById("autoCheck");
      let currentSlideID = localStorage.getItem('currentSlide');
      let i = getCurrentIndex(currentSlideID);
      let title = document.getElementById(`title${i}`);
-     let text = document.getElementById(`text${i}`);     
-     
+     let text = document.getElementById(`text${i}`);
+
      //UpdateTitle
-         let newTitle = document.getElementById(`title${i}`).value;
-         presentation.slides[i].title = newTitle;
-     
+     let newTitle = document.getElementById(`title${i}`).value;
+     presentation.slides[i].title = newTitle;
+
 
      //UpdateText
-         let newText = document.getElementById(`text${i}`).value;
-         presentation.slides[i].text = newText;
-     
+     let newText = document.getElementById(`text${i}`).value;
+     presentation.slides[i].text = newText;
+
 
 
      //UpdateSTYLE---------------
@@ -291,36 +296,36 @@ let autoCheck = document.getElementById("autoCheck");
 
  }
 
-function updateEmbed(){
-        let currentSlideID = localStorage.getItem('currentSlide');
-        let i = getCurrentIndex(currentSlideID);
-        let newVA = document.getElementById("avUrl").value;
-          document.getElementById(`mediaDiv${i}`).innerHTML = newVA;
-          presentation.slides[i].av = newVA;
-    
-    
-    
-}
+ function updateEmbed() {
+     let currentSlideID = localStorage.getItem('currentSlide');
+     let i = getCurrentIndex(currentSlideID);
+     let newVA = document.getElementById("avUrl").value;
+     document.getElementById(`mediaDiv${i}`).innerHTML = newVA;
+     presentation.slides[i].av = newVA;
 
- function updateBackground(){
-    let backgroundCheck = document.getElementById("backgroundCheck");
-    let currentSlideID = localStorage.getItem('currentSlide');
-    let i = getCurrentIndex(currentSlideID);
-    let newColor = document.getElementById("pickcolor").value;
-     
-     document.getElementById(currentSlideID).style.background = newColor;
-     presentation.slides[i].bakgrunnColor = newColor;
-     
-     backgroundCheck.checked =false;
+
 
  }
 
-function updateImage(){
-    let currentSlideID = localStorage.getItem('currentSlide');
-    let i = getCurrentIndex(currentSlideID);
-    let image = document.getElementById("imgUrl");
-    let backgroundCheck = document.getElementById("backgroundCheck");
-    if (checkURL(image.value)) {
+ function updateBackground() {
+     let backgroundCheck = document.getElementById("backgroundCheck");
+     let currentSlideID = localStorage.getItem('currentSlide');
+     let i = getCurrentIndex(currentSlideID);
+     let newColor = document.getElementById("pickcolor").value;
+
+     document.getElementById(currentSlideID).style.background = newColor;
+     presentation.slides[i].bakgrunnColor = newColor;
+
+     backgroundCheck.checked = false;
+
+ }
+
+ function updateImage() {
+     let currentSlideID = localStorage.getItem('currentSlide');
+     let i = getCurrentIndex(currentSlideID);
+     let image = document.getElementById("imgUrl");
+     let backgroundCheck = document.getElementById("backgroundCheck");
+     if (checkURL(image.value)) {
          let newImg = image.value;
          if (backgroundCheck.checked == false) {
              document.getElementById(`mediaImg${i}`).src = newImg;
@@ -332,10 +337,10 @@ function updateImage(){
      } else {
          document.getElementById("wrongFileType").innerHTML = "Not an imagelink";
      }
-    
-}
 
- 
+ }
+
+
 
 
  function deleteSlide(i) {
@@ -345,59 +350,95 @@ function updateImage(){
  }
 
 
-
-autoCheck.onchange = function(){
-    if (autoCheck.checked == true){
-        document.getElementById("timeInput").disabled =false;
-    }else{
-        document.getElementById("timeInput").disabled =true;
-    }
-}
-
-let interval
-function autoPresentation(){
-    let time = document.getElementById("timeInput")
-    
-    interval = setInterval(function(){ plusSlides(1) }, time.value*1000);
-    return interval;
-    
-}
-
+ autoCheck.onchange = function () {
+     if (autoCheck.checked == true) {
+         document.getElementById("timeInput").disabled = false;
+     } else {
+         document.getElementById("timeInput").disabled = true;
+     }
+ }
 
  
+ let interval
+ function autoPresentation() {
+     let time = document.getElementById("timeInput")
 
+     interval = setInterval(function () {
+         plusSlides(1)
+     }, time.value * 1000);
+     return interval;
+
+ }
+
+let presenterMode = document.getElementById("presenterMode");
+
+
+function openSecondWindow(){
+    return win2 =  window.open('./presenterMode.html', 'secondary', 'width=1000,height=700');
+
+}
+
+presenterMode.onchange = function(){
+    
+if (presenterMode.checked == true){   
+openSecondWindow();
+}else{
+    win2.close();
+    
+}
+    
+}
+
+
+    
+
+
+        
 
  //Tar på og av fullscreen
- fullscreenBtn.onclick = function () {
-     let elem = document.documentElement;
-     let currentSlideID = localStorage.getItem('currentSlide');
-     let slides = document.getElementsByClassName("mySlides");
-     //Ser om current slide er i editMode
-     let check = document.getElementById(currentSlideID).classList.contains("editMode");
-     //SLår på fullscreen
-     if (check) {
-        if(autoCheck.checked == true){
-            autoPresentation();
+ fullscreenBtn.onclick =  function () {
+         let elem = document.documentElement;
+         let currentSlideID = localStorage.getItem('currentSlide');
+         let slides = document.getElementsByClassName("mySlides");
+         //Ser om current slide er i editMode
+         let check = document.getElementById(currentSlideID).classList.contains("editMode");
+      
+         //SLår på fullscreen
+         if (check) {
+             if (autoCheck.checked == true) {
+                 autoPresentation();
+                 
              }
-         
-         for (i = 0; i < slides.length; i++) {
-             slides[i].className = slides[i].className.replace(" editMode", " fullscreen");
-
+        if (presenterMode.checked == true){
+            
+            
+            win2.getObject(presentation);
+            currentSlide(1);
+            
+            return;
+            
+        }
              
-         }
-         if (elem.requestFullscreen) {
-             elem.requestFullscreen();
-         } else if (elem.mozRequestFullScreen) { /* Firefox */
-             elem.mozRequestFullScreen();
-         } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-             elem.webkitRequestFullscreen();
-         } else if (elem.msRequestFullscreen) { /* IE/Edge */
-             elem.msRequestFullscreen();
-         }
+             
+
+             for (i = 0; i < slides.length; i++) {
+                 slides[i].className = slides[i].className.replace(" editMode", " fullscreen");
+             }
+             
+             
+             if (elem.requestFullscreen) {
+                 elem.requestFullscreen();
+             } else if (elem.mozRequestFullScreen) { /* Firefox */
+                 elem.mozRequestFullScreen();
+             } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                 elem.webkitRequestFullscreen();
+             } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                 elem.msRequestFullscreen();
+             }
 
 
-         //Slå av fullscreen
-     } 
+             //Slå av fullscreen
+         }
 
  }
 
@@ -412,11 +453,11 @@ function autoPresentation(){
      let x = event.which || event.keyCode || event.code || event.keyIdentifier;
      if (x == 27) {
          if (check) {
-                if(autoCheck.checked == true){
-                clearInterval(interval);
+             if (autoCheck.checked == true) {
+                 clearInterval(interval);
              }
-             
-             
+
+
              for (i = 0; i < slides.length; i++) {
                  slides[i].className = slides[i].className.replace(" fullscreen", " editMode");
              }
@@ -471,7 +512,7 @@ function autoPresentation(){
  //----------UPDATE TEMPLATE------------
  //0 = Title, 1 = Default, 2 = Media
  function changeTemplate(template) {
-     
+
      let slide = localStorage.getItem("currentSlide");
      let num = slide.slice(5);
      presentation.slides[num].template = template;
@@ -518,8 +559,7 @@ function autoPresentation(){
             </div>`;
              break;
      }
-     
+
      changeTheme()
 
  }
-

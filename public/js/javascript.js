@@ -22,9 +22,6 @@ function sendData(endpoint, data) {
 }
 
 
-
-
-
 function getData(endpoint) {
     return fetch(endpoint, {
         method: "GET",
@@ -75,7 +72,6 @@ async function loggInn() {
 
 
 }
-
 
 
 async function register() {
@@ -395,9 +391,9 @@ async function getAllPresentaionToUser() {
         
         for (let i = 0; i < res.loadPres.length; i++) {
             
-            let presID = JSON.parse(localStorage.getItem("loadedPresentation"))[i].presentationid;
+           let presID = JSON.parse(localStorage.getItem("loadedPresentation"))[i].presentationid;
             
-            listDiv.innerHTML += `<div class="loadedPres"><p  id="${presID}" onclick="openPresentation(${i})">${res.loadPres[i].titel}</p><span onclick="deletePresentation(${presID}, ${i})" class="deleteSlide">&times;</span></div>`;
+            listDiv.innerHTML += `<div class="loadedPres"><p  id="${presID}" onclick="openPresentation(${i})">${res.loadPres[i].titel}</p><span onclick="deletePresentation(${presID}, ${i})" class="deletePres">&times;</span></div>`;
         }
     }
 }
