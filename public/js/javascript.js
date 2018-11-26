@@ -25,7 +25,7 @@ async function loggInn() {
         };
         let json = await sendData("/app/users/login", data);
         if (json.username) {
-            console.log("yay");
+
 
             localStorage.setItem("logindata", JSON.stringify(json));
 
@@ -41,7 +41,6 @@ async function loggInn() {
             getAllPresentaionToUser();
 
         } else {
-            console.log("ops");
             outputLogIn1.innerHTML = json.mld;
         }
 

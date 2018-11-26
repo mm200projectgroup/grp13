@@ -57,7 +57,7 @@ router.post("/login/", async function (req, res) {
     }
     else {
         res.status(401).json({
-            mld: "Feil brukernavn eller passord",
+            mld: "Wrong username or password",
             status: "401"
         });
 
@@ -124,11 +124,11 @@ router.post("/register/", async function (req, res) {
         
        if (existingUsr) {
             res.status(401).json({
-                mld: "Brukernavn allerede registrert"
+                mld: "Username already exist"
             }).end();
         }else if (existingMail) {
             res.status(401).json({
-                mld: "Epost allerede registrert"
+                mld: "Email is already registered"
             }).end();
         } else {
             let createUser = await db.any(queryCreateUser);
