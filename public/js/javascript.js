@@ -1,11 +1,5 @@
 let STATUS;
 
-
-
-
-
-
-
 function sendData(endpoint, data) {
     return fetch(endpoint, {
         method: "POST",
@@ -20,21 +14,6 @@ function sendData(endpoint, data) {
 
     });
 }
-
-
-function getData(endpoint) {
-    return fetch(endpoint, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        },
-    }).then(data => {
-        //console.log(data);
-    });
-}
-
-
-
 
 async function loggInn() {
     let login = loggInnUsername.value;
@@ -59,6 +38,7 @@ async function loggInn() {
             user.onclick = function changePassword() {
                 document.getElementById('userSettingsForm').style.display = 'block'
             };
+
             getAllPresentaionToUser();
 
         } else {
@@ -72,6 +52,7 @@ async function loggInn() {
 
 
 }
+
 
 
 async function register() {
@@ -202,15 +183,11 @@ async function deleteUser() {
 
 }
 
-
-
-
 function logOut() {
     localStorage.removeItem('logindata');
     document.getElementById("userSettingsForm").style.display = "none";
     setHeaderView("notSignedIn", header);
 }
-
 
 async function getHash(usr) {
     let username;
@@ -224,12 +201,8 @@ async function getHash(usr) {
     });
 }
 
-
-
-
 //SAVE PRESENTATION TO DB---------------------------
 async function savePresentation() {
-
 
     let token = JSON.parse(localStorage.getItem("logindata")).token;
      let userId = JSON.parse(localStorage.getItem("logindata")).userId.toString();
@@ -238,12 +211,6 @@ async function savePresentation() {
         title = 'untitled';
     }
     let presID = localStorage.getItem('presentationid');
-   /* try{
-        presID = localStorage.getItem('presentationid');
-    }
-    catch (e) {
-        presID = null;
-    } */
 
     let data = {
         presId: presID,
@@ -265,76 +232,13 @@ async function savePresentation() {
     }
 }
 
-
-/*
-function savePresentation() {
-    if (localStorage.presentationid == null) {
-        saveNewPresentation();
-    } else {
-        updatePresentation();
-    }
-}
-
-
-
-//SAVE PRESENTATION TO DB---------------------------
-async function saveNewPresentation() {
-
-
-    let token = JSON.parse(localStorage.getItem("logindata")).token;
-    let userId = JSON.parse(localStorage.getItem("logindata")).userId.toString();
-    let title = document.getElementById("presentationTitle")
-
-
-
-    let data = {
-        presentationTitle: title.value,
-        presentationData: presentation,
-        token: token,
-        userId: userId
-    };
-
-
-    let res = await sendData("/app/presentation/savePresentation/", data);
-
-    if (res.status = 200) {
-        localStorage.setItem("presentationid", JSON.stringify(res.presId));
-
-        let presdata = JSON.parse(localStorage.getItem('presentation'));
-        getAllPresentaionToUser();
-
-    }
-}
-*/
-//------------------------------------------------
-/*
-async function updatePresentation() {
-    let presId = JSON.parse(localStorage.getItem("presentationid"));
-    let token = JSON.parse(localStorage.getItem("logindata")).token;
-    let userId = JSON.parse(localStorage.getItem("logindata")).userId.toString();
-    let title = document.getElementById("presentationTitle")
-
-
-
-    let data = {
-        presentationTitle: title.value,
-        presentationData: presentation,
-        token: token,
-        userId: userId,
-        presId: presId
-    };
-
-
-    let res = await sendData("/app/presentation/updatePresentation/", data);
-}
-*/
-
-async function deletePresentation(presID, lsIndex){
+async function deletePresentation(presID, lsIndex, dontDisplay){
     
     let token = JSON.parse(localStorage.getItem("logindata")).token;
     let userId = JSON.parse(localStorage.getItem("logindata")).userId.toString();
-    
-    
+
+
+
     let data = {
         token: token,
         presID: presID,
@@ -342,30 +246,20 @@ async function deletePresentation(presID, lsIndex){
     };
     
      let res = await sendData("/app/presentation/deletePresentation/", data);
-     
-    if (STATUS == 200){
-        
-        let listDiv = document.getElementById("loadedPrivetPresentation");
-        let presentations = JSON.parse(localStorage.getItem("loadedPresentation"));
-        presentations.splice(lsIndex, 1);
-        
+    console.log(await res);
+     if(dontDisplay){
+         let container = document.querySelector('#loadedPublicPresentation');
+         let divs = container.querySelectorAll('.loadedPres');
+         divs[lsIndex].style.display = 'none';
+     }
 
-        
-        listDiv.innerHTML = "";
-        
-        for (let i = 0; i < presentations.length; i++) {
-            
-            listDiv.innerHTML += `<div class="loadedPres"><p id="${presentations[i].presentationid}" onclick="openPresentation(${i})">${presentations[i].titel}</p><span onclick="deletePresentation(${presentations[i].presentationid}, ${i})" class="deleteSlide">&times;</span></div>`;
-        }
-        
-        
-        localStorage.setItem("loadedPresentation", JSON.stringify(presentations));
-        
-
+    else{
+         let container = document.querySelector('#loadedPrivetPresentation');
+         let divs = container.querySelectorAll('.loadedPres');
+         divs[lsIndex].style.display = 'none';
     }
     
 }
-
 
 
 async function getAllPresentaionToUser() {
@@ -375,7 +269,7 @@ async function getAllPresentaionToUser() {
     let data = {
         userId: userId,
         token: token
-    }
+    };
 
     let res = await sendData("/app/presentation/listOutPresentations/", data);
 
@@ -384,16 +278,17 @@ async function getAllPresentaionToUser() {
 
     if (res.status = 200) {
         localStorage.setItem("loadedPresentation", JSON.stringify(res.loadPres));
-        
-
 
         listDiv.innerHTML = "";
         
         for (let i = 0; i < res.loadPres.length; i++) {
             
-           let presID = JSON.parse(localStorage.getItem("loadedPresentation"))[i].presentationid;
+            let presID = JSON.parse(localStorage.getItem("loadedPresentation"))[i].presentationid;
             
-            listDiv.innerHTML += `<div class="loadedPres"><p  id="${presID}" onclick="openPresentation(${i})">${res.loadPres[i].titel}</p><span onclick="deletePresentation(${presID}, ${i})" class="deletePres">&times;</span></div>`;
+            listDiv.innerHTML += `<div class="loadedPres">
+            <p  id="${presID}" onclick="openPresentation(${i})">${res.loadPres[i].titel}</p>
+            <span onclick="deletePresentation(${presID}, ${i})" class="deletePres">&times;</span>
+            </div>`;
         }
     }
 }
@@ -402,10 +297,11 @@ async function getAllPresentaionToUser() {
 async function getAllPublicPresentation() {
 
     let token = JSON.parse(localStorage.getItem("logindata")).token;
-    
+
+
     let data = {
         token: token
-    }
+    };
     let res = await sendData("/app/presentation/listPublic/", data)
 
     let listDiv = document.getElementById("loadedPublicPresentation")
@@ -413,21 +309,27 @@ async function getAllPublicPresentation() {
     if (STATUS == 200) {
         
         localStorage.setItem("loadedPublicPresentation", JSON.stringify(res.loadPublicPres));
-        
+        let role = JSON.parse(localStorage.getItem("logindata")).role;
         listDiv.innerHTML = "";
         for (let i = 0; i < res.loadPublicPres.length; i++) {
-            listDiv.innerHTML += `
+            if(role === 2){
+                console.log("making div with delete");
+                listDiv.innerHTML += `
             <div class="loadedPres">
             <p onclick="openPublicPresentation(${i})">${res.loadPublicPres[i].titel}</p>
-            </div>`;
+            <span onclick="deletePresentation(${res.loadPublicPres[i].presentationid}, ${i}, true)" class="deleteSlide">&times;</span>
+            </div>
+            `;}
+            else{listDiv.innerHTML += `
+            <div class="loadedPres">
+            <p onclick="openPublicPresentation(${i})">${res.loadPublicPres[i].titel}</p>
+            </div>`;}
         }
 
     }
 }
 
 
-
-///TODO: Forløpig må du lagre og deretter laste for å kunne dele presentasjon. Fix this!!!
 ///TODO: Ikke tillat å dele to ganger med samme presentasjon
 async function sharePresentation() {
     savePresentation();
@@ -453,6 +355,7 @@ async function sharePresentation() {
 
 
 async function sharePublicPresentation() {
+    savePresentation();
     let userId = JSON.parse(localStorage.getItem("logindata")).userId;
     let token = JSON.parse(localStorage.getItem("logindata")).token;
 
@@ -468,8 +371,6 @@ async function sharePublicPresentation() {
     let response = await sendData('/app/presentation/makePublic/', data);
     if (STATUS == 200) {
         window.alert("success");
-        
-    getAllPublicPresentation();
-        
     }
 }
+

@@ -29,9 +29,9 @@ router.use(function (req, res, next) {
         } catch (err) {
             res.status(403).json({
                 msg: "The token is not valid!"
-            }); //send
+            });
             console.log("he token is not valid!");
-            return; //quit
+            return;
         }
     }
 
@@ -80,43 +80,10 @@ router.post('/savePresentation', async function (req, res) {
 });
 
 
-/*
-
-router.post('/updatePresentation', async function (req, res){
-    
-    let title = req.body.presentationTitle;
-    let presentation = req.body.presentationData;
-    let userId = req.body.userId;
-    let presId = req.body.presId
-    
-    let updatePresentationQuery = prpSql.updatePresentation;
-    updatePresentationQuery.values = [title, presentation, presId];
-
-    
-    try{
-      let updated = await db.any(updatePresentationQuery);
-
-        res.status(200).json({
-                pres: updated
-            }).end();
-        
-
-    }catch(err){
-        res.status(500).json({
-            error: err
-        });
-    }
-        
-});
-
-*/
 router.post('/listOutPresentations' , async function (req, res){
     let UserId = req.body.userId.toString();
     UserId = UserId + ",";
     let getPresentations = `SELECT * FROM public."presentation" WHERE "ownerid" LIKE '%${UserId}%'`;
-    //getPresentations.values = [UserId];
-    
-
     
     try{
        let getAll = await db.any(getPresentations);
@@ -141,14 +108,12 @@ router.post('/sharePresentation', async function (req, res) {
         let presentation = req.body.presID;
         console.log(login, presentation);
 
-        //hent id til login
         let getID = prpSql.getHash;
         getID.values = [login];
         let info = await db.one(getID);
         let userID = info.id.toString();
         userID = userID + ",";
         console.log(userID, typeof userID);
-        //kjør update sql
         let shareQuery = prpSql.sharePresentation;
         shareQuery.values = [userID, presentation];
         db.none(shareQuery);
@@ -203,20 +168,37 @@ router.post('/deletePresentation', async function (req, res) {
 
     let getPresentation = `SELECT * FROM public."presentation" WHERE "presentationid" = ${presID}`;
     let presentation  = await db.one(getPresentation);
-    let owners = presentation.ownerid.split(",");
-    
-    owners.forEach(function (element) {
-        
-        if (element == userID) {
-            
-            let deleteQuery = prpSql.deletePresentation;
-            deleteQuery.values = presID;
-            db.none(deleteQuery);
-            res.status(200).json({
-             feedback: "Presentation deleted"
+    let check = false;
+    if(presentation.ownerid === 'public'){
+        let user = await db.one(`SELECT role FROM public."users" WHERE "id" = ${userID}`);
+        console.log(user);
+        if(user.role !== 2){
+            res.status(401).json({
+                feedback: "Acess denied"
             }).end();
+            return;
         }
-    });
+        check = true;
+    }
+    else{
+        let owners = presentation.ownerid.split(",");
+        owners.forEach(function (element) {
+            if (element == userID) {
+                check = true;
+            }
+        });
+
+    }
+    console.log(check);
+    if(check === true){
+        let deleteQuery = prpSql.deletePresentation;
+        deleteQuery.values = presID;
+        db.none(deleteQuery);
+        res.status(200).json({
+            feedback: "Presentation deleted"
+        }).end();
+    }
+
 });
 
 

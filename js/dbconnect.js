@@ -9,7 +9,7 @@ const prpSql = {};
 prpSql.findUser = new PrpSt('findUser',`SELECT *FROM public."users" WHERE username=$1 OR email=$2`);
 
 //Find hash
-prpSql.getHash = new PrpSt('getHash', 'SELECT hash, id FROM public."users" WHERE (username = $1 OR email = $1) AND active = true');
+prpSql.getHash = new PrpSt('getHash', 'SELECT hash, id, role FROM public."users" WHERE (username = $1 OR email = $1) AND active = true');
 
 //Edit user
 prpSql.editEmail = new PrpSt('editEmail', 'UPDATE public."users" SET email = $1 WHERE username = $2');
@@ -32,7 +32,7 @@ prpSql.updatePresentation = new PrpSt('updatePresentation','UPDATE public."prese
 
 prpSql.getPresentations = new PrpSt('getPresentations','SELECT * FROM public."presentation" WHERE "ownerid" = $1');
 
-prpSql.sharePresentation = new PrpSt('sharePresentation', 'UPDATE public."presentation" SET "ownerid" = CONCAT("ownerid", $1::text) WHERE "presentationid" = $2');
+prpSql.sharePresentation = new PrpSt('sharePresentation', `UPDATE public."presentation" SET "ownerid" = CONCAT("ownerid", $1::text) WHERE "presentationid" = $2 AND NOT "presentationid" = 'public'`);
 
 prpSql.makePublic = new PrpSt('makePublic', `UPDATE public."presentation" SET ownerid = 'public' WHERE "presentationid" = $1`);
 

@@ -31,23 +31,28 @@ router.post('/checkToken/', async function (req, res) {
     }
 });
 
+
 router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
 
     let check = await validateUser(username, password);
+    console.log(check);
     if(check){
         let payload = {
             username: username
         };
-        let tok = jwt.sign(payload, secret, {
-            expiresIn: "12h"
+
+        let tok;
+        tok = jwt.sign(payload, secret, {
+            expiresIn: "12h",
         });
 
         res.status(200).json({
             username: username,
             token: tok,
-            userId: check
+            userId: check.id,
+            role: check.role
         });
     }
     else {
@@ -59,14 +64,25 @@ router.post("/login/", async function (req, res) {
     }
 });
 
+
 //Validate user. Login kan være passord eller epost
 async function validateUser (login, password){
     let hashQuery = prpSql.getHash;
     hashQuery.values = [login];
     let req = await db.one(hashQuery);
     let hash = req.hash;
+
     if(await bcrypt.compare(password, hash)){
-        return req.id;
+        if(req.role === 2){
+            return {
+                id:req.id,
+                role:2
+            }
+        }
+        return {
+            id: req.id,
+            role: 1
+        };
     }
 }
 

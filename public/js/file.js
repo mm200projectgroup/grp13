@@ -1,8 +1,8 @@
 let shareWith = document.getElementById("shareWith");
-let shareButton = document.getElementById("shareButton");
+let shareButton = document.getElementById("buttonShare");
 
 function shareOption(value){
-    if (value == "privet"){
+    if (value == "Private"){
         document.getElementById("shareWith").disabled =false;
         shareButton.setAttribute('onclick','sharePresentation()')
         

@@ -123,14 +123,14 @@
                 <span onclick="document.getElementById('sharePres').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h2 class="modulHeader">Share presentation</h2>
             </div>
-            <div id="shareContainer" class="container">
+                <div id="shareContainer" class="container">
                 <p>Enter username or email of the recipient:</p>
                 <input id="shareWith" placeholder="Username or email">
                 <br>
-                <input type="radio" name="sharetype" value="privet" onclick="shareOption(this.value)" checked="checked"> Privet<br>
+                <input type="radio" name="sharetype" value="Private" onclick="shareOption(this.value)" checked="checked"> Privet<br>
                 <input type="radio" name="sharetype" value="Public" onclick="shareOption(this.value)"> Public<br>
                 <br>
-                <button id="shareButton" onclick="sharePresentation()">Share</button>
+                <button id="buttonShare" onclick="sharePresentation()">Share</button>
             </div>
         </div>
     </div>
