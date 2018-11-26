@@ -139,15 +139,13 @@
         <div class="modal-content">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('addImageUrl').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <h2 class="modulHeader">Enter URL:</h2>
             </div>
             <div class="container">
-                <label for="imgUrl">Image URL:</label>
                 <input id="imgUrl" placeholder="image url...">
-                <br>
-                <br>
                 <button id = "addImgLink" onclick="updateImage()">Add</button>
-                <input id="backgroundCheck" type="checkbox" name="background" value="background">Set as background
+                <br><br>
+                <label id="labelwindow">Set as background</label>
+                <input id="backgroundCheck" type="checkbox" name="background" value="background"><br>
                 <p id="wrongFileType"></p>
 
             </div>
@@ -157,13 +155,9 @@
         <div class="modal-content">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('addVAUrl').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <h2 class="modulHeader">Enter embed link:</h2>
             </div>
             <div class="container">
-                <label for="avUrl">Embed link:</label>
                 <input id="avUrl" placeholder="Embed link...">
-                <br>
-                <br>
                 <button id = "addEmbedLink" onclick="updateEmbed()">Add</button>
             </div>
         </div>
@@ -203,6 +197,15 @@
     </template>
 
     <template id="notSignedIn">
+            <div class="dropdown">
+            <button class="dropbtn">Fil</button>
+            <div class="dropdown-content">
+                <a id="export" onclick="exportFile()">Export File</a>
+                <a id="exportNotes" onclick="exportPresenterNotes()">Export notes</a>
+                <a onclick=" document.getElementById('import').style.display = 'block'">Import</a>
+            </div>
+        </div>
+        <input id="presentationTitle" placeholder="Presentation Title..">
         <button id="loginBtn" onclick="document.getElementById('signUpForm').style.display='block'" style="width:auto;">Sign up</button>
         <button id="signInBtn" onclick="document.getElementById('logInForm').style.display='block'" style="width:auto;">Login</button>
     </template>

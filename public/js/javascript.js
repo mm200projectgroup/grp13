@@ -24,7 +24,6 @@ async function loggInn() {
             password: password
         };
         let json = await sendData("/app/users/login", data);
-        console.log(typeof json, json);
         if (json.username) {
             console.log("yay");
 
@@ -184,9 +183,11 @@ async function deleteUser() {
 }
 
 function logOut() {
-    localStorage.removeItem('logindata');
+    savePresentation();
+    localStorage.clear();
     document.getElementById("userSettingsForm").style.display = "none";
     setHeaderView("notSignedIn", header);
+
 }
 
 async function getHash(usr) {
@@ -225,8 +226,7 @@ async function savePresentation() {
     if (res.presId) {
         localStorage.setItem("presentationid", JSON.stringify(res.presId));
         
-        let presdata = JSON.parse(localStorage.getItem('presentation'));
-        window.alert("Success!");
+        console.log("Presentation saved");
         getAllPresentaionToUser();
         
     }
@@ -250,13 +250,13 @@ async function deletePresentation(presID, lsIndex, dontDisplay){
      if(dontDisplay){
          let container = document.querySelector('#loadedPublicPresentation');
          let divs = container.querySelectorAll('.loadedPres');
-         divs[lsIndex].style.display = 'none';
+         divs[lsIndex].innerHTML = res.feedback;
      }
 
     else{
          let container = document.querySelector('#loadedPrivetPresentation');
          let divs = container.querySelectorAll('.loadedPres');
-         divs[lsIndex].style.display = 'none';
+         divs[lsIndex].innerHTML = res.feedback;
     }
     
 }
@@ -369,8 +369,6 @@ async function sharePublicPresentation() {
     console.log(data);
 
     let response = await sendData('/app/presentation/makePublic/', data);
-    if (STATUS == 200) {
-        window.alert("success");
-    }
+    document.getElementById("buttonShare").value = response.feedback;
 }
 

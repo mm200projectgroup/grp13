@@ -31,7 +31,7 @@ filter.onchange = function () {
     image.style.filter = filterVal;
     presentation.slides[i].imgFilter = filterVal;
 
-    console.log(presentation.slides)
+
 }
 
 function checkURL(url) {
@@ -286,7 +286,11 @@ function changeTheme(newSlideTheme) {
     
 
 createPresentation(presentation.slides);
-currentSlide(1)
+
+let currentSlideID = localStorage.getItem('currentSlide');
+let i = getCurrentIndex(currentSlideID);
+    
+currentSlide(i+1)
 return newSlideTheme;
 
 }

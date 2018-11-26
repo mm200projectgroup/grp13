@@ -57,7 +57,6 @@
 
 
  function createPresentation(array) {
-     //console.log(array);
      let i;
      let canvas = document.getElementById("canvas");
      canvas.innerHTML = "";
@@ -213,7 +212,6 @@
 
 
      let activeSlide = slides[slideIndex - 1].id
-     console.log(activeSlide);
      localStorage.setItem('currentSlide', activeSlide);
 
      color.value = presentation.slides[slideIndex - 1].bakgrunnColor;
@@ -283,8 +281,7 @@
      //UpdateSTYLE---------------
      let newStyle = ACTIVEINPUT.style.cssText;
      if (ACTIVEINPUT.nodeName === "INPUT") {
-         presentation.slides[i].titleStyle = newStyle;
-         console.log(presentation.slides[i]);
+         presentation.slides[i].titleStyle = newStyle;;
      }
      if (ACTIVEINPUT.nodeName === "TEXTAREA") {
          presentation.slides[i].textStyle = newStyle;
@@ -349,15 +346,6 @@
 
  }
 
-
- autoCheck.onchange = function () {
-     if (autoCheck.checked == true) {
-         document.getElementById("timeInput").disabled = false;
-     } else {
-         document.getElementById("timeInput").disabled = true;
-     }
- }
-
  
  let interval
  function autoPresentation() {
@@ -365,10 +353,24 @@
 
      interval = setInterval(function () {
          plusSlides(1)
+             if(win2){
+             win2.plusSlides(1)
+         }
      }, time.value * 1000);
      return interval;
 
  }
+
+
+ autoCheck.onchange = function () {
+     if (autoCheck.checked == true) {
+         document.getElementById("timeInput").disabled = false;
+     } else {
+         document.getElementById("timeInput").disabled = true;
+         clearInterval(interval);
+     }
+ }
+
 
 let presenterMode = document.getElementById("presenterMode");
 

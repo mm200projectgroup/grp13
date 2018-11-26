@@ -84,9 +84,7 @@
         margin-left: 1%;
     }
 
-    .mediaTextDiv {
-        
-    }
+    .mediaTextDiv {}
 
     .mediaText {
         margin-left: 20%;
@@ -96,337 +94,329 @@
         height: 100%;
     }
 
-    }
-    #header {
-        height: 60px;
-        width: 100%;
-        grid-area: header;
-        background: #008ae6;
-    }
+}
 
-    #presentationTitle {
-        padding: 5px 40px;
-        font-family: sans-serif;
-        display: block;
-        font-size: 18px;
-        border: none;
-        color: white;
-        background: transparent;
-    }
+#header {
+    height: 60px;
+    width: 100%;
+    grid-area: header;
+    background: #008ae6;
+}
 
-    #presentationTitle::placeholder {
-        color: lightgray;
-    }
+#presentationTitle {
+    padding: 5px 40px;
+    font-family: sans-serif;
+    display: block;
+    font-size: 18px;
+    border: none;
+    color: white;
+    background: transparent;
+}
 
-    #user {
-        justify-content: center;
-        background-color: transparent;
-        font-family: sans-serif;
-        font-size: 18px;
-        font-weight: 500;
-        user-select: none;
-        padding: 10px 30px;
-        color: white;
-        margin-top: 11px;
-        margin-bottom: 6px;
-        cursor: pointer;
-    }
+#presentationTitle::placeholder {
+    color: lightgray;
+}
 
-    #signInBtn,
-    #loginBtn,
-    #logOutBtn {
-        float: right;
-        color: black;
-        border: 0px;
-        background-color: white;
-        margin: 4px;
-        font-family: sans-serif;
-        font-size: 18px;
-        user-select: none;
-        padding: 7px 20px;
+#user {
+    justify-content: center;
+    background-color: transparent;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    user-select: none;
+    padding: 10px 30px;
+    color: white;
+    margin-top: 11px;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
 
-    }
+#signInBtn,
+#loginBtn,
+#logOutBtn {
+    float: right;
+    color: black;
+    border: 0px;
+    background-color: white;
+    margin: 4px;
+    font-family: sans-serif;
+    font-size: 18px;
+    user-select: none;
+    padding: 7px 20px;
 
-    .formButtons {
-        color: white;
-        border: 0px;
-        background-color: #008ae6;
-        margin: 8px;
-        font-family: sans-serif;
-        font-size: 18pt;
-        cursor: pointer;
-        user-select: none;
-        padding: 14px 20px;
-        transition: transform 0.2s;
-    }
+}
 
-    /*-----------------------------------Canvas and slide*/
+.formButtons {
+    color: white;
+    border: 0px;
+    background-color: #008ae6;
+    margin: 8px;
+    font-family: sans-serif;
+    font-size: 18pt;
+    cursor: pointer;
+    user-select: none;
+    padding: 14px 20px;
+    transition: transform 0.2s;
+}
 
-    #canvas {
-        grid-area: canvas;
-    }
+/*-----------------------------------Canvas and slide*/
 
-    .mySlides {}
+#canvas {
+    grid-area: canvas;
+}
 
-    .editMode {
-        width: 158vw;
-        height: 88vw;
-        background-size: 100%;
-        margin-top: 2vw;
-        margin-left: 2%;
-        margin-bottom: 20px;
-    }
+.mySlides {}
 
-    .mediaText {
-        margin-left: 30%;
-        background-color: transparent;
-        border-style: hidden;
-        font-size: 2.5vw;
-        height: 100%;
-    }
+.editMode {
+    width: 158vw;
+    height: 88vw;
+    background-size: 100%;
+    margin-top: 2vw;
+    margin-left: 2%;
+    margin-bottom: 20px;
+}
 
-    .mediaDiv {
-        height: 30vw;
-        max-width: 55vw;
-        margin-left: 1%;
-    }
+.mediaText {
+    margin-left: 30%;
+    background-color: transparent;
+    border-style: hidden;
+    font-size: 2.5vw;
+    height: 100%;
+}
 
-    .mediaContent {
-        margin-top: 5vw;
-        justify-content: center;
-    }
+.mediaDiv {
+    height: 30vw;
+    max-width: 55vw;
+    margin-left: 1%;
+}
 
-    .imgcontainer {
-        text-align: center;
-        margin: 54px 0 32px 0;
-        position: relative;
-        font-size: 18;
-    }
-    
+.mediaContent {
+    margin-top: 5vw;
+    justify-content: center;
+}
 
-    /*-------------------------------------Editing-menu*/
-    #themes {
-        cursor: pointer;
-        font-size: 18px;
-        width: 100px;
-
-    }
-
-    .menu {
-        grid-area: menu;
-        height: 320px;
-        overflow: scroll;
-        overflow-y: hidden;
-        display: inline-block;
-        background: lightblue;
-
-    }
-
-    #textMenu,
-    #colorPicker,
-    #imageMenu,
-    #ppSettings,
-    #notesAndFullscreen,
-    #av,
-    #templatesMenu,
-    #backgroundMenu {
-
-        display: table-cell;
-        background: lightblue;
-
-    }
-
-    ::-webkit-scrollbar {
-        width: auto;
-        height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: darkgray;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: gray;
-    }
+.imgcontainer {
+    text-align: center;
+    margin: 54px 0 32px 0;
+    position: relative;
+    font-size: 18;
+}
 
 
+/*-------------------------------------Editing-menu*/
+#themes {
+    cursor: pointer;
+    font-size: 18px;
+    width: 100px;
+
+}
+
+.menu {
+    grid-area: menu;
+    height: 320px;
+    overflow: scroll;
+    overflow-y: hidden;
+    display: inline-block;
+    background: #008ae6;
+
+}
+
+#textMenu,
+#colorPicker,
+#imageMenu,
+#ppSettings,
+#notesAndFullscreen,
+#av,
+#templatesMenu,
+#backgroundMenu {
+
+    display: table-cell;
+    background: #008ae6;
+
+}
+
+::-webkit-scrollbar {
+    width: auto;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #008ae6;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a6a6a6;
+}
 
 
-    #butB {
-        font-weight: bold;
-    }
-
-    #butI {
-        font-style: italic;
-    }
-
-    #butAa {
-        font-variant: small-caps;
-    }
-
-    #butAa,
-    #butI,
-    #butB {
-        font-size: 18px;
-        height: 30px;
-        width: 30px;
-        margin-right: 2px;
-        border: 1px solid #000000;
-        background-color: lightgrey;
-        align-content: center;
-        margin-bottom: 10px;
-    }
-
-    /*-Add-AV---------------------------------------*/
-    #av {
-        padding-left: 30px;
-        padding-top: 30px;
-        padding-bottom: 30px;
-    }
-
-    #addAV {
-        cursor: pointer;
-        font-size: 18px;
-        height: 30px;
-        width: 100px;
-        align-content: center;
-    }
-
-    /*--Template-and-background---------------------*/
-
-    #templatesMenu {
-        background: lightblue;
-        padding-left: 30px;
-        padding-bottom: 10px;
-        padding-bottom: 30px;
-    }
-
-    #backgroundMenu {
-        background: lightblue;
-        padding-left: 30px;
-        padding-top: 30px;
-    }
-
-    #butTem1,
-    #butTem2,
-    #butTem3 {
-        font-size: 18px;
-        height: 60px;
-        width: 60px;
-        display: inline-block;
-        margin-right: 5px;
-        border: 1px solid #000000;
-        background-color: lightgrey;
-        align-content: center;
-        margin-bottom: 20px;
-    }
-
-    #templates {
-        cursor: pointer;
-        font-size: 18px;
-        width: 100px;
-    }
-
-    /-Themes-------------------------------------/ #themes {
-        cursor: pointer;
-        font-size: 18px;
-        width: 100px;
-
-    }
-
-    /*-Presentation-settings-----------------------*/
-
-    label {
-        font-size: 18px;
-    }
 
 
-    #timeInput {
-        height: 25px;
-        width: 50px;
-        font-size: 18px;
-    }
+#butB {
+    font-weight: bold;
+}
 
-    /*-------------------------------------------Footer*/
+#butI {
+    font-style: italic;
+}
 
-    #footerMenu {
-        grid-area: footerMenu;
-        background: pink;
-        display: inline-block;
-        width: 100%;
-        height: 60px;
-        padding: 10px;
+#butAa {
+    font-variant: small-caps;
+}
 
-    }
+#butAa,
+#butI,
+#butB {
+    font-size: 18px;
+    height: 30px;
+    width: 30px;
+    margin-right: 2px;
+    border: 1px solid #000000;
+    background-color: lightgrey;
+    align-content: center;
+    margin-bottom: 10px;
+}
 
-    .footer {
-        display: inline-block;
-        grid-area: footer;
-        background: gray;
-        white-space: nowrap;
-        overflow-x: scroll;
-        overflow-y: hidden;
-    }
+/*-Add-AV---------------------------------------*/
+#av {
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
 
-    .footer div {
-        display: inline-block;
-    }
+#addAV {
+    cursor: pointer;
+    font-size: 18px;
+    height: 30px;
+    width: 100px;
+    align-content: center;
+}
 
-    /*-------Next-&-previous-buttons--------*/
-
-    .prev,
-    .next {
-        visibility: hidden;
-        display: inline-block;
-        height: 180px;
-        width: auto;
-        padding-left: 5;
-        padding-right: 5px;
-        padding-top: 75px;
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
-    }
-
-    .next {
-        visibility: hidden;
-        float: right;
-        border-radius: 3px 0 0 3px;
-    }
+/*--Template-and-background---------------------*/
 
 
-    .prev {
-        visibility: hidden;
-        float: right;
-        border-radius: 3px 0 0 3px;
-    }
+#butTem1,
+#butTem2,
+#butTem3 {
+    font-size: 18px;
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    margin-right: 5px;
+    border: 1px solid #000000;
+    background-color: lightgrey;
+    align-content: center;
+    margin-bottom: 20px;
+}
 
-    /*------------^Next-and-prev-buttons^------------*/
+#templates {
+    cursor: pointer;
+    font-size: 18px;
+    width: 100px;
+}
 
-    /*----------------------------------------Pop-up-vindu*/
-    /* The Modal (background) */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
+/*-Themes-------------------------------------*/
+#themes {
+    cursor: pointer;
+    font-size: 18px;
+    width: 100px;
 
-    /* Modal Content/Box */
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto 15% auto;
-        border: 1px solid #888;
-        width: 80%;
-    }
+}
+
+/*-Presentation-settings-----------------------*/
+
+label {
+    font-size: 18px;
+}
 
 
-}/*-<ikke slett den lawl god damn it Alexa*/
+#timeInput {
+    height: 25px;
+    width: 50px;
+    font-size: 18px;
+}
+
+/*-------------------------------------------Footer*/
+
+#footerMenu {
+    grid-area: footerMenu;
+    background: #a6a6a6;
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+
+}
+
+.footer {
+    display: inline-block;
+    grid-area: footer;
+    background: gray;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.footer div {
+    display: inline-block;
+}
+
+/*-------Next-&-previous-buttons--------*/
+
+.prev,
+.next {
+    visibility: hidden;
+    display: inline-block;
+    height: 180px;
+    width: auto;
+    padding-left: 5;
+    padding-right: 5px;
+    padding-top: 75px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+.next {
+    visibility: hidden;
+    float: right;
+    border-radius: 3px 0 0 3px;
+}
+
+
+.prev {
+    visibility: hidden;
+    float: right;
+    border-radius: 3px 0 0 3px;
+}
+
+/*------------^Next-and-prev-buttons^------------*/
+
+/*----------------------------------------Pop-up-vindu*/
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+}
+
+/*-<ikke slett den lawl god damn it Alexa*/

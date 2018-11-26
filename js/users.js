@@ -65,25 +65,31 @@ router.post("/login/", async function (req, res) {
 });
 
 
-//Validate user. Login kan være passord eller epost
 async function validateUser (login, password){
     let hashQuery = prpSql.getHash;
     hashQuery.values = [login];
-    let req = await db.one(hashQuery);
-    let hash = req.hash;
+    try{
+        let req = await db.one(hashQuery);
+        let hash = req.hash;
 
-    if(await bcrypt.compare(password, hash)){
-        if(req.role === 2){
-            return {
-                id:req.id,
-                role:2
+        if(await bcrypt.compare(password, hash)){
+            if(req.role === 2){
+                return {
+                    id:req.id,
+                    role:2
+                }
             }
+            return {
+                id: req.id,
+                role: 1
+            };
         }
-        return {
-            id: req.id,
-            role: 1
-        };
     }
+    catch (e) {
+        console.log(e);
+        return false;
+    }
+
 }
 
 

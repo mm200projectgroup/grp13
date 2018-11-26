@@ -158,7 +158,9 @@ router.post('/makePublic', async function (req, res) {
     }
     catch(e){
         console.log(e);
-        res.status(500).end();
+        res.status(500).json({
+            feedback: "Server error"
+        }).end();
     }
 });
 
