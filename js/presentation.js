@@ -6,7 +6,7 @@ const db = require('./dbconnect').db; //database
 const bcrypt = require('bcryptjs');
 const prpSql = require('./dbconnect').prpSql;
 
-let jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const secret = process.env.SECRET;
 let logindata;

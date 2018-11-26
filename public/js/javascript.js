@@ -25,7 +25,7 @@ async function loggInn() {
         };
         let json = await sendData("/app/users/login", data);
         if (json.username) {
-
+            console.log("yay");
 
             localStorage.setItem("logindata", JSON.stringify(json));
 
@@ -41,6 +41,7 @@ async function loggInn() {
             getAllPresentaionToUser();
 
         } else {
+            console.log("ops");
             outputLogIn1.innerHTML = json.mld;
         }
 
@@ -83,11 +84,11 @@ async function register() {
 //EDIT USER--------------------------
 async function changeUsername() {
     let newUsername = document.getElementById("newUsername").value;
-    let user = JSON.parse(localStorage.getItem('logindata')).username;
+    let token = JSON.parse(localStorage.getItem("logindata")).token;
     let output = document.getElementById("userSettingsOutput");
     let data = {
         newUsr: newUsername,
-        username: user
+        token: token
     };
     let res = await sendData("/app/editUsers/changeLogin/username", data);
     console.log(res);
@@ -95,7 +96,9 @@ async function changeUsername() {
         output.style.color = "black";
         output.innerText = res.message;
         let user = JSON.parse(localStorage.getItem("logindata"));
+        user.token = res.token;
         user.username = newUsername;
+        console.log(user);
         localStorage.setItem("logindata", JSON.stringify(user));
     } else if (res.status == 400) {
         output.style.color = "red";
@@ -106,11 +109,11 @@ async function changeUsername() {
 
 async function changeEmail() {
     let newEmail = document.getElementById("newEmail").value;
-    let user = JSON.parse(localStorage.getItem('logindata')).username;
+    let token = JSON.parse(localStorage.getItem("logindata")).token;
     let output = document.getElementById("userSettingsOutput");
     let data = {
         email: newEmail,
-        username: user
+        token: token
     };
 
     let res = await sendData("/app/editUsers/changeLogin/email", data);
@@ -134,10 +137,11 @@ async function changePassword() {
 
     let newPassword = document.getElementById("newPassword").value;
     let user = JSON.parse(localStorage.getItem("logindata")).username;
+    let token = JSON.parse(localStorage.getItem("logindata")).token;
     let output = document.getElementById("userSettingsOutput");
     let data = {
         password: newPassword,
-        username: user
+        token: token
     };
 
     let res = await sendData("/app/editUsers/changeLogin/password", data);
@@ -156,28 +160,29 @@ async function changePassword() {
 //---------------DELETE USER--------------------
 async function deleteUser() {
     let prompt = window.prompt("Please enter your password to confirm. WARNING:This will permanently delete your account!");
-    console.log(prompt);
-    let n = await getHash();
-    console.log(n);
-    let hash = n.hash;
-    let user = JSON.parse(localStorage.getItem("logindata")).username;
-
-    if (!bcrypt.compareSync(prompt, hash)) {
+    let username = JSON.parse(localStorage.getItem("logindata")).username;
+    let data = {
+        username: username,
+        password: prompt
+    };
+    let check = await sendData('/app/users/login/', data);
+    if(!check.role){
         return window.alert("Imma need you to enter the correct password, chief");
     }
-
-
+    let token = JSON.parse(localStorage.getItem("logindata")).token;
     let cfg = {
         method: 'DELETE'
     };
+    let res = await fetch("/app/editUsers/changeLogin/" + token, cfg);
 
-    let res = await fetch("/app/editUsers/changeLogin/" + user, cfg);
-    if (res.status == "200") {
-        logOut();
-    } else {
-        console.error(res);
+
+    if (res.status == 400) {
+        return window.alert('Something went wrong');
     }
 
+    else{
+        logOut();
+    }
 
 }
 

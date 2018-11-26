@@ -42,8 +42,6 @@
          template: 1
      };
 
-
-
      let color = document.getElementById("pickcolor");
      color.value = "#FFFFFF"
 
@@ -51,8 +49,6 @@
      createPresentation(presentation.slides);
      changeTheme(newSlide)
      currentSlide(presentation.slides.length);
-
-
  }
 
 
@@ -65,19 +61,19 @@
          let slideContent;
          if (array[i].template === 1) {
              slideContent = `
-            <input class="title" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateText()" style="${array[i].titleStyle}">
+            <input class="title" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength= "20" onchange="updateText()" style="${array[i].titleStyle}">
             <br>
             <textarea class="text" id="text${i}" placeholder ="Text.." onfocus="activeTextArea(event)" style="${array[i].textStyle}">${array[i].text}</textarea> 
             `;
          } else if (array[i].template === 0) {
              slideContent = `
-                <input class="mainTitle" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength="14" style="${array[i].titleStyle}" onchange="updateText()">
+                <input class="mainTitle" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength="25" style="${array[i].titleStyle}" onchange="updateText()">
                 <br>
                 <textarea onchange="updateText()" class="undertitle" id="text${i}" placeholder="Undertitle" style="${array[i].textStyle}">${array[i].text}</textarea>
             `;
          } else if (array[i].template === 2) {
              slideContent = `
-            <input class="title" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateText()" style="${array[i].titleStyle}">
+            <input class="title" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength= "20" onchange="updateText()" style="${array[i].titleStyle}">
             <div class="mediaContent">
                 <div class="mediaDiv">
                     <img class="imgCont" id="mediaImg${i}" src=${array[i].media} style="width:${array[i].imgWidth}vw; filter:${array[i].imgFilter}">
@@ -89,7 +85,7 @@
             `;
          } else if (array[i].template === 3) {
              slideContent = `
-                <input class="title" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength= "14" onchange="updateText()" style="${array[i].titleStyle}">
+                <input class="title" id="title${i}" data-lpignore="true" placeholder="Title" value="${array[i].title}" maxlength= "20" onchange="updateText()" style="${array[i].titleStyle}">
                 <div class="mediaContent">
                 <div id="mediaDiv${i}" class="mediaDiv">
                 ${array[i].av} 
@@ -314,9 +310,10 @@
 
      document.getElementById(currentSlideID).style.background = newColor;
      presentation.slides[i].bakgrunnColor = newColor;
-
+     
+     console.log(presentation.slides);
      backgroundCheck.checked = false;
-
+     
  }
 
  function updateImage() {
@@ -324,7 +321,7 @@
      let i = getCurrentIndex(currentSlideID);
      let image = document.getElementById("imgUrl");
      let backgroundCheck = document.getElementById("backgroundCheck");
-     if(presentation.template != 2){
+     if(presentation.template != 2 && backgroundCheck.checked == false){
         window.alert("You must chooce the image template");
         }
      else if (checkURL(image.value)) {

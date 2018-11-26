@@ -14,7 +14,7 @@ const secret = process.env.SECRET;
 ///TODO: Jobb med jwt.verify så den ikke gir error
 router.post('/checkToken/', async function (req, res) {
     let token = req.body.token;
-    console.log(token);
+    console.log(token, 'checktoken');
     let check;
     try{
         check = jwt.verify(token, secret);
@@ -37,10 +37,15 @@ router.post("/login/", async function (req, res) {
     let password = req.body.password;
 
     let check = await validateUser(username, password);
-    console.log(check);
+    console.log(check, "line 40");
     if(check){
+        let userReq = prpSql.findUser;
+        userReq.values = [username, username];
+
+        let usr = await db.one(userReq);
+        username = usr.username;
         let payload = {
-            username: username
+            username: username,
         };
 
         let tok;
@@ -57,7 +62,7 @@ router.post("/login/", async function (req, res) {
     }
     else {
         res.status(401).json({
-            mld: "Wrong username or password",
+            mld: "Feil brukernavn eller passord",
             status: "401"
         });
 
@@ -65,6 +70,7 @@ router.post("/login/", async function (req, res) {
 });
 
 
+//Validate user. Login kan være passord eller epost
 async function validateUser (login, password){
     let hashQuery = prpSql.getHash;
     hashQuery.values = [login];
@@ -107,8 +113,6 @@ router.post("/register/", async function (req, res) {
     let queryFindUser = prpSql.findUser;
     queryFindUser.values = [username, userEmail];
 
-
-
     try {
         let findUser = await db.any(queryFindUser);
         
@@ -124,19 +128,20 @@ router.post("/register/", async function (req, res) {
         
        if (existingUsr) {
             res.status(401).json({
-                mld: "Username already exist"
+                mld: "Brukernavn allerede registrert"
             }).end();
         }else if (existingMail) {
             res.status(401).json({
-                mld: "Email is already registered"
+                mld: "Epost allerede registrert"
             }).end();
         } else {
             let createUser = await db.any(queryCreateUser);
             let payload = {username: username};
             let tok = jwt.sign(payload, secret, {expiresIn: "12h"});
+            console.log(createUser[0].id)
             res.status(200).json({
                 username: username,
-                userId: createUser.id,
+                userId: createUser[0].id,
                 token: tok
             }).end();
 
