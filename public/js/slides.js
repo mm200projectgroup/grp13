@@ -293,7 +293,7 @@
      let currentSlideID = localStorage.getItem('currentSlide');
      let i = getCurrentIndex(currentSlideID);
      let newVA = document.getElementById("avUrl").value;
-    if(presentation.template != 3){
+    if(presentation.slides[i].template !== 3){
         window.alert("You must chooce the embed template");
         }else{
      document.getElementById(`mediaDiv${i}`).innerHTML = newVA;
@@ -321,7 +321,7 @@
      let i = getCurrentIndex(currentSlideID);
      let image = document.getElementById("imgUrl");
      let backgroundCheck = document.getElementById("backgroundCheck");
-     if(presentation.template != 2 && backgroundCheck.checked == false){
+     if(presentation.slides[i].template != 2 && backgroundCheck.checked == false){
         window.alert("You must chooce the image template");
         }
      else if (checkURL(image.value)) {

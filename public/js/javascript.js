@@ -39,6 +39,7 @@ async function loggInn() {
             };
 
             getAllPresentaionToUser();
+            getAllPublicPresentation();
 
         } else {
             console.log("ops");
@@ -76,6 +77,8 @@ async function register() {
         user.onclick = function changePassword() {
             document.getElementById('userSettingsForm').style.display = 'block';
         };
+        
+        getAllPublicPresentation();
     } else {
         outputSignUp1.innerHTML = response.mld;
     }
